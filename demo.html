@@ -1,0 +1,156 @@
+<title>Local LVRG Live Demo</title>
+<style>
+  :root{
+    --paper:#FBFAF7; --screen:#FFFFFF; --ink:#1C1E21; --body:#33373D; --muted:#61666D;
+    --hairline:#E7E4DD; --hairline-soft:#F1EFE9;
+    --accent:#C2410C; --accent-hover:#A33509; --accent-soft:#FBEDE4;
+    --book:#1E7F3C; --book-deep:#166534; --book-soft:#EAF6EE;
+    --bubble-in:#EFEDE8;
+    --radius:12px; --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+  h1,h2{color:var(--ink);text-wrap:balance;letter-spacing:-.03em}
+  h1{font-size:clamp(34px,5.5vw,54px);font-weight:800;line-height:1.06}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+  .btn{display:inline-block;font:700 16px/1 var(--sans);padding:16px 28px;border-radius:10px;border:2px solid transparent;cursor:pointer}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-hover)}
+  .btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  header{border-bottom:1px solid var(--hairline)}
+  .nav{display:flex;align-items:center;height:64px}
+  .logo{font:800 19px/1 var(--sans);color:var(--ink)}
+  .logo span{color:var(--accent)}
+  .nav a.back{margin-left:auto;font-size:15px;font-weight:600;color:var(--ink)}
+  section{padding:60px 0}
+  .eyebrow{font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .lede{margin-top:18px;font-size:19px;color:var(--ink);max-width:36em}
+
+  /* steps */
+  .how{margin-top:40px;display:flex;flex-direction:column;gap:0;counter-reset:s}
+  .how-step{display:flex;gap:18px;padding:18px 0;border-top:1px solid var(--hairline)}
+  .how-step:last-child{border-bottom:1px solid var(--hairline)}
+  .how-step::before{counter-increment:s;content:counter(s);width:30px;height:30px;flex:none;border-radius:50%;background:var(--ink);color:var(--paper);font:800 14px/30px var(--mono);text-align:center}
+  .how-step .t{font:700 16.5px/1.4 var(--sans);color:var(--ink)}
+  .how-step p{font-size:15.5px;margin-top:4px}
+
+  /* form */
+  .demo-card{margin-top:40px;background:var(--screen);border:2px solid var(--ink);border-radius:18px;padding:32px 30px;box-shadow:0 16px 40px rgba(28,30,33,.08)}
+  .demo-card h2{font-size:24px}
+  form{margin-top:22px;display:flex;flex-direction:column;gap:16px}
+  label{font:700 14px/1.3 var(--sans);color:var(--ink);display:flex;flex-direction:column;gap:7px}
+  input[type=url],input[type=tel],input[type=text]{font:400 17px/1.4 var(--sans);color:var(--ink);background:var(--paper);border:1.5px solid var(--hairline);border-radius:9px;padding:14px;width:100%}
+  input:focus{border-color:var(--accent)}
+  .consent{display:flex;gap:10px;align-items:flex-start;font:400 13.5px/1.55 var(--sans);color:var(--muted)}
+  .consent input{width:19px;height:19px;accent-color:var(--accent);margin-top:2px;flex:none}
+  button{font:700 17px/1 var(--sans);padding:17px 30px;border-radius:10px;border:0;background:var(--accent);color:#fff;cursor:pointer;align-self:flex-start}
+  button:hover{background:var(--accent-hover)}
+  .expect{margin-top:14px;font:400 14px/1.6 var(--sans);color:var(--muted)}
+  .proof-label{font:400 12px/1.6 var(--mono);color:var(--muted);margin-top:16px}
+
+  /* try prompts */
+  .prompts{margin-top:44px}
+  .prompts h2{font-size:22px}
+  .chipset{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .pchip{font:600 14px/1.3 var(--sans);color:var(--ink);background:var(--hairline-soft);border:1px solid var(--hairline);border-radius:99px;padding:9px 15px}
+
+  /* generic fallback */
+  .fallback{margin-top:44px;padding:22px 26px;background:var(--hairline-soft);border-radius:var(--radius);font-size:15.5px}
+  .fallback strong{color:var(--ink)}
+
+  /* reveal */
+  .reveal{margin-top:70px;border-top:1px solid var(--hairline);padding-top:50px}
+  .reveal p.lead-in{margin-top:14px;font-size:17px}
+  .push{margin-top:22px;background:var(--screen);border:1px solid var(--hairline);border-left:6px solid var(--book);border-radius:16px;padding:20px 22px;box-shadow:0 16px 40px rgba(30,127,60,.14);max-width:430px}
+  .push-top{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+  .push-icon{width:26px;height:26px;border-radius:7px;background:var(--accent);display:grid;place-items:center;flex:none}
+  .push-top .app{font:700 11px/1 var(--mono);letter-spacing:.09em;color:var(--muted)}
+  .push-top .now{margin-left:auto;font:400 11px/1 var(--mono);color:var(--muted)}
+  .push .tag{font:700 13px/1 var(--mono);letter-spacing:.1em;color:var(--book-deep)}
+  .push .when{font:800 26px/1.2 var(--sans);color:var(--ink);margin-top:8px}
+  .push .what{font:400 15px/1.5 var(--mono);color:var(--muted);margin-top:6px}
+
+  .after{margin-top:56px;border-top:1px solid var(--hairline);padding-top:44px}
+  .after p.q{margin-top:16px;font-size:18px;color:var(--ink);font-weight:600;max-width:36em}
+  .after .btn{margin-top:22px}
+  footer{border-top:1px solid var(--hairline);padding:32px 0;font-size:14px;color:var(--muted);margin-top:60px}
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">Local <span>LVRG</span></a>
+    <a class="back" href="index.html">&larr; Back to Local LVRG</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Live demonstration</p>
+    <h1 style="margin-top:16px">Meet your company&rsquo;s estimate assistant.</h1>
+    <p class="lede">Give us your website. In about a minute, your phone gets a text from your own company&rsquo;s new assistant. Then you play the homeowner and try to make it book.</p>
+
+    <div class="how">
+      <div class="how-step"><div><span class="t">Enter your company website and cell number below.</span><p>The system reads your public site: your company name, your services, your cities.</p></div></div>
+      <div class="how-step"><div><span class="t">Your phone buzzes.</span><p>The text comes from your company&rsquo;s estimate assistant, built on the spot from what your website says you do.</p></div></div>
+      <div class="how-step"><div><span class="t">Pretend you&rsquo;re a homeowner.</span><p>Ask about a two-car garage. Mention cracks. Ask about colors, or price, or an old coating. Be difficult if you want.</p></div></div>
+      <div class="how-step"><div><span class="t">Try to make it book.</span><p>It will qualify your project, offer real appointment times, and put the estimate on a calendar. Watch what lands on the owner&rsquo;s side.</p></div></div>
+    </div>
+
+    <!-- PERSONALIZATION PIPELINE: this form needs to post to the demo-builder
+         webhook (scrape site -> create/personalize CloseBot bot -> send first SMS
+         from the demo line). Until that pipeline is live, wire to GHL form capture
+         and run the personalization manually within a few minutes. -->
+    <div class="demo-card">
+      <h2>Build my demo</h2>
+      <form action="#" method="post">
+        <label>Your company website <input type="url" name="website" placeholder="https://yourcoatingcompany.com" required></label>
+        <label>Your cell number <input type="tel" name="phone" placeholder="(810) 555-0147" autocomplete="tel" required></label>
+        <label>First name <input type="text" name="first" autocomplete="given-name" placeholder="So the assistant knows who it's texting"></label>
+        <label class="consent"><input type="checkbox" required> I agree to receive demonstration text messages from Local LVRG at this number. Message and data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. <a href="sms-terms.html">SMS&nbsp;Terms</a></label>
+        <button type="submit">Text Me My Demo</button>
+      </form>
+      <p class="expect">Your demo usually arrives within a couple of minutes. It is built only from what your website already says publicly. No account access, no payment, no sales call required.</p>
+      <p class="proof-label">Private demonstration built from your public website &middot; not a customer deployment &middot; nothing is sent to your customers</p>
+    </div>
+
+    <div class="prompts">
+      <h2>Things to try on it</h2>
+      <div class="chipset">
+        <span class="pchip">&ldquo;How much for a 2-car garage?&rdquo;</span>
+        <span class="pchip">&ldquo;It was painted before and it&rsquo;s peeling&rdquo;</span>
+        <span class="pchip">&ldquo;Got a couple cracks, is that a problem?&rdquo;</span>
+        <span class="pchip">&ldquo;What colors can I get?&rdquo;</span>
+        <span class="pchip">&ldquo;Can you do it in winter?&rdquo;</span>
+        <span class="pchip">&ldquo;What time can someone come out?&rdquo;</span>
+      </div>
+    </div>
+
+    <div class="fallback">
+      <strong>No website, or just browsing?</strong> Text our demonstration company, Anchor Concrete Coatings, at <strong>(XXX)&nbsp;XXX-XXXX</strong> and run the same test on the generic version.
+    </div>
+
+    <div class="reveal">
+      <h2>Here is what the owner receives one second later.</h2>
+      <p class="lead-in">While you were texting, this is what lands on the contractor&rsquo;s side:</p>
+      <div class="push">
+        <div class="push-top"><span class="push-icon"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="2" width="12" height="11" rx="2" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M1 5.5h12" stroke="#fff" stroke-width="1.6"/><path d="M4.5 1v2.5M9.5 1v2.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><rect x="7.2" y="7.5" width="3.4" height="3" rx=".8" fill="#fff"/></svg></span><span class="app">LOCAL LVRG</span><span class="now">now</span></div>
+        <div class="tag">NEW ESTIMATE BOOKED</div>
+        <div class="when">Friday &middot; 3:00 PM</div>
+        <div class="what">Two-car garage &middot; your service area &middot; Source: your website</div>
+      </div>
+    </div>
+
+    <div class="after">
+      <h2>Want this answering your real leads?</h2>
+      <p class="q">What normally happens in your business when a lead texts like that after hours?</p>
+      <a class="btn btn-primary" href="index.html#pricing">See Pricing &amp; Options</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">&copy; 2026 Local LVRG &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="sms-terms.html">SMS Terms</a></div>
+</footer>

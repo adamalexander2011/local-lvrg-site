@@ -1,0 +1,135 @@
+<title>Local LVRG Application</title>
+<style>
+  :root{
+    --paper:#FBFAF7; --screen:#FFFFFF; --ink:#1C1E21; --body:#3C4046; --muted:#6B7076;
+    --hairline:#E7E4DD; --accent:#C2410C; --accent-hover:#A33509;
+    --radius:12px; --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+  h1{color:var(--ink);font-size:clamp(32px,5vw,48px);font-weight:800;line-height:1.08;letter-spacing:-.03em;text-wrap:balance}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  header{border-bottom:1px solid var(--hairline)}
+  .nav{display:flex;align-items:center;height:64px}
+  .logo{font:800 19px/1 var(--sans);color:var(--ink)}
+  .logo span{color:var(--accent)}
+  .nav a.back{margin-left:auto;font-size:15px;font-weight:500;color:var(--body)}
+  section{padding:60px 0 80px}
+  .intro{margin-top:16px;font-size:18px;max-width:38em}
+  form{margin-top:40px;display:flex;flex-direction:column;gap:34px}
+  fieldset{border:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  legend{font:700 19px/1.3 var(--sans);color:var(--ink);margin-bottom:10px}
+  label{font:600 14.5px/1.3 var(--sans);color:var(--ink);display:flex;flex-direction:column;gap:7px}
+  input[type=text],input[type=tel],input[type=email],input[type=url],select{
+    font:400 16px/1.4 var(--sans);color:var(--ink);background:var(--screen);
+    border:1.5px solid var(--hairline);border-radius:9px;padding:12px 14px;width:100%}
+  input:focus,select:focus{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .check,.radio{display:flex;flex-direction:row;align-items:center;gap:10px;font:400 16px/1.4 var(--sans);color:var(--body)}
+  .check input,.radio input{width:19px;height:19px;accent-color:var(--accent)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+  button{font:600 17px/1 var(--sans);padding:17px 30px;border-radius:10px;border:0;background:var(--accent);color:#fff;cursor:pointer;align-self:flex-start}
+  button:hover{background:var(--accent-hover)}
+  button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+  .fine{font-size:13.5px;color:var(--muted);max-width:44em}
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">Local <span>LVRG</span></a>
+    <a class="back" href="index.html">&larr; Back to Local LVRG</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h1>Let&rsquo;s find the leak before we prescribe the system.</h1>
+    <p class="intro">Answer a few questions about how leads currently enter your company and what happens next. We&rsquo;ll use the answers to prepare the right demonstration.</p>
+
+    <!-- FORM ACTION: wire to the GHL form/webhook in the Local LVRG sub-account
+         before launch so submissions create a contact + notification. -->
+    <form action="#" method="post">
+      <fieldset>
+        <legend>Business information</legend>
+        <div class="grid2">
+          <label>Owner name <input type="text" name="owner" autocomplete="name" required></label>
+          <label>Company name <input type="text" name="company" autocomplete="organization" required></label>
+        </div>
+        <label>Website <input type="url" name="website" placeholder="https://" autocomplete="url"></label>
+        <label>Primary service area <input type="text" name="area" placeholder="Cities or counties you serve" required></label>
+        <div class="grid2">
+          <label>Mobile number <input type="tel" name="phone" autocomplete="tel" required></label>
+          <label>Email <input type="email" name="email" autocomplete="email" required></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Primary services</legend>
+        <label class="check"><input type="checkbox" name="svc" value="garage"> Garage-floor coatings</label>
+        <label class="check"><input type="checkbox" name="svc" value="basement"> Basement floors</label>
+        <label class="check"><input type="checkbox" name="svc" value="patio"> Patios, porches, pool decks</label>
+        <label class="check"><input type="checkbox" name="svc" value="commercial"> Commercial floors</label>
+        <label class="check"><input type="checkbox" name="svc" value="polish"> Grinding, polishing, sealing</label>
+        <label class="check"><input type="checkbox" name="svc" value="other"> Other concrete work</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Where do leads currently come from?</legend>
+        <label class="check"><input type="checkbox" name="src" value="website"> Website</label>
+        <label class="check"><input type="checkbox" name="src" value="meta"> Facebook or Instagram</label>
+        <label class="check"><input type="checkbox" name="src" value="gads"> Google Ads</label>
+        <label class="check"><input type="checkbox" name="src" value="gbp"> Google Business Profile</label>
+        <label class="check"><input type="checkbox" name="src" value="calls"> Phone calls</label>
+        <label class="check"><input type="checkbox" name="src" value="referrals"> Referrals</label>
+        <label class="check"><input type="checkbox" name="src" value="db"> Existing database</label>
+        <label class="check"><input type="checkbox" name="src" value="other"> Other</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>What happens after hours?</legend>
+        <label class="radio"><input type="radio" name="afterhours" value="me"> I answer personally</label>
+        <label class="radio"><input type="radio" name="afterhours" value="team"> Someone on my team answers</label>
+        <label class="radio"><input type="radio" name="afterhours" value="morning"> We respond the next morning</label>
+        <label class="radio"><input type="radio" name="afterhours" value="varies"> It varies</label>
+        <label class="radio"><input type="radio" name="afterhours" value="unknown"> I do not know</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Approximately how many old leads or unclosed estimates do you have?</legend>
+        <label class="radio"><input type="radio" name="oldleads" value="0-25"> Under 25</label>
+        <label class="radio"><input type="radio" name="oldleads" value="25-100"> 25 to 100</label>
+        <label class="radio"><input type="radio" name="oldleads" value="100-500"> 100 to 500</label>
+        <label class="radio"><input type="radio" name="oldleads" value="500+"> More than 500</label>
+        <label class="radio"><input type="radio" name="oldleads" value="unknown"> Not sure</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Which problem do you want to solve first?</legend>
+        <label class="radio"><input type="radio" name="firstproblem" value="speed"> New leads are not answered quickly</label>
+        <label class="radio"><input type="radio" name="firstproblem" value="calls"> Missed calls</label>
+        <label class="radio"><input type="radio" name="firstproblem" value="old"> Old leads</label>
+        <label class="radio"><input type="radio" name="firstproblem" value="volume"> Need more lead volume</label>
+        <label class="radio"><input type="radio" name="firstproblem" value="website"> Website or forms</label>
+        <label class="radio"><input type="radio" name="firstproblem" value="unsure"> Not sure</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Can you currently take additional estimate appointments?</legend>
+        <label class="radio"><input type="radio" name="capacity" value="yes"> Yes</label>
+        <label class="radio"><input type="radio" name="capacity" value="30days"> Within 30 days</label>
+        <label class="radio"><input type="radio" name="capacity" value="no"> Not currently</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Are you prepared to invest in advertising if the booking process is ready?</legend>
+        <label class="radio"><input type="radio" name="adbudget" value="yes"> Yes</label>
+        <label class="radio"><input type="radio" name="adbudget" value="maybe"> Possibly</label>
+        <label class="radio"><input type="radio" name="adbudget" value="no"> No, I only want to work existing leads</label>
+      </fieldset>
+
+      <button type="submit">Prepare My Demo</button>
+      <p class="fine">We use these answers to prepare your demonstration and to contact you about it. No CRM access, advertising account, or payment is required for the demo. See our <a href="privacy.html">Privacy Policy</a> and <a href="sms-terms.html">SMS Terms</a>.</p>
+    </form>
+  </div>
+</section>
