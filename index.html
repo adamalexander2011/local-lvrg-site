@@ -168,6 +168,26 @@
   .emp-list.yes li::before{content:"✓";font:800 13px/1.5 var(--mono);color:#4FBF72}
   .emp-list.yes li{color:#EDEFF1;font-weight:500}
   @media(max-width:720px){.emp-cols{grid-template-columns:1fr}}
+  .mathcomp{margin-top:52px}
+  .mc-head h3{font-size:clamp(24px,3.2vw,32px)}
+  .mc-head p{margin-top:8px;font-size:17px;color:var(--ink);font-weight:600}
+  .mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px;align-items:stretch}
+  .mc-card{background:var(--screen);border:1px solid var(--hairline);border-radius:16px;padding:28px 26px;display:flex;flex-direction:column}
+  .mc-card.hot{border:2.5px solid var(--book);box-shadow:0 16px 40px rgba(30,127,60,.12)}
+  .mc-title{font:700 13px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .mc-card.hot .mc-title{color:var(--book-deep)}
+  .mc-price{font:800 clamp(40px,4.6vw,56px)/1 var(--sans);letter-spacing:-.03em;color:var(--ink);margin-top:12px}
+  .mc-price span{font:600 18px/1 var(--sans);color:var(--muted);letter-spacing:0}
+  .mc-sub{font:400 13.5px/1.5 var(--sans);color:var(--muted);margin-top:8px}
+  .mc-list{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14.5px;line-height:1.45}
+  .mc-list li{position:relative;padding-left:24px;color:var(--body)}
+  .mc-list.no li::before{content:"\2715";position:absolute;left:0;font:800 12px/1.6 var(--mono);color:var(--muted)}
+  .mc-list.yes li{color:var(--ink);font-weight:500}
+  .mc-list.yes li::before{content:"\2713";position:absolute;left:0;font:800 13px/1.5 var(--mono);color:var(--book-deep)}
+  .mc-verdict{margin-top:auto;padding-top:18px;font:600 14.5px/1.5 var(--sans);color:var(--ink)}
+  .mc-card.hot .mc-verdict{color:var(--book-deep)}
+  .mc-bottom{margin-top:24px;font:700 clamp(17px,2.2vw,21px)/1.5 var(--sans);color:var(--ink);max-width:56ch}
+  @media(max-width:760px){.mc-grid{grid-template-columns:1fr}}
   .trust{margin-top:24px;padding:22px 26px;background:var(--hairline-soft);border-left:4px solid var(--accent);border-radius:var(--radius);font-size:17.5px;font-weight:500;color:var(--ink);max-width:680px}
   @media(max-width:720px){.seq{flex-direction:column}.seq-arrow{transform:rotate(90deg);margin:-4px 0}}
 
@@ -555,6 +575,40 @@
         </ul>
       </div>
     </div>
+    <div class="mathcomp rv">
+      <div class="mc-head">
+        <h3>Now try hiring a human for this seat.</h3>
+        <p>There are 168 hours in a week. Your leads arrive during all of them.</p>
+      </div>
+      <div class="mc-grid">
+        <div class="mc-card">
+          <p class="mc-title">A full-time hire</p>
+          <p class="mc-price">$3,100<span>/mo</span></p>
+          <p class="mc-sub">at a typical $18/hr, before taxes, training, and turnover</p>
+          <ul class="mc-list no">
+            <li>Covers 40 of the 168 hours</li>
+            <li>Nights, weekends, and holidays missed</li>
+            <li>Sick days, vacations, two-week notice</li>
+            <li>Takes messages when things get busy</li>
+          </ul>
+          <p class="mc-verdict">And round-the-clock human coverage? That&rsquo;s three of these salaries. Nobody staffs it.</p>
+        </div>
+        <div class="mc-card hot">
+          <p class="mc-title">Your 24/7 AI employee</p>
+          <p class="mc-price">$497<span>/mo</span></p>
+          <p class="mc-sub">every hour of every day, including 2:47 AM and Sunday</p>
+          <ul class="mc-list yes">
+            <li>Covers all 168 hours</li>
+            <li>Answers in seconds, every single time</li>
+            <li>Qualifies, captures name and address, books</li>
+            <li>Never calls in sick, never quits</li>
+          </ul>
+          <p class="mc-verdict">One garage floor pays for months of it.</p>
+        </div>
+      </div>
+      <p class="mc-bottom">You could not hire a human to do this job. And the human you could hire costs six times more to cover a quarter of the hours.</p>
+    </div>
+
     <p class="trust rv">When the conversation requires judgment, pricing approval, or a human answer, it is handed to the owner instead of pretending to know.</p>
   </div>
 </section>
