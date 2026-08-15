@@ -48,23 +48,26 @@
   <h1 style="margin-top:14px">Watch an estimate book itself. For your company.</h1>
   <p class="lede">Tell us who you are and drop in your website. On the next page, the demo shapes itself around your company and you play the homeowner.</p>
 
-  <!-- LEAD CAPTURE: replace this static form with the GHL form embed (same fields,
-       redirect URL = demo-live.html) so submissions create a contact + notify Adam.
-       Until then this form navigates but does NOT store the lead. -->
-  <div class="card">
-    <form action="demo-live.html" method="get" onsubmit="this.querySelectorAll('input').forEach(i=>i.removeAttribute('name'))">
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <label>First name <input type="text" name="first" autocomplete="given-name" required></label>
-        <label>Cell number <input type="tel" name="phone" autocomplete="tel" required></label>
-        <label>Company website <input type="url" name="website" placeholder="https://yourcoatingcompany.com"></label>
-        <label class="fine" style="display:flex;flex-direction:row;gap:10px;align-items:flex-start;font-weight:400">
-          <input type="checkbox" required style="width:19px;height:19px;accent-color:var(--accent);margin-top:2px;flex:none">
-          Local LVRG may contact me about my demonstration. Consent is not a condition of purchase. <a href="sms-terms.html">Messaging&nbsp;Terms</a>
-        </label>
-        <button type="submit">Take Me to My Demo</button>
-      </div>
-    </form>
-    <p class="fine" style="margin-top:14px">No account access, no payment, no sales call required. The demo is built only from what your website already says publicly.</p>
+  <div class="card" style="padding:18px 14px">
+    <iframe
+      src="https://link.locallvrg.co/widget/form/2Zo6Mfix9vO0O6GRj3NI"
+      style="width:100%;min-height:560px;border:none;border-radius:8px"
+      id="inline-2Zo6Mfix9vO0O6GRj3NI"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Demo Access"
+      data-height="undefined"
+      data-layout-iframe-id="inline-2Zo6Mfix9vO0O6GRj3NI"
+      data-form-id="2Zo6Mfix9vO0O6GRj3NI"
+      title="Demo Access">
+    </iframe>
   </div>
+  <p class="fine" style="margin-top:14px">No account access, no payment, no sales call required. Already submitted? <a href="demo-live.html">Continue to your demo &rarr;</a></p>
+  <script src="https://link.locallvrg.co/js/form_embed.js"></script>
 </div></section>
 <footer><div class="wrap">&copy; 2026 Local LVRG &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="sms-terms.html">SMS Terms</a></div></footer>
