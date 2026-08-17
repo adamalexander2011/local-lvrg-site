@@ -1,0 +1,127 @@
+<title>Start Your Reactivation Sprint</title>
+<style>
+  :root{--paper:#FBFAF7;--screen:#FFFFFF;--ink:#1C1E21;--body:#33373D;--muted:#61666D;
+  --hairline:#E7E4DD;--hairline-soft:#F1EFE9;--accent:#C2410C;--accent-hover:#A33509;
+  --book:#1E7F3C;--book-deep:#166534;--book-soft:#EAF6EE;--danger:#D6453D;--radius:12px;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+  h1,h2,h3{color:var(--ink);text-wrap:balance;letter-spacing:-.02em}
+  h1{font-size:clamp(32px,5vw,48px);font-weight:800;line-height:1.08;letter-spacing:-.03em}
+  h2{font-size:24px;font-weight:800}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:720px;margin:0 auto;padding:0 22px}
+  header{border-bottom:1px solid var(--hairline)}
+  .nav{display:flex;align-items:center;height:64px}
+  .logo{font:800 19px/1 var(--sans);color:var(--ink)}
+  .logo span{color:var(--accent)}
+  .nav a.back{margin-left:auto;font-size:15px;font-weight:600;color:var(--ink)}
+  section{padding:56px 0 90px}
+  .eyebrow{font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .order{margin-top:30px;background:var(--screen);border:2px solid var(--ink);border-radius:16px;padding:30px;box-shadow:0 16px 40px rgba(28,30,33,.08)}
+  .order .line{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--hairline-soft);font-size:16px}
+  .order .line strong{color:var(--ink)}
+  .order .line.total{border-bottom:0;font:800 19px/1.4 var(--sans);color:var(--ink)}
+  .order .note{font:400 13.5px/1.55 var(--sans);color:var(--muted);margin-top:12px}
+  .btn{display:inline-block;font:700 17px/1 var(--sans);padding:17px 30px;border-radius:10px;background:var(--accent);color:#fff;margin-top:20px;border:0;cursor:pointer}
+  .btn:hover{background:var(--accent-hover)}
+  .btn:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+  @media(max-width:680px){.cols{grid-template-columns:1fr}}
+  .col{background:var(--screen);border:1px solid var(--hairline);border-radius:var(--radius);padding:24px}
+  .col h3{font-size:17px}
+  .col.exc h3{color:var(--muted)}
+  .col ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14.5px}
+  .col li{position:relative;padding-left:22px}
+  .col.inc li::before{content:"\2713";position:absolute;left:0;font:800 12px/1.6 var(--mono);color:var(--book-deep)}
+  .col.exc li::before{content:"\2715";position:absolute;left:0;font:800 11px/1.7 var(--mono);color:var(--muted)}
+  .caveat{margin-top:34px;background:var(--hairline-soft);border-left:4px solid var(--accent);border-radius:var(--radius);padding:22px 24px;font-size:16px;color:var(--ink)}
+  .elig{margin-top:34px}
+  .elig h2{margin-bottom:10px}
+  .elig ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:15px}
+  .elig li{position:relative;padding-left:22px}
+  .elig li::before{content:"\2713";position:absolute;left:0;font:800 12px/1.6 var(--mono);color:var(--book-deep)}
+  .steps{margin-top:44px;counter-reset:s}
+  .st{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--hairline)}
+  .st:last-of-type{border-bottom:1px solid var(--hairline)}
+  .st::before{counter-increment:s;content:counter(s);width:30px;height:30px;flex:none;border-radius:50%;background:var(--ink);color:var(--paper);font:800 14px/30px var(--mono);text-align:center}
+  .st .t{font:700 16.5px/1.4 var(--sans);color:var(--ink)}
+  .st p{font-size:15px;margin-top:4px}
+  .st.live::before{background:var(--book)}
+  .guarantee{margin-top:40px;background:var(--book-soft);border:1px solid #CBE7D3;border-left:6px solid var(--book);border-radius:var(--radius);padding:24px 26px}
+  .guarantee h3{font-size:18px;color:var(--book-deep)}
+  .guarantee p{font-size:15.5px;margin-top:8px}
+  footer{border-top:1px solid var(--hairline);padding:32px 0;font-size:14px;color:var(--muted);margin-top:40px}
+</style>
+<header><div class="wrap nav"><a class="logo" href="../">Local <span>LVRG</span></a><a class="back" href="../#pricing">&larr; Back to the offer</a></div></header>
+<section><div class="wrap">
+  <p class="eyebrow">Founding client offer</p>
+  <h1 style="margin-top:14px">Start your Revenue Reactivation Sprint.</h1>
+  <p style="margin-top:14px;font-size:17px">The outcome: reactivated interest and qualified next steps from a database you already own. Not guaranteed revenue, and we won't pretend otherwise.</p>
+
+  <div class="order">
+    <div class="line"><span><strong>Revenue Reactivation Sprint</strong> · one database segment, one offer, one campaign</span><span><strong>$1,000</strong></span></div>
+    <div class="line"><span>Continuing obligation</span><span>None</span></div>
+    <div class="line"><span>List boundary</span><span>Up to 1,000 eligible contacts</span></div>
+    <div class="line total"><span>Due today</span><span>$1,000</span></div>
+    <!-- PAYMENT LINK: replace the mailto below with the live GHL payment link for
+         "Revenue Reactivation Sprint - $1,000" (Local LVRG sub-account -> Payments ->
+         Products (one-time, hidden from store) -> Payment Links, LIVE mode, phone required,
+         same recipe as the coatings setup links). Then set button text to "Pay $1,000 & Start". -->
+    <a class="btn" href="mailto:hello@locallvrg.co?subject=Start%20my%20Reactivation%20Sprint&body=Send%20me%20the%20payment%20link.%20My%20business%3A%20">Get My Payment Link</a>
+    <p class="note">Questions before buying? <a href="mailto:hello@locallvrg.co?subject=Question%20before%20I%20start">Email hello@locallvrg.co</a> and a human answers. No required sales call, ever.</p>
+  </div>
+
+  <div class="cols">
+    <div class="col inc">
+      <h3>Included</h3>
+      <ul>
+        <li>Reactivation opportunity review</li>
+        <li>Collaborative offer workshop</li>
+        <li>One campaign strategy</li>
+        <li>Done-for-you campaign build</li>
+        <li>Follow-up over a defined period</li>
+        <li>Routine response handling &amp; qualification</li>
+        <li>One booking or purchase destination</li>
+        <li>Campaign summary in plain numbers</li>
+      </ul>
+    </div>
+    <div class="col exc">
+      <h3>Not included</h3>
+      <ul>
+        <li>New lead generation (that's a later conversation)</li>
+        <li>Guaranteed appointments or revenue</li>
+        <li>Contacting people who can't legally or ethically be contacted</li>
+        <li>Offers your business can't actually honor</li>
+        <li>Fixing bad service after somebody buys</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="caveat"><strong>We build the offer together. We do everything after that for you.</strong> You know your margins, capacity, and delivery limits. We know how to turn those into an offer people respond to. You approve the final offer before anything launches.</div>
+
+  <div class="elig">
+    <h2>You're a fit if</h2>
+    <ul>
+      <li>You have a meaningful list of old leads, unsold estimates, no-shows, or past customers</li>
+      <li>One customer is worth enough that a few recovered ones justify the campaign</li>
+      <li>You have capacity to serve the appointments</li>
+      <li>Your database can properly be contacted and you honor opt-outs</li>
+    </ul>
+  </div>
+
+  <div class="steps">
+    <h2>What happens immediately after payment</h2>
+    <div class="st"><div><span class="t">Your onboarding link arrives.</span><p>Welcome video plus a short intake: your database, offer history, economics, capacity, and existing follow-up.</p></div></div>
+    <div class="st"><div><span class="t">We hold your offer workshop.</span><p>One focused session, 30 to 45 minutes. We make the campaign compelling without creating something you can't fulfill. You approve the final offer.</p></div></div>
+    <div class="st"><div><span class="t">We build the reactivation.</span><p>Messaging, follow-up logic, qualification, and the booking path. Done for you.</p></div></div>
+    <div class="st live"><div><span class="t">Campaign goes live.</span><p>We work the opportunity, qualify the interested, book the qualified, and report what happened.</p></div></div>
+  </div>
+
+  <div class="guarantee">
+    <h3>What we guarantee</h3>
+    <p>That we build and run the agreed reactivation process exactly as described, and report the outcome honestly: contacts worked, replies, conversations, qualified opportunities, bookings. If the opportunity review says your database isn't worth reactivating, we tell you before launch instead of beating a dead list.</p>
+  </div>
+</div></section>
+<footer><div class="wrap">&copy; 2026 Local LVRG &middot; <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a> &middot; <a href="../sms-terms.html">SMS Terms</a></div></footer>

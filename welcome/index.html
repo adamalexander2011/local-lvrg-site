@@ -1,0 +1,74 @@
+<title>Welcome to Local LVRG</title>
+<style>
+  :root{--paper:#FBFAF7;--screen:#FFFFFF;--ink:#1C1E21;--body:#33373D;--muted:#61666D;
+  --hairline:#E7E4DD;--hairline-soft:#F1EFE9;--accent:#C2410C;--accent-hover:#A33509;
+  --book:#1E7F3C;--book-deep:#166534;--book-soft:#EAF6EE;--radius:12px;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+  h1,h2{color:var(--ink);text-wrap:balance;letter-spacing:-.02em}
+  h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;letter-spacing:-.03em}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  header{border-bottom:1px solid var(--hairline)}
+  .nav{display:flex;align-items:center;height:64px}
+  .logo{font:800 19px/1 var(--sans);color:var(--ink)}
+  .logo span{color:var(--accent)}
+  section{padding:56px 0 90px}
+  .paid{display:inline-flex;align-items:center;gap:9px;background:var(--book-soft);border:1px solid #CBE7D3;color:var(--book-deep);font:700 13px/1 var(--mono);letter-spacing:.08em;padding:10px 14px;border-radius:99px}
+  .steps{margin-top:36px;counter-reset:s}
+  .st{display:flex;gap:16px;padding:20px 0;border-top:1px solid var(--hairline)}
+  .st:last-of-type{border-bottom:1px solid var(--hairline)}
+  .st::before{counter-increment:s;content:counter(s);width:30px;height:30px;flex:none;border-radius:50%;background:var(--ink);color:var(--paper);font:800 14px/30px var(--mono);text-align:center}
+  .st .t{font:700 16.5px/1.4 var(--sans);color:var(--ink)}
+  .st p{font-size:15.5px;margin-top:5px}
+  .st .btn{display:inline-block;font:700 15px/1 var(--sans);padding:13px 22px;border-radius:9px;background:var(--accent);color:#fff;margin-top:12px}
+  .st .btn:hover{background:var(--accent-hover)}
+  .prep{margin-top:40px;background:var(--screen);border:1px solid var(--hairline);border-radius:var(--radius);padding:26px}
+  .prep h2{font-size:20px}
+  .prep ul{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;font-size:15px}
+  .prep li{position:relative;padding-left:22px}
+  .prep li::before{content:"\2713";position:absolute;left:0;font:800 12px/1.6 var(--mono);color:var(--book-deep)}
+  .note{margin-top:28px;font-size:14.5px;color:var(--muted)}
+  footer{border-top:1px solid var(--hairline);padding:32px 0;font-size:14px;color:var(--muted);margin-top:40px}
+</style>
+<header><div class="wrap nav"><a class="logo" href="../">Local <span>LVRG</span></a></div></header>
+<section><div class="wrap">
+  <span class="paid">✓ PAYMENT CONFIRMED</span>
+  <h1 style="margin-top:18px">You're in. Here's exactly what happens now.</h1>
+  <p style="margin-top:14px;font-size:17px">Your receipt is in your email. Your sprint starts the moment you finish the two steps below. Most owners are done in under 15 minutes.</p>
+
+  <div class="steps">
+    <div class="st"><div>
+      <span class="t">Fill out your intake form.</span>
+      <p>Your database (size, where it came from, roughly how old), what a customer is worth, what you most want to sell, your capacity, and what access you can give us. Honest answers beat impressive ones; the whole sprint is built from this.</p>
+      <!-- INTAKE FORM: replace with the live GHL "Sprint Intake" form link or embed once Adam saves it in the builder -->
+      <a class="btn" href="mailto:hello@locallvrg.co?subject=Sprint%20intake%20form%20request&body=Just%20paid.%20Send%20my%20intake%20form.">Open My Intake Form</a>
+    </div></div>
+    <div class="st"><div>
+      <span class="t">Book your Offer Workshop.</span>
+      <p>One focused session, 30 to 45 minutes. We choose the segment, verify your margins and capacity, and build the reactivation offer together. Nothing launches until you approve it.</p>
+      <!-- BOOKING LINK: replace with the live GHL calendar link for the Offer Workshop -->
+      <a class="btn" href="mailto:hello@locallvrg.co?subject=Book%20my%20Offer%20Workshop">Book My Workshop Time</a>
+    </div></div>
+    <div class="st"><div>
+      <span class="t">Then we take over.</span>
+      <p>Campaign build, launch, follow-up, qualification, and booking are done for you. You'll get a campaign summary in plain numbers: contacts worked, replies, conversations, qualified, booked.</p>
+    </div></div>
+  </div>
+
+  <div class="prep">
+    <h2>Worth gathering before the workshop</h2>
+    <ul>
+      <li>An export or screenshot of your list (hide customer details if you like; we mainly need size, source, and age)</li>
+      <li>What one new customer is actually worth to you</li>
+      <li>The service you most WANT to sell more of</li>
+      <li>Your real capacity over the next 60 days</li>
+      <li>Anything your business can't or won't offer, so we never build an offer you can't honor</li>
+    </ul>
+  </div>
+
+  <p class="note">Questions at any point: <a href="mailto:hello@locallvrg.co">hello@locallvrg.co</a>. A human answers.</p>
+</div></section>
+<footer><div class="wrap">&copy; 2026 Local LVRG &middot; <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a> &middot; <a href="../sms-terms.html">SMS Terms</a></div></footer>
