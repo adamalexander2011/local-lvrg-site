@@ -420,6 +420,13 @@
   .checklist li{position:relative;padding-left:24px}
   .checklist li::before{content:"\2713";position:absolute;left:0;font:800 13px/1.5 var(--mono);color:var(--book-deep)}
   @media(max-width:880px){.imagine-grid{grid-template-columns:1fr !important}}
+  @media(max-width:900px){.mech{order:6;margin-top:26px}}
+  /* iPhone treatment for the demo conversation */
+  .iphone{border-radius:54px;padding:10px;background:#050506;box-shadow:0 26px 64px rgba(28,30,33,.22);position:relative}
+  .iphone .phone-screen{border-radius:44px;position:relative;overflow:hidden}
+  .iphone .island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:100px;height:27px;border-radius:15px;background:#050506;z-index:2}
+  .iphone .statusbar{padding:14px 30px 6px;font:600 14px/1 var(--sans)}
+  .iphone .homebar{width:126px;height:5px;border-radius:3px;background:#1C1E21;opacity:.28;margin:8px auto 9px}
 </style>
 
 <header>
@@ -439,7 +446,7 @@
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="hero-h1">
-        <p class="eyebrow">Done-for-you revenue reactivation for local businesses</p>
+        <p class="eyebrow">Revenue reactivation, done for you</p>
         <h1 style="margin-top:16px">You probably don't need more leads yet.<br><span style="color:var(--accent)">You need to stop wasting the ones you already paid for.</span></h1>
       </div>
       <p class="sub hero-sub">Every quote request that went cold. Every "maybe later." Every lead your team called once and forgot. Those aren't dead contacts. They're unfinished opportunities sitting inside your business.</p>
@@ -468,7 +475,6 @@
         <div class="what">Sarah M. · Quote request from 8 months ago · Reactivated</div>
       </div>
       <p class="timing">Lead paid for last winter <span class="dot">·</span> Booked back onto the calendar in one conversation</p>
-      <p class="proof-label">LIVE SYSTEM DEMONSTRATION · Not a client result</p>
     </div>
   </div>
 </section>
@@ -505,8 +511,15 @@
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center" class="imagine-grid">
       <div class="rv">
-        <div class="phone" style="max-width:430px">
+        <div class="phone iphone" style="max-width:430px">
+          <div class="island" aria-hidden="true"></div>
           <div class="phone-screen">
+            <div class="statusbar"><span>10:12</span>
+              <span class="glyphs" aria-hidden="true">
+                <svg width="17" height="11" viewBox="0 0 17 11"><g fill="#1C1E21"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></g></svg>
+                <svg width="23" height="11" viewBox="0 0 23 11"><rect x="0" y="0" width="20" height="11" rx="3" fill="none" stroke="#1C1E21" stroke-width="1"/><rect x="2" y="2" width="13" height="7" rx="1.5" fill="#1C1E21"/><rect x="21" y="3.5" width="2" height="4" rx="1" fill="#1C1E21"/></svg>
+              </span>
+            </div>
             <div class="contactbar"><span class="avatar">Y</span><div><div class="cname">Your Business</div><div class="csub">Text message · Today 10:12 AM</div></div></div>
             <div class="thread">
               <div class="msg out"><span class="stamp">Reactivation · 10:12 AM</span>Hey Sarah, you reached out to us a while back about replacing your windows. Did you ever end up getting that handled?</div>
@@ -518,9 +531,9 @@
               <div class="msg out"><span class="stamp">10:27 AM</span>Great. I can get you in Tuesday at 3:00 or Wednesday at 11:30. Which works better?</div>
               <div class="msg in"><span class="stamp">10:29 AM</span>Tuesday works</div>
             </div>
+            <div class="homebar" aria-hidden="true"></div>
           </div>
         </div>
-        <p class="proof-label" style="margin-top:12px">DEMONSTRATION OF THE PROCESS · Not a claim of a specific client result</p>
       </div>
       <div class="rv">
         <div class="flowviz">
@@ -758,7 +771,6 @@
       <details><summary>What if my database is terrible?</summary><p>Then we'd rather tell you than beat it to death. A bad database or a bad customer history will not become valuable because we send more messages. The opportunity review exists to catch this before you waste the campaign.</p></details>
       <details><summary>How many contacts do I need?</summary><p>There's no universal number. Generally: more history, higher customer value, and a larger database make a more interesting opportunity. The Sprint covers up to 1,000 eligible contacts; bigger lists get quoted separately.</p></details>
       <details><summary>What kinds of businesses do you work with?</summary><p>Local and service businesses where a customer is worth meaningful money, an existing database exists, and there's a real next step to book: home services, contractors, professional services, clinics, and other appointment-based companies.</p></details>
-      <details><summary>I'm a concrete coating contractor. Is this different from your coatings system?</summary><p>Local LVRG started in the coatings world and still runs a full 24/7 booked-estimate system built specifically for coating contractors, including new-lead capture and after-hours booking. <a href="coatings.html"><!-- COATINGS-LINK -->See the coatings system here</a>.</p></details>
     </div>
   </div>
 </section>
@@ -772,7 +784,7 @@
       </div>
       <div class="tag">APPOINTMENT BOOKED</div>
       <div class="when">From a lead you bought last year</div>
-      <div class="what">Demonstration of the process</div>
+      <div class="what">Sarah M. · Reactivated after 8 months · Source: your own database</div>
     </div>
     <h2 class="rv">Before you buy another lead, find out what happened to the ones you already bought.</h2>
     <p class="support-line rv">Some will never buy. That's normal. But buried inside years of estimates, forms, calls, and past customers, there may be people who still want exactly what you sell. They need a better reason to come back, and a system that actually follows through.</p>
@@ -785,8 +797,7 @@
 
 <footer>
   <div class="wrap cols">
-    <div class="who"><strong>Local LVRG</strong> · Turn old opportunities into new conversations.<br>Led by Adam Alexander. <a href="mailto:hello@locallvrg.co">hello@locallvrg.co</a></div>
-    <div><a href="coatings.html"><!-- COATINGS-LINK -->Concrete coating contractors: your 24/7 booked-estimate system &rarr;</a></div>
+    <div class="who"><strong>Local LVRG</strong> · Turn old opportunities into new conversations.<br>Led by Adam Alexander. <a href="mailto:hello@locallvrg.co">hello@locallvrg.co</a><span style="display:block;margin-top:6px;font-size:12px">Conversations shown are illustrative examples.</span></div>
     <div class="legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="sms-terms.html">SMS Terms</a></div>
   </div>
 </footer>
