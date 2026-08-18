@@ -55,6 +55,31 @@
   .st p{font-size:15px;margin-top:4px}
   .st.live::before{background:var(--book)}
   footer{border-top:1px solid var(--hairline);padding:32px 0;font-size:14px;color:var(--muted);margin-top:40px}
+  /* application stepper */
+  .app{margin-top:44px;background:var(--screen);border:2px solid var(--ink);border-radius:16px;padding:30px;box-shadow:0 16px 40px rgba(28,30,33,.08)}
+  .app h2{font-size:22px}
+  .app .sub{font-size:15px;color:var(--muted);margin-top:6px}
+  .dots{display:flex;gap:7px;margin:18px 0 6px}
+  .dots i{width:26px;height:5px;border-radius:3px;background:var(--hairline)}
+  .dots i.on{background:var(--accent)}
+  .panel{display:none;margin-top:16px}
+  .panel.on{display:block}
+  .panel label{display:block;font:600 14px/1.4 var(--sans);color:var(--ink);margin:14px 0 6px}
+  .panel input[type=text],.panel input[type=tel],.panel input[type=email],.panel select{width:100%;font:400 16px/1.4 var(--sans);color:var(--ink);background:var(--paper);border:1.5px solid var(--hairline);border-radius:9px;padding:12px 14px}
+  .panel input:focus,.panel select:focus{outline:none;border-color:var(--accent)}
+  .opt{display:block;border:1.5px solid var(--hairline);border-radius:10px;padding:13px 15px;margin-top:9px;font:500 15.5px/1.4 var(--sans);color:var(--ink);cursor:pointer}
+  .opt input{margin-right:10px;accent-color:var(--accent)}
+  .opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+  .app .nav-row{display:flex;gap:12px;align-items:center;margin-top:22px}
+  .app .btn{margin-top:0}
+  .app .back-link{font:600 14.5px/1 var(--sans);color:var(--muted);cursor:pointer;background:none;border:none;padding:12px 6px}
+  .app .err{display:none;margin-top:12px;font:600 14px/1.4 var(--sans);color:#B42318}
+  .app .err.on{display:block}
+  .result h3{font-size:20px}
+  .result p{font-size:15.5px;margin-top:10px}
+  .result.dq h3{color:#B42318}
+  .result.q h3{color:var(--book-deep)}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
 </style>
 <header><div class="wrap nav"><a class="logo" href="../">Local <span>LVRG</span></a><a class="back" href="../#pricing">&larr; Back to the offer</a></div></header>
 <section><div class="wrap">
@@ -70,11 +95,79 @@
     <div class="line"><span>Minimum list to qualify</span><span>1,000 contacts</span></div>
     <div class="line"><span>After your 10 · optional</span><span>The Engine · $497/mo flat</span></div>
     <div class="line total"><span>Due today</span><span>$0</span></div>
-    <!-- APPLICATION: swap this mailto for the GHL "Test Drive Application" form link once Adam saves one in the builder -->
-    <a class="btn" href="mailto:hello@locallvrg.co?subject=Test%20Drive%20application&body=Business%20name%3A%0AWhat%20you%20sell%3A%0ARough%20size%20of%20your%20old%20lead%2Festimate%20list%3A%0AWhat%20one%20new%20customer%20is%20worth%3A%0ACould%20you%20serve%205-10%20extra%20appointments%20in%20the%20next%2060%20days%3F%3A%0AInterested%20in%20this%20for%20NEW%20leads%20too%3F%20(optional)%3A%0ABest%20number%20to%20text%20you%20at%3A">Apply for My Test Drive</a>
-    <p class="note">The application takes about two minutes. Qualify and you can start on the spot; miss the bar and you get a straight, friendly no. No blank campaigns. No contact with your list before you approve the offer.</p>
+    <a class="btn" href="#application">Apply for My Test Drive</a>
+    <p class="note">The application is right below. About two minutes, you'll know instantly, and if you qualify you can start on the spot. No blank campaigns. No contact with your list before you approve the offer.</p>
     <p class="note" style="color:var(--ink);font-weight:600;font-size:15px">Do your own math first: if one new customer is worth $4,000 to you, one appointment that closes pays for the entire setup eight times over. And it comes with nine more.</p>
     <p class="note" style="color:var(--book-deep);font-weight:600;font-size:15px">The guarantee, in one sentence: if your campaign books zero appointments, the $497 comes back. All of it.</p>
+  </div>
+
+  <div class="app" id="application">
+    <h2>The application</h2>
+    <p class="sub">About two minutes. A straight answer at the end, either way.</p>
+    <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    <div class="hp" aria-hidden="true"><label>Website<input type="text" id="a-hp" tabindex="-1" autocomplete="off"></label></div>
+
+    <div class="panel on" data-step="0">
+      <label for="a-name">Your name</label><input type="text" id="a-name" autocomplete="name">
+      <label for="a-biz">Business name</label><input type="text" id="a-biz" autocomplete="organization">
+      <label for="a-phone">Best number to text you at</label><input type="tel" id="a-phone" autocomplete="tel">
+      <label for="a-email">Email</label><input type="email" id="a-email" autocomplete="email">
+    </div>
+
+    <div class="panel" data-step="1">
+      <label for="a-sells">What do you sell?</label><input type="text" id="a-sells" placeholder="Windows, roofs, med spa treatments, epoxy floors...">
+      <label for="a-value">What's one new customer worth to you?</label>
+      <select id="a-value">
+        <option value="">Choose one</option>
+        <option value="under-500">Under $500</option>
+        <option value="500-2000">$500 to $2,000</option>
+        <option value="2000-5000">$2,000 to $5,000</option>
+        <option value="5000+">$5,000+</option>
+      </select>
+    </div>
+
+    <div class="panel" data-step="2">
+      <label>How many old leads, estimates, no-shows, or past customers do you have?</label>
+      <label class="opt"><input type="radio" name="a-list" value="under-1000">Under 1,000</label>
+      <label class="opt"><input type="radio" name="a-list" value="1000-3000">1,000 to 3,000</label>
+      <label class="opt"><input type="radio" name="a-list" value="3000-10000">3,000 to 10,000</label>
+      <label class="opt"><input type="radio" name="a-list" value="10000+">10,000+</label>
+    </div>
+
+    <div class="panel" data-step="3">
+      <label>We build a comeback offer WITH you. A real reason your old leads respond, not a discount blast. Open to that?</label>
+      <label class="opt"><input type="radio" name="a-comeback" value="yes">Yes, let's build it</label>
+      <label class="opt"><input type="radio" name="a-comeback" value="no">No, just message my list</label>
+    </div>
+
+    <div class="panel" data-step="4">
+      <label>Could you serve 5 to 10 extra appointments in the next 60 days?</label>
+      <label class="opt"><input type="radio" name="a-cap" value="yes">Yes</label>
+      <label class="opt"><input type="radio" name="a-cap" value="no">Not right now</label>
+      <label style="margin-top:20px">Want this on your NEW leads too? Same system, answers and books every new inquiry day or night.</label>
+      <label class="opt"><input type="radio" name="a-new" value="yes">Yes, tell me more</label>
+      <label class="opt"><input type="radio" name="a-new" value="maybe">Maybe later</label>
+      <label class="opt"><input type="radio" name="a-new" value="no">Just the old leads</label>
+    </div>
+
+    <div class="panel result dq" data-step="dq">
+      <h3>Straight answer: this isn't a fit yet.</h3>
+      <p>Under 1,000 leads, or a "just blast my list" approach, the math rarely justifies the campaign. We'd rather tell you now than take your money. Keep every inquiry, estimate, and no-show in one list; when you cross 1,000, come back.</p>
+      <p>Need NEW lead flow instead? That we do. <a href="mailto:hello@locallvrg.co?subject=NEW%20LEADS">Email hello@locallvrg.co</a> with the subject NEW LEADS.</p>
+    </div>
+
+    <div class="panel result q" data-step="q">
+      <h3>&#10003; You qualify.</h3>
+      <p>Your spot is held for the next step: the $497 setup. It includes the complete build and your first 10 booked appointments, and if the campaign books zero, it comes back in full.</p>
+      <p style="font-weight:600;color:var(--ink)">Taking you to secure checkout...</p>
+      <a class="btn" id="a-pay" href="https://link.fastpaydirect.com/payment-link/6a8439cbbd9f26c7377a1a08">Continue to Setup &middot; $497</a>
+    </div>
+
+    <p class="err" id="a-err">Fill in everything above and we can keep moving.</p>
+    <div class="nav-row" id="a-nav">
+      <button class="btn" id="a-next" type="button">Next</button>
+      <button class="back-link" id="a-back" type="button" style="display:none">&larr; Back</button>
+    </div>
   </div>
 
   <div class="defbox">
@@ -129,4 +222,52 @@
   </div>
   <div class="caveat" style="margin-top:44px"><strong>Want this on your NEW leads too?</strong> The same system that revives old leads can answer, qualify, and book every new lead the moment they inquire, day or night. Mention it on your application and we'll have that conversation. This is where it explodes businesses.</div>
 </div></section>
+<script>
+(function(){
+  var API="https://cemxfdnrowkkqvabtljp.supabase.co/functions/v1/lvrg-apply";
+  var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlbXhmZG5yb3dra3F2YWJ0bGpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyODEwNjksImV4cCI6MjA5ODg1NzA2OX0.e3tehmI8Dx8r9VOBgQAz_FEz1K6P9VdVLmOv6fSbX6M";
+  var PAY="https://link.fastpaydirect.com/payment-link/6a8439cbbd9f26c7377a1a08";
+  function $(id){return document.getElementById(id)}
+  var step=0,order=[0,1,2,3,4];
+  var panels=document.querySelectorAll('.app .panel');
+  var dots=document.querySelectorAll('.dots i');
+  var err=$('a-err');
+  document.querySelectorAll('.opt input').forEach(function(r){r.addEventListener('change',function(){
+    document.querySelectorAll('.opt input[name="'+r.name+'"]').forEach(function(x){x.closest('.opt').classList.toggle('sel',x.checked)});
+  })});
+  function show(key){
+    panels.forEach(function(p){p.classList.toggle('on',p.dataset.step===String(key))});
+    dots.forEach(function(d,i){d.classList.toggle('on',typeof key==='number'&&i<=key)});
+    err.classList.remove('on');
+    var terminal=(key==='dq'||key==='q');
+    $('a-nav').style.display=terminal?'none':'flex';
+    $('a-back').style.display=(key===0||terminal)?'none':'inline-block';
+    $('a-next').textContent=(key===4)?'Submit My Application':'Next';
+    if(!terminal)step=key;
+  }
+  function radio(name){var c=document.querySelector('input[name="'+name+'"]:checked');return c?c.value:''}
+  function valid(k){
+    if(k===0)return $('a-name').value.trim()&&$('a-biz').value.trim()&&$('a-phone').value.trim().length>6&&/.+@.+\..+/.test($('a-email').value.trim());
+    if(k===1)return $('a-sells').value.trim()&&$('a-value').value;
+    if(k===2)return !!radio('a-list');
+    if(k===3)return !!radio('a-comeback');
+    if(k===4)return !!radio('a-cap')&&!!radio('a-new');
+    return true;
+  }
+  function submit(){
+    var body=JSON.stringify({name:$('a-name').value.trim(),business:$('a-biz').value.trim(),phone:$('a-phone').value.trim(),email:$('a-email').value.trim(),sells:$('a-sells').value.trim(),value:$('a-value').value,list_size:radio('a-list'),comeback:radio('a-comeback'),capacity:radio('a-cap'),new_leads:radio('a-new'),website_url:$('a-hp').value});
+    var done=false;function go(){if(!done){done=true;window.location.href=PAY}}
+    try{fetch(API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ANON,'apikey':ANON},body:body}).then(go,go)}catch(e){go()}
+    setTimeout(go,3500);
+  }
+  $('a-next').addEventListener('click',function(){
+    if(!valid(step)){err.classList.add('on');return}
+    if(step===2&&radio('a-list')==='under-1000'){show('dq');return}
+    if(step===3&&radio('a-comeback')==='no'){show('dq');return}
+    if(step===4){show('q');submit();return}
+    show(step+1);
+  });
+  $('a-back').addEventListener('click',function(){show(step-1)});
+})();
+</script>
 <footer><div class="wrap">&copy; 2026 Local LVRG &middot; <a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a> &middot; <a href="../sms-terms.html">SMS Terms</a></div></footer>
