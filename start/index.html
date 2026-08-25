@@ -92,7 +92,6 @@
     <div class="line"><span><strong>Setup, only if you qualify</strong> · the complete DFY build</span><span><strong>$497</strong></span></div>
     <div class="line"><span><strong>Your first 10 booked appointments</strong></span><span><strong>Included</strong></span></div>
     <div class="line"><span>Per-appointment fees</span><span>None, ever</span></div>
-    <div class="line"><span>Minimum list to qualify</span><span>1,000 contacts</span></div>
     <div class="line"><span>After your 10 · optional</span><span>The Engine · $497/mo flat</span></div>
     <div class="line total"><span>Due today</span><span>$0</span></div>
     <a class="btn" href="#application">Apply for My Test Drive</a>
@@ -205,8 +204,8 @@
   <div class="elig">
     <h2>What qualifies you</h2>
     <ul>
-      <li><strong>At least 1,000 old leads</strong>, estimates, no-shows, or past customers to be worked</li>
-      <li><strong>Open to a real comeback offer.</strong> We build it with you and you approve it, but "just blast my list with a discount" is not a campaign we run</li>
+      <li><strong>Inquiries reach you when you cannot answer them.</strong> While you are on a job, at night, or at the weekend, and nobody picks them up</li>
+      <li><strong>You want them answered and booked, not just collected.</strong> An estimate on your calendar, at times you set</li>
       <li>Capacity to serve the appointments we book</li>
       <li>A list that can properly be contacted, with opt-outs honored</li>
     </ul>
@@ -262,8 +261,10 @@
   }
   $('a-next').addEventListener('click',function(){
     if(!valid(step)){err.classList.add('on');return}
-    if(step===2&&radio('a-list')==='under-1000'){show('dq');return}
-    if(step===3&&radio('a-comeback')==='no'){show('dq');return}
+    // Gates retired 2026-08-25 (keystone v12). The 1,000-lead minimum
+    // disqualified the exact owner-operator this is built for, and the
+    // comeback-offer question is reactivation-era. lvrg-apply v24 no
+    // longer rejects either server-side, so nothing bounces here.
     if(step===4){show('q');submit();return}
     show(step+1);
   });
