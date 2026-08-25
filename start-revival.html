@@ -50,13 +50,13 @@
   <h1 style="margin-top:14px">Let’s wake up the list you already paid for.</h1>
 
   <div class="order">
-    <div style="padding:20px 22px;border:2px solid var(--ink);border-radius:12px;background:var(--screen)">
-      <p style="font-weight:700;font-size:18px;color:var(--ink)">First, one question. It decides what happens next.</p>
-      <p style="margin-top:8px;color:var(--muted);font-size:15px">The Sprint wakes up the leads you already paid for. Those people reply. If there is nothing there to answer them, you have recreated the exact problem you came here to fix, so we will not sell you the Sprint on its own.</p>
-      <label style="display:flex;gap:10px;align-items:center;margin-top:16px;font-size:16px;cursor:pointer">
-        <input type="radio" name="hasbase" value="yes" style="width:18px;height:18px"> <span>I already have the Estimate Catcher running</span></label>
-      <label style="display:flex;gap:10px;align-items:center;margin-top:10px;font-size:16px;cursor:pointer">
-        <input type="radio" name="hasbase" value="no" style="width:18px;height:18px"> <span>Not yet</span></label>
+    <div id="gate" style="padding:22px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--screen)">
+      <p style="font-weight:700;font-size:18px;color:var(--ink)">First, we check you have the base.</p>
+      <p style="margin-top:8px;color:var(--muted);font-size:15px">The Sprint wakes up leads you already paid for. Those people reply, and if there is nothing there to answer them you have recreated the exact problem you came here to fix. So we check rather than ask. Enter the email on your Estimate Catcher account.</p>
+      <input id="vemail" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" style="width:100%;margin-top:14px;padding:14px 16px;font:400 16px/1 var(--sans);border:2px solid var(--hairline);border-radius:10px">
+      <input id="vhp" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <a class="btn" id="vbtn" href="#" style="margin-top:12px">Check my account</a>
+      <p id="vmsg" style="margin-top:12px;font-size:15px;display:none"></p>
     </div>
 
     <div id="path-yes" style="display:none;margin-top:20px">
@@ -66,7 +66,7 @@
       <p class="note" style="margin-top:10px"><strong>What happens after the tenth appointment.</strong> The Sprint stops. We tell you it is done and what it produced, and you decide whether to run another ten. Nothing renews and nothing is charged without you asking for it.</p>
       <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:15px;line-height:1.5;cursor:pointer">
         <input type="checkbox" id="agree" style="margin-top:4px;width:18px;height:18px;flex:0 0 auto">
-        <span>I confirm my Estimate Catcher is live. I understand the $297 covers <strong>up to 10 booked appointments</strong>, that it stops there, and that nothing renews automatically.</span>
+        <span>I understand the $297 covers <strong>up to 10 booked appointments</strong>, that it stops there, and that nothing renews automatically.</span>
       </label>
       <a class="btn" id="paybtn" href="https://link.fastpaydirect.com/payment-link/6a8317d173c7ff66b05e8945" style="margin-top:14px">Add the Sprint &middot; $297</a>
       <p class="note" style="margin-top:10px">Paying is how you accept the terms above. Your card is charged $297 once. There is no monthly attached to the Sprint itself.</p>
@@ -74,27 +74,48 @@
 
     <div id="path-no" style="display:none;margin-top:20px">
       <div style="padding:22px 24px;border:2px solid var(--accent);border-radius:12px;background:var(--accent-soft)">
-        <p style="font-weight:700;font-size:18px;color:var(--ink)">Then start with the Estimate Catcher. Not because we want a bigger sale.</p>
-        <p style="margin-top:10px">Waking up an old list is the easy half. The half that earns you money is answering the people who reply, in seconds, at whatever hour they reply. That is what the Estimate Catcher does, and it is what the Sprint sends people into.</p>
-        <p style="margin-top:10px">Set that up first. Until <strong>September 30</strong> it is $497 and that includes your first month. Once it is live, come back here and add the Sprint on top. It takes a minute and the button above turns on.</p>
-        <a class="btn" href="start-afterhours.html" style="margin-top:16px">Start with the Estimate Catcher &middot; $497</a>
-        <p class="note" style="margin-top:10px">Would rather talk it through? <a href="apply.html?offer=revival">Ask me about your list first.</a></p>
+        <p style="font-weight:700;font-size:18px;color:var(--ink)">We could not find an Estimate Catcher on that email.</p>
+        <p style="margin-top:10px">If you have not set one up yet, start there. Waking up an old list is the easy half. The half that earns you money is answering the people who reply, in seconds, at whatever hour they reply.</p>
+        <p style="margin-top:10px">Until <strong>September 30</strong> the Estimate Catcher is $497 and that includes your first month. Once it is live, come back here and the Sprint unlocks.</p>
+        <a class="btn" href="start-afterhours.html" style="margin-top:14px">Start with the Estimate Catcher &middot; $497</a>
+        <p class="note" style="margin-top:12px"><strong>Already a client and this says no?</strong> You may have paid under a different email. <a href="mailto:hello@locallvrg.co?subject=Sprint%20access">Email me</a> and I will sort it out and send you the link directly.</p>
       </div>
     </div>
 
     <script>
     (function(){
-      var yes=document.getElementById("path-yes"), no=document.getElementById("path-no");
+      var FN="https://cemxfdnrowkkqvabtljp.supabase.co/functions/v1/lvrg-verify-base";
+      var K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlbXhmZG5yb3dra3F2YWJ0bGpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyODEwNjksImV4cCI6MjA5ODg1NzA2OX0.e3tehmI8Dx8r9VOBgQAz_FEz1K6P9VdVLmOv6fSbX6M";
+      var gate=document.getElementById("gate"), yes=document.getElementById("path-yes"), no=document.getElementById("path-no");
+      var em=document.getElementById("vemail"), hp=document.getElementById("vhp"), vb=document.getElementById("vbtn"), msg=document.getElementById("vmsg");
       var c=document.getElementById("agree"), b=document.getElementById("paybtn");
       function sync(){var ok=c.checked;b.style.opacity=ok?"":".4";b.style.pointerEvents=ok?"":"none";b.setAttribute("aria-disabled",ok?"false":"true");}
       c.addEventListener("change",sync);sync();
-      Array.prototype.forEach.call(document.querySelectorAll('input[name="hasbase"]'),function(r){
-        r.addEventListener("change",function(){
-          yes.style.display = r.value==="yes" ? "block" : "none";
-          no.style.display  = r.value==="no"  ? "block" : "none";
-          if(r.value==="no"){c.checked=false;sync();}
+      function say(t,color){msg.textContent=t;msg.style.color=color||"var(--danger)";msg.style.display="block";}
+      vb.addEventListener("click",function(e){
+        e.preventDefault();
+        var v=(em.value||"").trim();
+        if(!v||v.indexOf("@")<1){say("Enter the email on your account.");return;}
+        vb.textContent="Checking...";vb.style.pointerEvents="none";msg.style.display="none";
+        fetch(FN,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+K,"apikey":K},
+          body:JSON.stringify({email:v,website_url:hp.value})})
+        .then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});})
+        .then(function(o){
+          vb.textContent="Check my account";vb.style.pointerEvents="";
+          if(o.s===503||(o.j&&o.j.error==="upstream_unavailable")){
+            say("We could not reach our billing system just now, so we cannot confirm your account. Nothing is broken on your end. Email hello@locallvrg.co and I will send you the link directly.");
+            return;
+          }
+          if(!o.j||o.j.ok!==true){say("That email did not look right. Try again, or email hello@locallvrg.co.");return;}
+          if(o.j.hasBase){gate.style.display="none";no.style.display="none";yes.style.display="block";}
+          else{yes.style.display="none";no.style.display="block";}
+        })
+        .catch(function(){
+          vb.textContent="Check my account";vb.style.pointerEvents="";
+          say("Something went wrong reaching us. Email hello@locallvrg.co and I will send you the link directly.");
         });
       });
+      em.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();vb.click();}});
     })();
     </script>
   </div>
