@@ -50,25 +50,28 @@
   <h1 style="margin-top:14px">Let’s catch every lead you already get.</h1>
 
   <div class="order">
-    <div class="line"><span><strong>After-Hours / 24-7 Estimate Catcher</strong> setup &amp; build</span><span><s style="color:var(--muted);font-weight:400">$497</s> <strong style="color:var(--book-deep)">Waived</strong></span></div>
-    <div class="line"><span>Monthly management (starts only after your live booking test passes)</span><span>$497/mo</span></div>
-    
-    <div class="line total"><span>Due today</span><span>$0</span></div>
-    <!-- PAYMENT LINK: replace the href below with the GHL/Stripe payment link for "After-Hours Estimate Catcher Setup $497"
-         (create in Local LVRG sub-account -> Payments -> Payment Links, Live mode, like the offeraj links).
-         Then change the button text to "Pay $497 Setup". -->
-<p class="note" style="margin-top:12px;padding:14px 16px;background:var(--book-soft);border:1px solid #CFE8D8;border-radius:10px;color:var(--ink)"><strong>Founding client terms.</strong> The $497 setup is real, and it is what the build actually costs. We are waiving it for founding clients, and here is the whole trade: a three month minimum on the monthly, permission to document what the system does for you, and a short video testimonial once it books your first estimate. Nothing is charged today.</p>
-    <a class="btn" href="apply.html?offer=afterhours">Apply as a founding client</a>
-    <!-- Setup fee WAIVED for founding clients 2026-08-25, so this page no longer takes payment.
-         The live $497 setup link is preserved here for direct use (an upgrade, or a client who is
-         not on founding terms): https://link.fastpaydirect.com/payment-link/6a7fa069c8cc9a2ce726813a -->
-        <p class="note">Nothing is charged today. Your monthly begins only at activation, after you watch your own system book a test estimate and you tell us it is right.</p>
+    <div class="line"><span><strong>After-Hours / 24-7 Estimate Catcher</strong> setup &amp; build <em style="font-style:normal;color:var(--book-deep)">&middot; includes your first month</em></span><span><strong>$497</strong></span></div>
+    <div class="line"><span>After month one</span><span>$497/mo</span></div>
+    <div class="line"><span>Commitment</span><span>90 days</span></div>
+    <div class="line total"><span>Due today</span><span>$497</span></div>
+    <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:15px;line-height:1.5;cursor:pointer">
+      <input type="checkbox" id="agree" style="margin-top:4px;width:18px;height:18px;flex:0 0 auto">
+      <span>I understand my first month is included in the $497 above, that $497 a month begins after that, and that this is a <strong>90 day commitment</strong>.</span>
+    </label>
+    <a class="btn" id="paybtn" href="https://link.fastpaydirect.com/payment-link/6a7fa069c8cc9a2ce726813a" style="margin-top:14px">Get started &middot; $497</a>
+    <p class="note" style="margin-top:10px">Paying is how you accept the terms above. Your card is charged $497 once, today. The $497 monthly begins after your first month, and only once you have watched your own system book a test estimate and told us it is right.</p>
+    <p class="note"><a href="apply.html?offer=afterhours">Rather talk it through first? Start with a conversation instead.</a></p>
+    <script>
+    (function(){var c=document.getElementById("agree"),b=document.getElementById("paybtn");
+      function sync(){var ok=c.checked;b.style.opacity=ok?"":".4";b.style.pointerEvents=ok?"":"none";b.setAttribute("aria-disabled",ok?"false":"true");}
+      c.addEventListener("change",sync);sync();})();
+    </script>
   </div>
 
   <div class="steps">
-    <h2>What happens once you are approved</h2>
+    <h2>What happens after you pay</h2>
     <p>No mystery, no waiting around. Here is the exact sequence:</p>
-    <div class="st"><div><span class="when">Right after approval</span><br><span class="t">You get the founding terms in writing and a 15-minute onboarding form.</span><p>Services, service area, estimate hours, calendar, who gets notified, and your business details (LLC name and EIN) so we can register your texting number with the carriers on day one. That form is everything we need to start.</p></div></div>
+    <div class="st"><div><span class="when">Right after payment</span><br><span class="t">You get your receipt, the terms in writing, and a 15-minute onboarding form.</span><p>Services, service area, estimate hours, calendar, who gets notified, and your business details (LLC name and EIN) so we can register your texting number with the carriers on day one. That form is everything we need to start.</p></div></div>
     <div class="st"><div><span class="when">Days 1&ndash;3</span><br><span class="t">We build your system and submit your carrier registration.</span><p>Configured with your company name, services, cities, and real availability, wired to your calendar and your existing lead sources (website form, Facebook leads, missed-call text-back). In parallel, your business texting registration (required by US carriers for every company that texts customers) is submitted from your onboarding details. It usually clears in about a week, and you get your written launch date the moment it does. We build while it processes, so nothing waits on us.</p></div></div>
     <div class="st live"><div><span class="when">Before any monthly billing</span><br><span class="t">The live test: you try to break it.</span><p>You play a homeowner and text your own system. It answers, qualifies the project, captures the name and address, and books a test estimate onto your calendar while you watch. The owner notification lands on your phone.</p></div></div>
     <div class="st"><div><span class="when">Launch</span><br><span class="t">It goes live on your real channels.</span><p>It starts answering your real inquiries on the schedule you choose: after hours only, or full 24/7. You can expand coverage anytime.</p></div></div>
@@ -77,7 +80,7 @@
 
   <div class="guarantee">
     <h3>The live-test guarantee</h3>
-    <p>Nothing is charged today, and monthly billing does not begin until a test lead receives a response, completes qualification, books a test appointment, and you receive the notification. <strong>And if we cannot make your system book a test estimate in front of you, we refund your setup fee.</strong> You own your accounts, the handoff is documented, and your launch date is in writing.</p>
+    <p>Your first month is included in the setup above, and the monthly does not begin until a test lead receives a response, completes qualification, books a test appointment, and you receive the notification. <strong>And if we cannot make your system book a test estimate in front of you, we refund your setup fee.</strong> You own your accounts, the handoff is documented, and your launch date is in writing.</p>
   </div>
 </div></section>
 <footer><div class="wrap">&copy; 2026 Local LVRG &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="sms-terms.html">SMS Terms</a></div></footer>
