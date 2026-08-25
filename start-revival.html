@@ -50,23 +50,52 @@
   <h1 style="margin-top:14px">Let’s wake up the list you already paid for.</h1>
 
   <div class="order">
-    <div class="line"><span><strong>Lead Revival Sprint</strong> <em style="font-style:normal;color:var(--book-deep)">&middot; includes 10 booked appointments</em></span><span><strong>$297</strong></span></div>
-    <div class="line"><span>After your ten</span><span>It stops. Nothing auto-charges</span></div>
-    <div class="line"><span>Requires</span><span>An active Estimate Catcher</span></div>
-    <div class="line total"><span>Due today</span><span>$297</span></div>
-    <p class="note" style="margin-top:12px;padding:14px 16px;background:var(--accent-soft);border:1px solid #F0D9C9;border-radius:10px;color:var(--ink)"><strong>This is an add-on, not a standalone service.</strong> The Sprint wakes up old leads, and those people need somewhere to land when they reply. That is the Estimate Catcher. Buying the Sprint without it means waking a list up and missing them all over again, which is the exact problem you came here to fix. If you are not running the Estimate Catcher yet, <a href="start-afterhours.html">start there</a> and add this on top.</p>
-    <p class="note" style="margin-top:10px"><strong>What happens after the tenth appointment.</strong> The Sprint stops. We tell you it is done and what it produced, and you decide whether to run another ten. Nothing renews and nothing is charged without you asking for it.</p>
-    <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:15px;line-height:1.5;cursor:pointer">
-      <input type="checkbox" id="agree" style="margin-top:4px;width:18px;height:18px;flex:0 0 auto">
-      <span>I have an active Estimate Catcher, or I am buying one alongside this. I understand the $297 covers <strong>up to 10 booked appointments</strong>, that it stops there, and that nothing renews automatically.</span>
-    </label>
-    <a class="btn" id="paybtn" href="https://link.fastpaydirect.com/payment-link/6a8317d173c7ff66b05e8945" style="margin-top:14px">Add the Sprint &middot; $297</a>
-    <p class="note" style="margin-top:10px">Paying is how you accept the terms above. Your card is charged $297 once. There is no monthly attached to the Sprint itself.</p>
-    <p class="note"><a href="apply.html?offer=revival">Not sure your list is worth working? Ask me first.</a></p>
+    <div style="padding:20px 22px;border:2px solid var(--ink);border-radius:12px;background:var(--screen)">
+      <p style="font-weight:700;font-size:18px;color:var(--ink)">First, one question. It decides what happens next.</p>
+      <p style="margin-top:8px;color:var(--muted);font-size:15px">The Sprint wakes up the leads you already paid for. Those people reply. If there is nothing there to answer them, you have recreated the exact problem you came here to fix, so we will not sell you the Sprint on its own.</p>
+      <label style="display:flex;gap:10px;align-items:center;margin-top:16px;font-size:16px;cursor:pointer">
+        <input type="radio" name="hasbase" value="yes" style="width:18px;height:18px"> <span>I already have the Estimate Catcher running</span></label>
+      <label style="display:flex;gap:10px;align-items:center;margin-top:10px;font-size:16px;cursor:pointer">
+        <input type="radio" name="hasbase" value="no" style="width:18px;height:18px"> <span>Not yet</span></label>
+    </div>
+
+    <div id="path-yes" style="display:none;margin-top:20px">
+      <div class="line"><span><strong>Lead Revival Sprint</strong> <em style="font-style:normal;color:var(--book-deep)">&middot; includes 10 booked appointments</em></span><span><strong>$297</strong></span></div>
+      <div class="line"><span>After your ten</span><span>It stops. Nothing auto-charges</span></div>
+      <div class="line total"><span>Due today</span><span>$297</span></div>
+      <p class="note" style="margin-top:10px"><strong>What happens after the tenth appointment.</strong> The Sprint stops. We tell you it is done and what it produced, and you decide whether to run another ten. Nothing renews and nothing is charged without you asking for it.</p>
+      <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:15px;line-height:1.5;cursor:pointer">
+        <input type="checkbox" id="agree" style="margin-top:4px;width:18px;height:18px;flex:0 0 auto">
+        <span>I confirm my Estimate Catcher is live. I understand the $297 covers <strong>up to 10 booked appointments</strong>, that it stops there, and that nothing renews automatically.</span>
+      </label>
+      <a class="btn" id="paybtn" href="https://link.fastpaydirect.com/payment-link/6a8317d173c7ff66b05e8945" style="margin-top:14px">Add the Sprint &middot; $297</a>
+      <p class="note" style="margin-top:10px">Paying is how you accept the terms above. Your card is charged $297 once. There is no monthly attached to the Sprint itself.</p>
+    </div>
+
+    <div id="path-no" style="display:none;margin-top:20px">
+      <div style="padding:22px 24px;border:2px solid var(--accent);border-radius:12px;background:var(--accent-soft)">
+        <p style="font-weight:700;font-size:18px;color:var(--ink)">Then start with the Estimate Catcher. Not because we want a bigger sale.</p>
+        <p style="margin-top:10px">Waking up an old list is the easy half. The half that earns you money is answering the people who reply, in seconds, at whatever hour they reply. That is what the Estimate Catcher does, and it is what the Sprint sends people into.</p>
+        <p style="margin-top:10px">Set that up first. Until <strong>September 30</strong> it is $497 and that includes your first month. Once it is live, come back here and add the Sprint on top. It takes a minute and the button above turns on.</p>
+        <a class="btn" href="start-afterhours.html" style="margin-top:16px">Start with the Estimate Catcher &middot; $497</a>
+        <p class="note" style="margin-top:10px">Would rather talk it through? <a href="apply.html?offer=revival">Ask me about your list first.</a></p>
+      </div>
+    </div>
+
     <script>
-    (function(){var c=document.getElementById("agree"),b=document.getElementById("paybtn");
+    (function(){
+      var yes=document.getElementById("path-yes"), no=document.getElementById("path-no");
+      var c=document.getElementById("agree"), b=document.getElementById("paybtn");
       function sync(){var ok=c.checked;b.style.opacity=ok?"":".4";b.style.pointerEvents=ok?"":"none";b.setAttribute("aria-disabled",ok?"false":"true");}
-      c.addEventListener("change",sync);sync();})();
+      c.addEventListener("change",sync);sync();
+      Array.prototype.forEach.call(document.querySelectorAll('input[name="hasbase"]'),function(r){
+        r.addEventListener("change",function(){
+          yes.style.display = r.value==="yes" ? "block" : "none";
+          no.style.display  = r.value==="no"  ? "block" : "none";
+          if(r.value==="no"){c.checked=false;sync();}
+        });
+      });
+    })();
     </script>
   </div>
 
