@@ -1,5 +1,6 @@
 <title>Local LVRG</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Local LVRG installs the system that answers every inquiry and books the appointment while the owner is still working. Built and running for concrete coating pros, and configured for other local trades on request.">
 
 <style>
   :root{
@@ -7,824 +8,153 @@
     --hairline:#E7E4DD; --hairline-soft:#F1EFE9;
     --accent:#C2410C; --accent-hover:#A33509; --accent-soft:#FBEDE4;
     --book:#1E7F3C; --book-deep:#166534; --book-soft:#EAF6EE;
-    --bubble-in:#EFEDE8; --bubble-out:#0B93F6; --danger:#D6453D;
     --radius:12px; --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;margin:0}
   html{scroll-behavior:smooth}
   body{background:var(--paper);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
   h1,h2,h3{color:var(--ink);text-wrap:balance;letter-spacing:-.02em}
-  h1{font-size:clamp(38px,6vw,62px);font-weight:800;line-height:1.04;letter-spacing:-.03em}
-  h2{font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.08}
-  h3{font-size:21px;font-weight:700;line-height:1.25}
+  h1{font-size:clamp(34px,5.4vw,54px);font-weight:800;line-height:1.06;letter-spacing:-.03em}
+  h2{font-size:clamp(24px,3.2vw,32px);font-weight:800;line-height:1.12}
+  h3{font-size:20px;font-weight:700;line-height:1.3}
   a{color:var(--accent);text-decoration:none}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  a:hover{color:var(--accent-hover)}
+  .wrap{max-width:800px;margin:0 auto;padding:0 22px}
   .eyebrow{font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-  .btn{display:inline-block;font:700 16px/1 var(--sans);padding:16px 28px;border-radius:10px;border:2px solid transparent;cursor:pointer;transition:background .15s,color .15s}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-primary:hover{background:var(--accent-hover)}
-  .btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
-  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
-  .btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-  section{padding:84px 0}
-  .section-head{max-width:660px;margin-bottom:42px}
-  .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-  .rv.vis{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+  .btn{display:inline-block;font:700 16px/1 var(--sans);padding:16px 28px;border-radius:10px;
+       border:2px solid transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+  .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:#fff}
 
-  /* header */
-  header{position:sticky;top:0;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline);z-index:50}
-  .nav{display:flex;align-items:center;gap:26px;height:64px}
-  .logo{font:800 19px/1 var(--sans);color:var(--ink);letter-spacing:-.02em}
+  header{border-bottom:1px solid var(--hairline);background:var(--paper)}
+  .nav{display:flex;align-items:center;height:64px}
+  .logo{font:800 19px/1 var(--sans);color:var(--ink)}
   .logo span{color:var(--accent)}
-  .nav-links{display:flex;gap:22px;margin-left:auto}
-  .nav-links a{color:var(--ink);font-size:15px;font-weight:600}
-  .nav .btn{padding:11px 18px;font-size:14.5px}
-  @media(max-width:720px){.nav-links{display:none}}
 
-  /* hero */
-  .hero{padding:64px 0 90px;overflow:hidden}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
-  .hero-copy>p.sub{margin:20px 0 0;font-size:19px;color:var(--ink);max-width:30em}
-  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
-  .reassure{margin-top:16px;font-size:14.5px;color:var(--muted);max-width:36em}
+  .hero{padding:84px 0 22px}
+  .lede{font-size:clamp(18px,2.2vw,21px);color:var(--body);margin-top:22px;max-width:63ch}
+  .rule{height:1px;background:var(--hairline);margin:56px 0}
 
-  .exhibit{display:flex;flex-direction:column;gap:14px}
-  .push{background:var(--screen);border:1px solid var(--hairline);border-left:6px solid var(--book);border-radius:16px;padding:20px 22px;box-shadow:0 20px 48px rgba(30,127,60,.16);max-width:430px}
-  .push.hero-push{opacity:0;animation:land .55s ease forwards .5s,buzz .45s ease 1.25s}
-  .push-top{display:flex;align-items:center;gap:9px;margin-bottom:11px}
-  .push-icon{width:26px;height:26px;border-radius:7px;background:var(--accent);display:grid;place-items:center;flex:none}
-  .push-top .app{font:700 11px/1 var(--mono);letter-spacing:.09em;color:var(--muted)}
-  .push-top .now{margin-left:auto;font:400 11px/1 var(--mono);color:var(--muted)}
-  .push .tag{font:700 14px/1 var(--mono);letter-spacing:.1em;color:var(--book-deep)}
-  .push .when{font:800 30px/1.15 var(--sans);color:var(--ink);letter-spacing:-.02em;margin-top:8px}
-  .push .what{font:400 15px/1.5 var(--mono);color:var(--muted);margin-top:6px}
-  @keyframes land{from{opacity:0;transform:translateY(-16px) scale(.97)}to{opacity:1;transform:none}}
-  @keyframes buzz{0%,100%{transform:none}20%{transform:translateX(-3px) rotate(-.4deg)}40%{transform:translateX(3px) rotate(.4deg)}60%{transform:translateX(-2px)}80%{transform:translateX(2px)}}
-  @media(prefers-reduced-motion:reduce){.push.hero-push{animation:none;opacity:1}}
-  .timing{font:600 13.5px/1.5 var(--mono);color:var(--ink)}
-  .timing .dot{color:var(--muted)}
+  .frame{background:var(--accent-soft);border:1px solid #F0D9C9;border-radius:var(--radius);
+         padding:26px 28px;margin-top:26px}
+  .frame p{margin-top:10px;max-width:60ch}
 
-  .convo{max-width:430px;border:1px solid var(--hairline);border-radius:14px;background:var(--screen)}
-  .convo summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:14px 18px;font:700 15px/1.3 var(--sans);color:var(--ink)}
-  .convo summary::-webkit-details-marker{display:none}
-  .convo summary::after{content:"▾";margin-left:auto;color:var(--muted);transition:transform .2s}
-  .convo[open] summary::after{transform:rotate(180deg)}
-  .convo .phone{margin:0 12px 14px}
-  .phone{background:#0E0F11;border-radius:30px;padding:9px}
-  .phone-screen{background:var(--screen);border-radius:23px;overflow:hidden}
-  .statusbar{display:flex;align-items:center;justify-content:space-between;padding:10px 18px 6px;font:600 13px/1 var(--sans);color:var(--ink)}
-  .statusbar .glyphs{display:flex;gap:5px;align-items:center}
-  .contactbar{display:flex;align-items:center;gap:10px;padding:8px 16px 12px;border-bottom:1px solid var(--hairline-soft)}
-  .avatar{width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:700 14px/32px var(--sans);text-align:center;flex:none}
-  .contactbar .cname{font:600 14px/1.2 var(--sans);color:var(--ink)}
-  .contactbar .csub{font:400 11px/1.2 var(--mono);color:var(--muted)}
-  .thread{display:flex;flex-direction:column;gap:9px;padding:14px 14px 18px}
-  .msg{max-width:86%;padding:9px 13px;border-radius:16px;font-size:14.5px;line-height:1.42}
-  .msg .stamp{display:block;font:400 10px/1 var(--mono);letter-spacing:.03em;color:var(--muted);margin-bottom:4px;text-transform:uppercase}
-  .msg.in{background:var(--bubble-in);color:var(--ink);border-bottom-left-radius:5px;align-self:flex-start}
-  .msg.out{background:var(--bubble-out);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
-  .msg.out .stamp{color:rgba(255,255,255,.78)}
-  .exhibit-foot{font-weight:700;color:var(--ink);font-size:17px}
-  .proof-label{font:400 12px/1.5 var(--mono);color:var(--muted)}
+  .door{background:var(--screen);border:2px solid var(--ink);border-radius:16px;
+        padding:34px 32px;margin-top:30px}
+  .door .eyebrow{display:block;margin-bottom:12px}
+  .door p{margin-top:12px;max-width:58ch}
+  .door .btn{margin-top:24px}
+  .door .after{margin-top:14px;font-size:15px;color:var(--muted)}
 
-  @media(max-width:900px){
-    .hero{padding:42px 0 66px}
-    .hero-grid{display:flex;flex-direction:column;gap:0}
-    .hero-copy{display:contents}
-    .hero-h1{order:1}
-    .hero-sub{order:2;margin-top:18px !important}
-    .hero-exhibit{order:3;margin-top:26px;display:flex;flex-direction:column;gap:14px}
-    .hero-ctas{order:4;margin-top:26px}
-    .hero-reassure{order:5}
-    .push{max-width:100%}
-    .convo{max-width:100%}
+  .who{margin-top:14px;max-width:60ch}
+  section{padding:0 0 18px}
+  .tail{padding:0 0 90px}
+
+  footer{border-top:1px solid var(--hairline);padding:30px 0 46px;margin-top:60px;
+         font-size:14.5px;color:var(--muted)}
+  footer .cols{display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;justify-content:space-between}
+  footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+  footer .legal a{margin-left:16px}
+  @media(max-width:640px){
+    .hero{padding:56px 0 18px}
+    .door{padding:26px 22px}
+    footer .legal a{margin:0 16px 0 0}
   }
-
-  /* leak selector */
-  .band{background:var(--screen);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
-  .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:38px}
-  .tab{font:700 15px/1.3 var(--sans);padding:12px 20px;border-radius:99px;border:2px solid var(--hairline);background:transparent;color:var(--ink);cursor:pointer}
-  .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-  .panel{display:none;max-width:620px}
-  .panel.on{display:block}
-  .panel .note{margin-top:18px;font-size:15.5px;color:var(--body)}
-  .panel .proof-label{margin-top:12px}
-  .panel .push{margin-top:16px}
-
-  .tl{display:flex;flex-direction:column;gap:26px}
-  .tl-row .lbl{font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
-  .tl-row.bad .lbl{color:var(--danger)}
-  .tl-row.good .lbl{color:var(--book-deep)}
-  .tl-bar{display:flex;align-items:center}
-  .tl-dot{width:13px;height:13px;border-radius:50%;flex:none}
-  .tl-row.bad .tl-dot{background:var(--ink)}
-  .tl-row.good .tl-dot{background:var(--book)}
-  .tl-line{height:10px;border-radius:6px;position:relative;flex:1}
-  .tl-row.bad .tl-line{background:repeating-linear-gradient(-45deg,#F3E3E2 0 8px,#FBF1F0 8px 16px);border:1px solid #EAD3D1}
-  .tl-row.good .tl-line{flex:0 0 44px;background:var(--book)}
-  .tl-line .mid{position:absolute;inset:0;display:grid;place-items:center;font:700 13px/1 var(--mono);color:var(--danger);white-space:nowrap}
-  .tl-ends{display:flex;justify-content:space-between;gap:12px;margin-top:9px;font:400 13px/1.4 var(--mono);color:var(--muted)}
-  .tl-ends strong{color:var(--ink);font-weight:700}
-  .chip{display:inline-flex;align-items:center;font:700 13px/1 var(--mono);letter-spacing:.05em;padding:9px 13px;border-radius:8px;margin-left:14px}
-  .chip.booked{background:var(--book-soft);color:var(--book-deep);border:1px solid #CBE7D3}
-
-  .callcard{display:flex;align-items:center;gap:12px;background:var(--screen);border:1px solid var(--hairline);border-radius:14px;padding:14px 16px;box-shadow:0 8px 22px rgba(28,30,33,.06);max-width:400px}
-  .callcard .cc-icon{width:34px;height:34px;border-radius:50%;background:#FBECEB;display:grid;place-items:center;flex:none}
-  .callcard .cc-title{font:700 14.5px/1.3 var(--sans);color:var(--danger)}
-  .callcard .cc-sub{font:400 12px/1.4 var(--mono);color:var(--muted)}
-  .mini-thread{display:flex;flex-direction:column;gap:9px;margin:16px 0;max-width:400px}
-  .flow-arrow{width:2px;height:22px;background:var(--hairline);margin:2px 0 2px 24px;position:relative}
-  .flow-arrow::after{content:"";position:absolute;bottom:-1px;left:-4px;border:5px solid transparent;border-top-color:var(--hairline)}
-  .agecard{display:flex;align-items:center;gap:12px;background:var(--hairline-soft);border:1px dashed #D9D5CC;border-radius:14px;padding:14px 16px;max-width:400px}
-  .agecard .age-lbl{font:700 11px/1.4 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-  .agecard .age-sub{font:400 14px/1.4 var(--sans);color:var(--body)}
-
-  /* compact mechanism */
-  .seq{display:flex;align-items:stretch;gap:14px;flex-wrap:wrap}
-  .seq-item{flex:1;min-width:200px;background:var(--screen);border:1px solid var(--hairline);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:10px}
-  .seq-item .cap{font:700 14.5px/1.3 var(--sans);color:var(--ink)}
-  .seq-arrow{align-self:center;color:var(--muted);font:700 20px/1 var(--mono)}
-  .leadcard{background:var(--hairline-soft);border-left:4px solid #1877F2;border-radius:8px;padding:9px 12px}
-  .leadcard .lc-t{font:700 12.5px/1.3 var(--sans);color:var(--ink)}
-  .leadcard .lc-s{font:400 10.5px/1.4 var(--mono);color:var(--muted)}
-  .seq .b{border-radius:11px;padding:7px 10px;font:400 12.5px/1.35 var(--sans);max-width:92%}
-  .seq .b.in{background:var(--hairline-soft);color:var(--ink);align-self:flex-start;border-bottom-left-radius:4px}
-  .seq .b.out{background:var(--bubble-out);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
-  .cal{background:var(--hairline-soft);border-radius:8px;overflow:hidden}
-  .cal-head{background:var(--ink);color:var(--paper);font:700 10px/1 var(--mono);letter-spacing:.1em;text-align:center;padding:6px}
-  .cal-grid{display:grid;grid-template-columns:repeat(5,1fr)}
-  .cal-grid .d{font:600 9.5px/1 var(--mono);color:var(--muted);text-align:center;padding:6px 0}
-  .cal-slots{display:grid;grid-template-columns:repeat(5,1fr);height:42px}
-  .cal-slots .s.busy{background:var(--book);border-radius:4px;margin:4px 3px;display:grid;place-items:center}
-  .cal-slots .s.busy span{font:700 8.5px/1.2 var(--mono);color:#fff;text-align:center}
-  .employee{margin-top:44px;background:var(--ink);border-radius:16px;padding:34px;color:#D4D7DB}
-  .emp-head h3{color:var(--paper);font-size:clamp(21px,2.6vw,26px)}
-  .emp-head p{margin-top:8px;font-size:16px;color:#A6ABB2}
-  .emp-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:24px}
-  .emp-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;font-size:16px}
-  .emp-list li{display:flex;gap:11px;align-items:flex-start}
-  .emp-list.no li::before{content:"✕";font:800 13px/1.5 var(--mono);color:#8B9097}
-  .emp-list.no li{color:#A6ABB2}
-  .emp-list.yes li::before{content:"✓";font:800 13px/1.5 var(--mono);color:#4FBF72}
-  .emp-list.yes li{color:#EDEFF1;font-weight:500}
-  @media(max-width:720px){.emp-cols{grid-template-columns:1fr}}
-  .mathcomp{margin-top:52px}
-  .mc-head h3{font-size:clamp(24px,3.2vw,32px)}
-  .mc-head p{margin-top:8px;font-size:17px;color:var(--ink);font-weight:600}
-  .mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px;align-items:stretch}
-  .mc-card{background:var(--screen);border:1px solid var(--hairline);border-radius:16px;padding:28px 26px;display:flex;flex-direction:column}
-  .mc-card.hot{border:2.5px solid var(--book);box-shadow:0 16px 40px rgba(30,127,60,.12)}
-  .mc-title{font:700 13px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .mc-card.hot .mc-title{color:var(--book-deep)}
-  .mc-price{font:800 clamp(40px,4.6vw,56px)/1 var(--sans);letter-spacing:-.03em;color:var(--ink);margin-top:12px}
-  .mc-price span{font:600 18px/1 var(--sans);color:var(--muted);letter-spacing:0}
-  .mc-sub{font:400 13.5px/1.5 var(--sans);color:var(--muted);margin-top:8px}
-  .mc-list{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14.5px;line-height:1.45}
-  .mc-list li{position:relative;padding-left:24px;color:var(--body)}
-  .mc-list.no li::before{content:"\2715";position:absolute;left:0;font:800 12px/1.6 var(--mono);color:var(--muted)}
-  .mc-list.yes li{color:var(--ink);font-weight:500}
-  .mc-list.yes li::before{content:"\2713";position:absolute;left:0;font:800 13px/1.5 var(--mono);color:var(--book-deep)}
-  .mc-verdict{margin-top:auto;padding-top:18px;font:600 14.5px/1.5 var(--sans);color:var(--ink)}
-  .mc-card.hot .mc-verdict{color:var(--book-deep)}
-  .mc-bottom{margin-top:24px;font:700 clamp(17px,2.2vw,21px)/1.5 var(--sans);color:var(--ink);max-width:56ch}
-  @media(max-width:760px){.mc-grid{grid-template-columns:1fr}}
-  .trust{margin-top:24px;padding:22px 26px;background:var(--hairline-soft);border-left:4px solid var(--accent);border-radius:var(--radius);font-size:17.5px;font-weight:500;color:var(--ink);max-width:680px}
-  @media(max-width:720px){.seq{flex-direction:column}.seq-arrow{transform:rotate(90deg);margin:-4px 0}}
-
-  /* private demo (dark) */
-  .reversal{background:var(--ink);color:#D4D7DB}
-  .reversal h2{color:var(--paper)}
-  .reversal .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center}
-  .reversal p.big{font-size:18px;margin-top:18px;max-width:34em;color:#D4D7DB}
-  .reversal .support{margin-top:14px;font-size:14.5px;color:#A6ABB2}
-  .yourco{background:#26292E;border:1px solid #3A3E44;border-radius:14px;padding:16px 18px;max-width:430px}
-  .yourco .yc-head{display:flex;align-items:center;gap:10px;border-bottom:1px solid #3A3E44;padding-bottom:10px;margin-bottom:12px}
-  .yourco .yc-av{width:30px;height:30px;border-radius:50%;background:#3A3E44;color:#D4D7DB;font:700 13px/30px var(--sans);text-align:center}
-  .yourco .yc-n{font:700 14px/1.2 var(--sans);color:var(--paper)}
-  .yourco .yc-s{font:400 10.5px/1.3 var(--mono);color:#A6ABB2}
-  .yourco .b{border-radius:11px;padding:8px 11px;font:400 13px/1.4 var(--sans);max-width:90%;display:block;background:#31353B;color:#EDEFF1;border-bottom-left-radius:4px;margin-right:auto}
-  @media(max-width:900px){.reversal .wrap{grid-template-columns:1fr}}
-
-  /* offers */
-  .flagship{background:var(--screen);border:2.5px solid var(--accent);border-radius:16px;padding:36px;box-shadow:0 20px 50px rgba(194,65,12,.12);position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
-  .flagship::before{content:"The complete 24/7 system";position:absolute;top:-14px;left:32px;background:var(--accent);color:#fff;font:700 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:6px}
-  .flagship h3{font-size:clamp(24px,3vw,32px)}
-  .flagship p.pitch{font-size:17.5px;color:var(--ink);margin-top:12px}
-  .flagship p.mech{font-size:15px;color:var(--body);margin-top:10px}
-  .flagship .btn{margin-top:22px}
-  .flowviz{display:flex;flex-direction:column;gap:10px}
-  .flowviz .node{background:var(--hairline-soft);border:1px solid var(--hairline);border-radius:10px;padding:12px 16px;font:700 14px/1.3 var(--sans);color:var(--ink);display:flex;align-items:center;gap:10px}
-  .flowviz .node.g{background:var(--book-soft);border-color:#CBE7D3;color:var(--book-deep)}
-  .flowviz .fa{align-self:center;color:var(--muted);font:700 16px/1 var(--mono)}
-  @media(max-width:880px){.flagship{grid-template-columns:1fr}}
-  .price{margin-top:16px;font:400 16px/1.4 var(--sans);color:var(--ink)}
-  .price strong{font-weight:800;font-size:20px}
-  .price span{display:block;font:400 13px/1.5 var(--sans);color:var(--muted);margin-top:3px}
-  .flowviz .scene{font:700 13px/1.4 var(--mono);color:var(--accent);letter-spacing:.02em}
-  .flowviz .scene.end{color:var(--book-deep)}
-  .fbad-img{display:block;width:100%;border-radius:12px;border:1px solid var(--hairline);box-shadow:0 8px 22px rgba(28,30,33,.09)}
-  /* facebook ad mockup */
-  .fbad{background:#fff;border:1px solid var(--hairline);border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(28,30,33,.07);font-family:var(--sans)}
-  .fb-top{display:flex;align-items:center;gap:9px;padding:11px 13px 9px}
-  .fb-av{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font:800 15px/34px var(--sans);text-align:center;flex:none}
-  .fb-name{font:700 13.5px/1.25 var(--sans);color:#050505}
-  .fb-sub{font:400 11.5px/1.3 var(--sans);color:#65676B}
-  .fb-body{padding:0 13px 11px;font:400 13.5px/1.45 var(--sans);color:#050505}
-  .fb-creative{position:relative;height:118px;display:grid;grid-template-columns:1fr 1fr}
-  .fb-creative .side{position:relative}
-  .fb-creative .before{background:
-      linear-gradient(63deg,transparent 46%,rgba(40,38,35,.5) 46.6%,transparent 47.2%),
-      linear-gradient(-71deg,transparent 63%,rgba(40,38,35,.45) 63.5%,transparent 64.2%),
-      linear-gradient(80deg,transparent 24%,rgba(40,38,35,.35) 24.4%,transparent 25%),
-      linear-gradient(170deg,#A8A29A,#8E8880 70%,#7D7770)}
-  .fb-creative .after{background:
-      linear-gradient(105deg,transparent 38%,rgba(255,255,255,.38) 49%,transparent 60%),
-      radial-gradient(2px 2px at 12% 22%,#5C5650 50%,transparent 51%),
-      radial-gradient(2px 2px at 34% 64%,#D9D2C7 50%,transparent 51%),
-      radial-gradient(2.5px 2.5px at 58% 30%,#4A443E 50%,transparent 51%),
-      radial-gradient(2px 2px at 76% 74%,#CFC8BD 50%,transparent 51%),
-      radial-gradient(2px 2px at 88% 40%,#5C5650 50%,transparent 51%),
-      radial-gradient(2.5px 2.5px at 22% 82%,#D9D2C7 50%,transparent 51%),
-      radial-gradient(2px 2px at 47% 12%,#CFC8BD 50%,transparent 51%),
-      radial-gradient(2px 2px at 66% 55%,#413B36 50%,transparent 51%),
-      radial-gradient(2.5px 2.5px at 92% 85%,#D9D2C7 50%,transparent 51%),
-      radial-gradient(2px 2px at 8% 55%,#4A443E 50%,transparent 51%),
-      linear-gradient(170deg,#9B938A,#847C74)}
-  .fb-creative .tag{position:absolute;top:8px;left:8px;font:800 9.5px/1 var(--mono);letter-spacing:.08em;color:#fff;background:rgba(5,5,5,.62);padding:5px 7px;border-radius:4px}
-  .fb-creative .divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.7)}
-  .fb-link{display:flex;align-items:center;gap:10px;background:#F0F2F5;padding:10px 13px}
-  .fb-url{font:400 10.5px/1.3 var(--sans);color:#65676B;text-transform:uppercase;letter-spacing:.02em}
-  .fb-headline{font:700 13.5px/1.3 var(--sans);color:#050505}
-  .fb-cta{margin-left:auto;flex:none;font:700 12.5px/1 var(--sans);color:#050505;background:#E4E6EB;border-radius:6px;padding:9px 13px}
-  .fb-row{display:flex;justify-content:space-around;border-top:1px solid #E4E6EB;padding:8px 0;font:600 12px/1 var(--sans);color:#65676B}
-  /* google ad mockup */
-  .gad{background:#fff;border:1px solid var(--hairline);border-radius:10px;padding:13px 15px;box-shadow:0 8px 22px rgba(28,30,33,.07);font-family:arial,var(--sans);text-align:left}
-  .gad .g-sp{font:700 12px/1 arial;color:#1F1F1F}
-  .gad .g-urlrow{display:flex;align-items:center;gap:8px;margin-top:7px}
-  .gad .g-fav{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:800 11px/22px arial;text-align:center;flex:none}
-  .gad .g-site{font:400 12.5px/1.2 arial;color:#1F1F1F}
-  .gad .g-url{font:400 11px/1.2 arial;color:#474747}
-  .gad .g-h{display:block;font:400 16.5px/1.3 arial;color:#1A0DAB;margin-top:6px}
-  .gad .g-d{font:400 12.5px/1.5 arial;color:#474747;margin-top:3px}
-  .convo-node{flex-direction:column;align-items:stretch;gap:7px}
-  .cv{border-radius:10px;padding:7px 10px;font:400 12.5px/1.35 var(--sans);max-width:88%}
-  .cv.out{background:var(--bubble-out);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
-  .cv.in{background:var(--paper);border:1px solid var(--hairline);color:var(--ink);align-self:flex-start;border-bottom-left-radius:4px;font-weight:400}
-  .bigcard{margin-top:26px;background:var(--screen);border:1px solid var(--hairline);border-radius:16px;padding:34px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
-  .bigcard h3{font-size:clamp(22px,2.8vw,28px)}
-  .bigcard p.pitch{font-size:17px;color:var(--ink);margin-top:10px}
-  .bigcard p.mech{font-size:15px;margin-top:10px}
-  .bigcard .btn{margin-top:20px}
-  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .stat{background:var(--hairline-soft);border-radius:12px;padding:22px 18px}
-  .stat .n{display:block;font:800 clamp(30px,4vw,42px)/1 var(--sans);letter-spacing:-.02em;color:var(--ink)}
-  .stat .l{display:block;font:500 13.5px/1.45 var(--sans);color:var(--body);margin-top:8px}
-  .statgrid .attr{grid-column:1/-1;font:400 11.5px/1.5 var(--mono);color:var(--muted)}
-  @media(max-width:880px){.bigcard{grid-template-columns:1fr}}
-  .starter{margin-top:26px;background:var(--hairline-soft);border:1px dashed #D9D5CC;border-radius:14px;padding:26px 30px;display:grid;grid-template-columns:1.4fr .6fr;gap:26px;align-items:center}
-  .starter .q{font:700 13px/1.4 var(--sans);color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
-  .starter h3{font-size:20px;margin-top:6px}
-  .starter p{font-size:15px;margin-top:8px;max-width:52ch}
-  .starter-cta{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
-  .starter-cta .price{margin-top:0}
-  .starter-cta .btn{margin-top:12px}
-  @media(max-width:880px){.starter{grid-template-columns:1fr}}
-  .pdemo{display:flex;flex-direction:column;gap:12px;max-width:1080px;margin:52px auto 0}
-  .pdemo .scene{text-align:center}
-  .pd-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:18px;align-items:center;margin-top:8px}
-  .pd-arrow{font:700 24px/1 var(--mono);color:var(--muted)}
-  .pd-col{display:flex;flex-direction:column;gap:12px;min-width:0}
-  .pd-convo{gap:9px}
-  .pd-col .push{max-width:none;margin:0}
-  @media(max-width:880px){.pd-grid{grid-template-columns:1fr;max-width:430px;margin:8px auto 0}.pd-arrow{transform:rotate(90deg);justify-self:center}}
-  @media print{
-    .rv,.msg,.push{opacity:1 !important;transform:none !important;animation:none !important}
-    .msg.in .txt{max-height:none !important;opacity:1 !important;animation:none !important}
-    .msg.in .dots{display:none !important}
-    header{position:static !important}
-  }
-  .pdemo .node{background:var(--hairline-soft);border:1px solid var(--hairline);border-radius:10px;padding:12px 16px;font:700 14px/1.3 var(--sans);color:var(--ink);display:flex;align-items:center;gap:10px}
-  .pdemo .node.g{background:var(--book-soft);border-color:#CBE7D3;color:var(--book-deep)}
-  .pdemo .fa{align-self:center;color:var(--muted);font:700 16px/1 var(--mono)}
-  .pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
-  .pcard{background:var(--screen);border:1px solid var(--hairline);border-radius:16px;padding:30px 26px;display:flex;flex-direction:column;gap:0}
-  .pcard.hot{border:2.5px solid var(--accent);box-shadow:0 20px 50px rgba(194,65,12,.12);position:relative}
-  .pcard.hot::before{content:"The complete 24/7 system";position:absolute;top:-14px;left:24px;background:var(--accent);color:#fff;font:700 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:6px}
-  .pcard .aud{font:700 12px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-  .pcard h3{font-size:24px;margin-top:10px;line-height:1.15}
-  .pcard .pdesc{font-size:15px;margin-top:8px;min-height:3em}
-  .bigprice{margin-top:18px}
-  .bigprice .n{font:800 clamp(38px,4vw,52px)/1 var(--sans);letter-spacing:-.03em;color:var(--ink)}
-  .bigprice .per{font:600 17px/1 var(--sans);color:var(--muted);margin-left:4px}
-  .bigprice .sub{display:block;font:400 13px/1.5 var(--sans);color:var(--muted);margin-top:8px}
-  .prule{height:1px;background:var(--hairline);margin:20px 0 16px}
-  .feat{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;font-size:14.5px;line-height:1.5}
-  .feat li{position:relative;padding-left:24px}
-  .feat li::before{content:"\2713";position:absolute;left:0;top:0;font:800 13px/1.5 var(--mono);color:var(--book-deep)}
-  .feat strong{color:var(--ink)}
-  .statline{margin-top:16px;background:var(--hairline-soft);border-radius:9px;padding:11px 13px;font:600 12.5px/1.5 var(--sans);color:var(--ink)}
-  .statline span{display:block;font:400 10.5px/1.5 var(--mono);color:var(--muted);margin-top:4px}
-  .pbtn{margin-top:20px;text-align:center;width:100%}
-  .pcard .btn-ghost{border-color:var(--ink)}
-  @media(max-width:920px){.pcards{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
-  .afterpay{margin-top:34px;text-align:center}
-  .ap-label{font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-  .ap-flow{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin-top:14px;font:600 15px/1.4 var(--sans);color:var(--ink)}
-  .ap-a{color:var(--muted);font-family:var(--mono)}
-  .ap-live{color:var(--book-deep)}
-  .ap-note{margin-top:10px;font-size:13.5px;color:var(--muted)}
-
-  /* guarantee + founder */
-  .assure{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .g-card{background:var(--screen);border:1px solid var(--hairline);border-radius:var(--radius);padding:30px}
-  .g-card h3{font-size:19px}
-  .g-card>p{font-size:15.5px;margin-top:10px}
-  .g-card ul{margin:16px 0 0;padding:0;list-style:none;font-size:15px;display:flex;flex-direction:column;gap:9px}
-  .g-card li{display:flex;gap:10px;align-items:flex-start}
-  .g-card li svg{flex:none;margin-top:3px}
-  .founder-sig{margin-top:18px;font:700 15px/1.4 var(--sans);color:var(--ink)}
-  .founder-sig small{display:block;font:400 13px/1.5 var(--sans);color:var(--muted)}
-  @media(max-width:880px){.assure{grid-template-columns:1fr}}
-
-  /* faq */
-  .faq{max-width:720px}
-  .faq details{border-bottom:1px solid var(--hairline);padding:18px 0}
-  .faq summary{font:600 17px/1.4 var(--sans);color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
-  .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";font:400 22px/1 var(--mono);color:var(--muted)}
-  .faq details[open] summary::after{content:"–"}
-  .faq details p{margin-top:12px;font-size:16px;max-width:60ch}
-
-  /* final */
-  .final{text-align:center;padding:104px 0}
-  .final .push{margin:0 auto 40px;text-align:left}
-  .final p.support-line{margin:18px auto 0;max-width:36em;font-size:18px;color:var(--ink)}
-  .final .cta-row{justify-content:center}
-  .final .reassure{margin:16px auto 0;text-align:center}
-
-  footer{border-top:1px solid var(--hairline);padding:40px 0;font-size:14.5px;color:var(--muted)}
-  footer .cols{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start}
-  footer .who{max-width:420px}
-  footer .who strong{color:var(--ink)}
-  footer a{color:var(--body);font-weight:500}
-  footer a:hover{color:var(--ink)}
-  footer .legal{display:flex;gap:16px;flex-wrap:wrap}
-  /* reactivation homepage additions */
-  .mech{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px;font:700 13.5px/1 var(--mono);letter-spacing:.06em;color:var(--ink)}
-  .mech .m{background:var(--screen);border:1px solid var(--hairline);border-radius:8px;padding:9px 13px}
-  .mech .m.g{background:var(--book-soft);border-color:#CBE7D3;color:var(--book-deep)}
-  .mech .ma{color:var(--muted)}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px;max-width:760px}
-  .chips .c{font:600 14px/1 var(--sans);color:var(--ink);background:var(--screen);border:1px solid var(--hairline);border-radius:99px;padding:9px 15px}
-  .chips .c.money::after{content:" $";color:var(--accent);font-weight:800}
-  .dead{margin-top:34px;max-width:560px;display:flex;flex-direction:column;gap:0}
-  .dead .drow{display:flex;gap:16px;padding:14px 0;border-top:1px solid var(--hairline);align-items:baseline}
-  .dead .drow:last-child{border-bottom:1px solid var(--hairline)}
-  .dead .dday{flex:0 0 130px;font:700 12.5px/1.6 var(--mono);letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
-  .dead .dwhat{font-size:15.5px;color:var(--body)}
-  .dead .drow.hot .dday{color:var(--danger)}
-  .dead .drow.hot .dwhat{color:var(--ink);font-weight:600}
-  .calc{background:var(--screen);border:1px solid var(--hairline);border-radius:16px;padding:34px;box-shadow:0 16px 44px rgba(28,30,33,.07)}
-  .calc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
-  @media(max-width:880px){.calc-grid{grid-template-columns:1fr}}
-  .calc label{display:block;margin-bottom:18px}
-  .calc label .ln{display:flex;justify-content:space-between;gap:12px;font:600 14.5px/1.4 var(--sans);color:var(--ink)}
-  .calc label .ln output{font:700 15px/1.4 var(--mono);color:var(--accent)}
-  .calc input[type=range]{width:100%;margin-top:8px;accent-color:var(--accent)}
-  .pipe{display:flex;flex-direction:column;gap:14px}
-  .pipe .prow .pl{display:flex;justify-content:space-between;gap:12px;font:600 13px/1.4 var(--sans);color:var(--body);margin-bottom:6px}
-  .pipe .prow .pl strong{font:700 15px/1.3 var(--mono);color:var(--ink)}
-  .pipe .pbar{height:26px;border-radius:7px;background:var(--hairline-soft);overflow:hidden}
-  .pipe .pfill{height:100%;border-radius:7px;background:var(--muted);min-width:6px;transition:width .45s ease}
-  .pipe .prow.p2 .pfill{background:#8A6E5B}
-  .pipe .prow.p3 .pfill{background:var(--accent)}
-  .pipe .prow.p4 .pfill{background:var(--book)}
-  .pipe .presult{margin-top:8px;background:var(--book-soft);border:1px solid #CBE7D3;border-radius:12px;padding:18px 20px}
-  .pipe .presult .rn{font:800 clamp(30px,3.6vw,42px)/1.1 var(--sans);letter-spacing:-.02em;color:var(--book-deep)}
-  .pipe .presult .rl{font:600 14px/1.4 var(--sans);color:var(--ink);margin-top:4px}
-  .calc .disclaimer{margin-top:18px;font:400 12.5px/1.6 var(--mono);color:var(--muted)}
-  .split3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:34px}
-  @media(max-width:880px){.split3{grid-template-columns:1fr}}
-  .split3 .g-card h3 span{display:block;font:700 11.5px/1;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
-  .split3 .g-card.together h3 span{color:var(--accent)}
-  .split3 .g-card.dfy h3 span{color:var(--book-deep)}
-  .split3 .g-card.yours h3 span{color:var(--muted)}
-  .qlist{margin:20px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:16px;max-width:620px}
-  .qlist li{padding-left:24px;position:relative;color:var(--body)}
-  .qlist li::before{content:"?";position:absolute;left:0;font:800 14px/1.6 var(--mono);color:var(--accent)}
-  .sprint-card{max-width:640px;margin:0 auto}
-  .sprint-card .pcard.hot::before{content:"First three businesses"}
-  .checklist{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:15px}
-  .checklist li{position:relative;padding-left:24px}
-  .checklist li::before{content:"\2713";position:absolute;left:0;font:800 13px/1.5 var(--mono);color:var(--book-deep)}
-  @media(max-width:880px){.imagine-grid{grid-template-columns:1fr !important}}
-  @media(max-width:900px){.mech{order:6;margin-top:26px}}
-  /* iPhone treatment for the demo conversation */
-  .iphone{border-radius:54px;padding:10px;background:#050506;box-shadow:0 26px 64px rgba(28,30,33,.22);position:relative}
-  .iphone .phone-screen{border-radius:44px;position:relative;overflow:hidden}
-  .iphone .island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:100px;height:27px;border-radius:15px;background:#050506;z-index:2}
-  .iphone .statusbar{padding:14px 30px 6px;font:600 14px/1 var(--sans)}
-  .iphone .homebar{width:126px;height:5px;border-radius:3px;background:#1C1E21;opacity:.28;margin:8px auto 9px}
 </style>
 
 <header>
   <div class="wrap nav">
     <a class="logo" href="/">Local <span>LVRG</span></a>
-    <nav class="nav-links">
-      <a href="#leak">The Leak</a>
-      <a href="#how">How It Works</a>
-      <a href="#fit">Who It's For</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="btn btn-primary" href="start/" style="margin-left:auto">Apply for a Test Drive</a>
   </div>
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <div class="hero-h1">
-        <p class="eyebrow">Revenue reactivation, done for you</p>
-        <h1 style="margin-top:16px">You probably don't need more leads yet.<br><span style="color:var(--accent)">You need to stop wasting the ones you already paid for.</span></h1>
-      </div>
-      <p class="sub hero-sub">Every quote request that went cold. Every "maybe later." Every lead your team called once and forgot. Those aren't dead contacts. They're unfinished opportunities sitting inside your business.</p>
-      <div class="cta-row hero-ctas">
-        <a class="btn btn-primary" href="#calculator">See What's Hiding in My Database</a>
-        <a class="btn btn-ghost" href="start/">Apply for a Test Drive &rarr;</a>
-      </div>
-      <p class="reassure hero-reassure">We work with you to create a reactivation offer your business can actually fulfill. Then we build and run the campaign, handle responses, qualify the interested people, and book the next step. For you.</p>
-      <div class="mech" aria-label="The mechanism">
-        <span class="m">OFFER</span><span class="ma">&rarr;</span>
-        <span class="m">REACTIVATE</span><span class="ma">&rarr;</span>
-        <span class="m">QUALIFY</span><span class="ma">&rarr;</span>
-        <span class="m g">BOOK</span>
-      </div>
-    </div>
+  <div class="wrap">
+    <p class="eyebrow">Local LVRG</p>
+    <h1>Every inquiry answered. Every appointment booked. While you are still working.</h1>
+    <p class="lede">
+      We install the system that replies the moment an inquiry arrives, answers the questions
+      you have answered a thousand times, works out whether it is a real job, and puts it on
+      your calendar at the times you set. Then it gets out of the way, and you can read every
+      word it has ever said to anybody.
+    </p>
+  </div>
+</section>
 
-    <div class="exhibit hero-exhibit">
-      <div class="push hero-push" role="status">
-        <div class="push-top">
-          <span class="push-icon"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="2" width="12" height="11" rx="2" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M1 5.5h12" stroke="#fff" stroke-width="1.6"/><path d="M4.5 1v2.5M9.5 1v2.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><rect x="7.2" y="7.5" width="3.4" height="3" rx=".8" fill="#fff"/></svg></span>
-          <span class="app">LOCAL LVRG</span>
-          <span class="now">now</span>
-        </div>
-        <div class="tag">APPOINTMENT BOOKED</div>
-        <div class="when">Tuesday · 3:00 PM</div>
-        <div class="what">Sarah M. · Quote request from 8 months ago · Reactivated</div>
-      </div>
-      <p class="timing">Lead paid for last winter <span class="dot">·</span> Booked back onto the calendar in one conversation</p>
+<section>
+  <div class="wrap">
+    <div class="rule"></div>
+    <h2>Everyone sells more leads. That is not usually the first problem.</h2>
+    <div class="frame">
+      <p>
+        Adding lead volume to an owner who already cannot answer the phone does not fix
+        anything. It makes the bottleneck worse, and now there is a monthly bill attached
+        to it.
+      </p>
+      <p>
+        The gap we work sits after the inquiry arrives and before it is booked. In the trades
+        that is <strong>post lead, pre estimate</strong>. In a shop it is the call that came in
+        while you had your hands full. Same gap, and it is the part nobody sells into.
+      </p>
     </div>
   </div>
 </section>
 
-<section class="band" id="leak">
+<section>
   <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">The leak</p>
-      <h2 style="margin-top:12px">The expensive part already happened.</h2>
-      <p style="margin-top:14px;font-size:18px;color:var(--ink)">You already paid to make these people raise their hand:</p>
+    <div class="rule"></div>
+    <div class="door">
+      <span class="eyebrow">Built and running</span>
+      <h2>Concrete and garage floor coatings.</h2>
+      <p>
+        If you coat floors for a living, there is a site built for your trade, with a live
+        system you can open and try to break. Play the homeowner. Ask it the things you
+        actually get asked. It takes about a minute and there is nothing to sign up for.
+      </p>
+      <a class="btn btn-primary" href="https://coatings.locallvrg.co">Go to Local LVRG for coating pros</a>
+      <p class="after">No account access, advertising account, or payment required for the demo.</p>
     </div>
-    <div class="chips rv">
-      <span class="c money">Facebook ads</span><span class="c money">Google Ads</span><span class="c money">SEO</span><span class="c money">HomeAdvisor</span><span class="c money">Angi</span><span class="c money">Trade shows</span><span class="c money">Website traffic</span><span class="c money">Salespeople</span><span class="c money">Referral programs</span><span class="c money">Promotions</span><span class="c money">Estimates</span><span class="c money">Your time</span>
-    </div>
-    <p class="rv" style="margin-top:30px;font-size:17px;max-width:620px">And somewhere along the way, a person filled out a form. Called your business. Asked for pricing. Scheduled and disappeared. Said "not right now." Or bought once and never heard from you again.</p>
-    <p class="rv" style="margin-top:18px;font:700 19px/1.5 var(--sans);color:var(--ink)">Then what happened? For most businesses: almost nothing.</p>
 
-    <div class="dead rv" aria-label="What usually happens to a paid lead">
-      <div class="drow"><span class="dday">Day 1</span><span class="dwhat">"Hey, I'm interested. How much does this usually cost?" Your team calls. No answer. Leaves a voicemail.</span></div>
-      <div class="drow"><span class="dday">Day 2</span><span class="dwhat">Nothing.</span></div>
-      <div class="drow"><span class="dday">Day 7</span><span class="dwhat">Nothing.</span></div>
-      <div class="drow"><span class="dday">Day 30</span><span class="dwhat">Nothing.</span></div>
-      <div class="drow hot"><span class="dday">6 months later</span><span class="dwhat">You buy another lead. The first person may still need what you sell.</span></div>
-    </div>
-    <p class="trust rv" style="margin-top:30px">That isn't automatically a bad lead. Sometimes it's just an unfinished sale. Their timing was wrong, their budget changed, they got busy comparing providers, or nobody ever gave them a compelling reason to come back.</p>
-  </div>
-</section>
-
-<section id="imagine">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">Now imagine this instead</p>
-      <h2 style="margin-top:12px">We give the old opportunity a new reason to respond.</h2>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center" class="imagine-grid">
-      <div class="rv">
-        <div class="phone iphone" style="max-width:430px">
-          <div class="island" aria-hidden="true"></div>
-          <div class="phone-screen">
-            <div class="statusbar"><span>10:12</span>
-              <span class="glyphs" aria-hidden="true">
-                <svg width="17" height="11" viewBox="0 0 17 11"><g fill="#1C1E21"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></g></svg>
-                <svg width="23" height="11" viewBox="0 0 23 11"><rect x="0" y="0" width="20" height="11" rx="3" fill="none" stroke="#1C1E21" stroke-width="1"/><rect x="2" y="2" width="13" height="7" rx="1.5" fill="#1C1E21"/><rect x="21" y="3.5" width="2" height="4" rx="1" fill="#1C1E21"/></svg>
-              </span>
-            </div>
-            <div class="contactbar"><span class="avatar">Y</span><div><div class="cname">Your Business</div><div class="csub">Text message · Today 10:12 AM</div></div></div>
-            <div class="thread">
-              <div class="msg out"><span class="stamp">Reactivation · 10:12 AM</span>Hey Sarah, you reached out to us a while back about replacing your windows. Did you ever end up getting that handled?</div>
-              <div class="msg in"><span class="stamp">Sarah · 10:19 AM</span>Not yet actually</div>
-              <div class="msg out"><span class="stamp">10:20 AM</span>Got it. We've opened a few installation spots and put together something specifically for homeowners who had already asked us about it. Want me to send the details?</div>
-              <div class="msg in"><span class="stamp">10:24 AM</span>Sure</div>
-              <div class="msg out"><span class="stamp">10:25 AM</span>Perfect. So we don't waste your time, are you still looking to have this done in the next 30 to 60 days?</div>
-              <div class="msg in"><span class="stamp">10:26 AM</span>Yes</div>
-              <div class="msg out"><span class="stamp">10:27 AM</span>Great. I can get you in Tuesday at 3:00 or Wednesday at 11:30. Which works better?</div>
-              <div class="msg in"><span class="stamp">10:29 AM</span>Tuesday works</div>
-            </div>
-            <div class="homebar" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-      <div class="rv">
-        <div class="flowviz">
-          <div class="node">Old lead gets a real reason to come back, not "just checking in"</div>
-          <span class="fa">&darr;</span>
-          <div class="node">Interested people re-enter the conversation</div>
-          <span class="fa">&darr;</span>
-          <div class="node">"Someday maybe" gets separated from "yes, I still want this"</div>
-          <span class="fa">&darr;</span>
-          <div class="node g">Qualified people land on your calendar</div>
-        </div>
-        <p style="margin-top:22px;font-size:16.5px">Your team's job stays the one they're already good at: <strong style="color:var(--ink)">serve the customer.</strong></p>
-        <a class="btn btn-primary" href="#calculator" style="margin-top:20px">I Have Leads Like This</a>
-      </div>
+    <div class="door" style="border-width:1px;border-color:var(--hairline);margin-top:18px">
+      <span class="eyebrow">Everywhere else</span>
+      <h3 style="margin-bottom:2px">Not a coating pro?</h3>
+      <p>
+        The system underneath is not built around one trade. It learns your business, your
+        questions and your calendar, so the trade is a configuration rather than a rebuild.
+        Flooring, barbershops and salons, and a handful of other local businesses are the
+        conversations happening now.
+      </p>
+      <p>
+        Tell me what happens when somebody tries to reach you while your hands are full. If the
+        answer is something you can fix yourself in an afternoon, I will say so.
+      </p>
+      <a class="btn btn-primary" href="mailto:hello@locallvrg.co?subject=What%20happens%20to%20my%20missed%20inquiries"
+         style="background:transparent;color:var(--accent);border-color:var(--accent)">Email me about your trade</a>
     </div>
   </div>
 </section>
 
-<section class="band" id="calculator">
+<section class="tail">
   <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">The big question</p>
-      <h2 style="margin-top:12px">How much money is sitting inside your database right now?</h2>
-      <p style="margin-top:14px;font-size:17px">Move the sliders to your situation. This is illustrative math, not a promise. It exists to show why an ignored database is economically worth taking seriously.</p>
-    </div>
-    <div class="calc rv">
-      <div class="calc-grid">
-        <div>
-          <label><span class="ln">Old leads &amp; past customers in your database <output id="o-size">1,000</output></span>
-            <input type="range" id="i-size" min="100" max="10000" step="100" value="1000"></label>
-          <label><span class="ln">What one new customer is worth <output id="o-value">$4,000</output></span>
-            <input type="range" id="i-value" min="250" max="25000" step="250" value="4000"></label>
-          <label><span class="ln">Respond to a well-built offer <output id="o-resp">10%</output></span>
-            <input type="range" id="i-resp" min="2" max="30" step="1" value="10"></label>
-          <label><span class="ln">Of responders who become qualified <output id="o-qual">20%</output></span>
-            <input type="range" id="i-qual" min="5" max="50" step="5" value="20"></label>
-          <label><span class="ln">Of qualified who eventually buy <output id="o-close">25%</output></span>
-            <input type="range" id="i-close" min="5" max="60" step="5" value="25"></label>
-        </div>
-        <div class="pipe" aria-live="polite">
-          <div class="prow p1"><div class="pl"><span>Dormant contacts you already paid for</span><strong id="r-size">1,000</strong></div><div class="pbar"><div class="pfill" id="b-size" style="width:100%"></div></div></div>
-          <div class="prow p2"><div class="pl"><span>Conversations restarted</span><strong id="r-conv">100</strong></div><div class="pbar"><div class="pfill" id="b-conv" style="width:10%"></div></div></div>
-          <div class="prow p3"><div class="pl"><span>Qualified opportunities</span><strong id="r-qual">20</strong></div><div class="pbar"><div class="pfill" id="b-qual" style="width:2%"></div></div></div>
-          <div class="prow p4"><div class="pl"><span>Recovered customers</span><strong id="r-cust">5</strong></div><div class="pbar"><div class="pfill" id="b-cust" style="width:1%"></div></div></div>
-          <div class="presult"><div class="rn" id="r-rev">$20,000</div><div class="rl">of potential recovered revenue, sitting in leads you already own</div></div>
-        </div>
-      </div>
-      <p class="disclaimer">ILLUSTRATIVE ONLY. NOT A FORECAST OR GUARANTEE. Actual results depend on list size, age, quality, prior customer experience, the offer, capacity, and market conditions. Some databases should not be reactivated at all, and we'll tell you if yours is one of them.</p>
-    </div>
-    <div class="cta-row rv" style="margin-top:30px;justify-content:center">
-      <a class="btn btn-primary" href="start/">Find Out If Mine Is Worth Reactivating</a>
-    </div>
-  </div>
-</section>
-
-<section id="different">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">Why most reactivation fails</p>
-      <h2 style="margin-top:12px">"Just checking in" is not an offer.</h2>
-      <p style="margin-top:14px;font-size:17px;color:var(--ink)">Sending more messages is not the hard part. Getting someone to care again is. So we don't start by blasting your database. We start by answering:</p>
-    </div>
-    <ul class="qlist rv">
-      <li>What did these people originally want, and why didn't they buy?</li>
-      <li>What service do you most want to sell, and what can you realistically fulfill?</li>
-      <li>What capacity do you have, and what can you add without destroying your margins?</li>
-      <li>What would make someone say "okay, tell me more"?</li>
-    </ul>
-    <p class="trust rv" style="margin-top:30px">We won't invent some crazy promo you can't honor. We build the offer together so it fits your margins, capacity, and what you actually want to sell. Once that's nailed down, the reactivation is done for you.</p>
-
-    <div class="split3 rv">
-      <div class="g-card together">
-        <h3><span>We do together</span>The offer</h3>
-        <ul>
-          <li>Choose the database segment</li>
-          <li>Decide what service to promote</li>
-          <li>Verify margins, capacity, exclusions</li>
-          <li>You approve the final offer</li>
-        </ul>
-      </div>
-      <div class="g-card dfy">
-        <h3><span>Local LVRG does for you</span>Everything after that</h3>
-        <ul>
-          <li>Write the campaign</li>
-          <li>Build the follow-up</li>
-          <li>Launch the reactivation</li>
-          <li>Handle routine replies</li>
-          <li>Qualify interested contacts</li>
-          <li>Send them to the booking path</li>
-          <li>Report conversations &amp; outcomes</li>
-        </ul>
-      </div>
-      <div class="g-card yours">
-        <h3><span>You do</span>Your part</h3>
-        <ul>
-          <li>Provide accurate data and access</li>
-          <li>Confirm contacts are eligible to be contacted, honor opt-outs</li>
-          <li>Approve an offer you can fulfill</li>
-          <li>Serve the appointments produced</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="how">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">How it works</p>
-      <h2 style="margin-top:12px">Four steps. No 38-page strategy deck.</h2>
-    </div>
-    <div class="seq rv">
-      <div class="seq-item"><span class="cap">1 · Inspect the opportunity</span><p style="font-size:14.5px">List size, origin, age, relationship, previous offers, customer value, capacity. We'd rather tell you your database isn't worth it than beat a dead list.</p></div>
-      <span class="seq-arrow">&rarr;</span>
-      <div class="seq-item"><span class="cap">2 · Offer Workshop</span><p style="font-size:14.5px">One focused session. You bring the operational truth. We bring the offer strategy. You approve the final offer.</p></div>
-      <span class="seq-arrow">&rarr;</span>
-      <div class="seq-item"><span class="cap">3 · Reactivation</span><p style="font-size:14.5px">We build and launch the campaign, work the dormant pool, and handle the routine replies.</p></div>
-      <span class="seq-arrow">&rarr;</span>
-      <div class="seq-item" style="border-color:#CBE7D3;background:var(--book-soft)"><span class="cap" style="color:var(--book-deep)">4 · Qualify + Book</span><p style="font-size:14.5px">Interested people get qualified and moved to your calendar, or straight to purchase for standardized offers.</p></div>
-    </div>
-
-    <div class="employee rv">
-      <div class="emp-head">
-        <h3>The old agency model vs Local LVRG</h3>
-        <p>"Here are some leads" was never the finish line.</p>
-      </div>
-      <div class="emp-cols">
-        <ul class="emp-list no">
-          <li>Agency hands your team a list of leads</li>
-          <li>Your team calls, voicemails, texts, forgets, tries again tomorrow</li>
-          <li>Three weeks later: "these leads suck"</li>
-          <li>Agency: "your team didn't follow up"</li>
-          <li>Everyone gets pissed</li>
-        </ul>
-        <ul class="emp-list yes">
-          <li>The offer gets built with you before anything launches</li>
-          <li>Follow-up, qualification, and booking are handled for you</li>
-          <li>Your calendar gets the qualified ones</li>
-          <li>Your team serves the customer</li>
-          <li>You see exactly what happened, in plain numbers</li>
-        </ul>
-      </div>
-      <p style="margin-top:24px;font:600 17px/1.6 var(--sans);color:#EDEFF1;max-width:56ch">A dentist should get to be a dentist. A plumber should get to be a plumber. Your employees shouldn't have to become professional lead chasers because you ran an ad.</p>
-    </div>
-  </div>
-</section>
-
-<section id="fit">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">Who qualifies</p>
-      <h2 style="margin-top:12px">We want good businesses with wasted opportunity.</h2>
-      <p style="margin-top:12px;font-size:16.5px">Not bad businesses looking for another marketing trick.</p>
-    </div>
-    <div class="assure rv">
-      <div class="g-card">
-        <h3 style="color:var(--book-deep)">A strong fit usually has</h3>
-        <ul class="checklist">
-          <li>Hundreds or thousands of old leads, unsold estimates, no-shows, or past customers</li>
-          <li>A transaction valuable enough that a few recovered customers pay for the campaign</li>
-          <li>Capacity to serve new appointments</li>
-          <li>A generally positive prior relationship with the database</li>
-          <li>A real service worth bringing people back for</li>
-          <li>Proper contact records and a process for honoring opt-outs</li>
-        </ul>
-      </div>
-      <div class="g-card">
-        <h3 style="color:var(--danger)">This is probably not for you if</h3>
-        <ul class="mc-list no" style="margin-top:16px;font-size:15px">
-          <li>You have 63 contacts in a spreadsheet</li>
-          <li>You have no capacity to take the appointments</li>
-          <li>Your customers are already furious with you</li>
-          <li>You want a dishonest discount or a promise you can't keep</li>
-          <li>Your average sale is too small to justify the campaign</li>
-          <li>Your database can't legally or ethically be contacted</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="pricing">
-  <div class="wrap">
-    <div class="section-head rv" style="text-align:center;margin-left:auto;margin-right:auto">
-      <p class="eyebrow">The founding offer</p>
-      <h2 style="margin-top:12px">The Reactivation Test Drive</h2>
-    </div>
-    <div class="sprint-card rv">
-      <div class="pcard hot">
-        <p class="aud">For businesses with 1,000+ old leads, open to a real comeback offer</p>
-        <h3>One payment. Your first 10 booked appointments included.</h3>
-        <div class="bigprice"><span class="n">$497</span><span class="per">setup, only if you qualify</span>
-          <span class="sub">Includes the complete build AND your first 10 booked appointments. If the campaign books zero, the $497 comes back. All of it. No per-appointment fees, ever.</span></div>
-        <div class="prule"></div>
-        <ul class="feat">
-          <li><strong>A complete done-for-you conversational system</strong>, built as an expert on your company: your services, your areas, your voice</li>
-          <li><strong>A revamped comeback offer</strong> engineered for your old leads, the kind that perks ears and gets replies. Built with you, approved by you</li>
-          <li><strong>Every interested lead requalified</strong>, so only real opportunities reach your calendar</li>
-          <li><strong>Appointments booked at times you approve</strong>, on your calendar</li>
-          <li><strong>Follow-up and response handling</strong>, done for you</li>
-          <li><strong>Your first 10 booked appointments, included</strong></li>
-          <li><strong>Plain-numbers reporting</strong>, including what didn't work</li>
-        </ul>
-        <a class="btn btn-primary pbtn" href="start/">Apply for My Test Drive</a>
-        <p style="margin-top:12px;font-size:13.5px;color:var(--muted);text-align:center">Application required, and applying costs nothing. If you don't meet the bar (1,000+ leads, open to a comeback offer), you don't move forward. No blank campaigns, no contact with your list before you approve the offer.</p>
-        <p style="margin-top:14px;font-size:15px;color:var(--ink);text-align:center;font-weight:600">Run your own math before you apply: if one new customer is worth $4,000 to you, a single appointment that closes pays for the entire setup eight times over. And it comes with nine more.</p>
-      </div>
-    </div>
-    <div class="afterpay rv">
-      <p class="ap-label">How the test drive runs</p>
-      <div class="ap-flow">
-        <span>Apply, free</span><span class="ap-a">&rarr;</span>
-        <span>Qualified: $497 setup</span><span class="ap-a">&rarr;</span>
-        <span>Offer workshop</span><span class="ap-a">&rarr;</span>
-        <span>You approve the offer</span><span class="ap-a">&rarr;</span>
-        <span>We build &amp; launch</span><span class="ap-a">&rarr;</span>
-        <span class="ap-live">Your 10 appointments land</span><span class="ap-a">&rarr;</span>
-        <span>Keep it running or stop</span>
-      </div>
-      <p class="ap-note">Nothing due up front. No required sales call. Questions first? <a href="mailto:hello@locallvrg.co?subject=Question%20about%20the%20Test%20Drive">Email us</a> and a human answers.</p>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">Straight answers</p>
-      <h2 style="margin-top:12px">Questions owners actually ask</h2>
-    </div>
-    <div class="faq rv">
-      <details><summary>Can this run on my NEW leads too?</summary><p>Yes, and that's where it explodes: the same system that revives old leads can answer, qualify, and book every new lead the moment they inquire, day or night. The Test Drive starts with the leads you already own because that's the fastest proof. If you want it on new leads too, say so on your application and we'll have that conversation.</p></details>
-      <details><summary>Do you create the offer for us?</summary><p>We lead the offer strategy, but the final offer is created together, because you know your margins, capacity, delivery limits, and pricing. Once you approve the offer, execution is done for you.</p></details>
-      <details><summary>Is everything automated?</summary><p>Parts of the system use automation and AI-assisted conversations. But we don't sell software. We sell a reactivation process designed to move real interested people to the correct next step, with anything unusual handed to a human.</p></details>
-      <details><summary>What exactly counts as a "booked appointment"?</summary><p>A contact from your list who books a time slot on your calendar through our system. That definition is in the agreement in plain English. Show or no-show is your side of the counter; we book them, you serve them. Your setup includes the first 10.</p></details>
-      <details><summary>What happens after my 10 included appointments?</summary><p>You choose. Keep it running with the Engine: a flat $497/month that keeps working your list, covers unlimited appointments, and answers and books your NEW leads day or night. Or stop, keep everything, and owe nothing more. Nothing renews on its own. We ask you, we don't bill you.</p></details>
-      <details><summary>Do you guarantee revenue?</summary><p>No, and nobody honest can. Database quality, your offer, your close rate, and your market are real variables. Here is what we do guarantee: if your campaign books zero appointments, the $497 comes back, all of it. And we report everything in plain numbers, including what didn't work.</p></details>
-      <details><summary>What if my database is terrible?</summary><p>Then we'd rather tell you than beat it to death. A bad database or a bad customer history will not become valuable because we send more messages. The opportunity review exists to catch this before anyone wastes a campaign, and if we pass on your list, you owe nothing.</p></details>
-      <details><summary>How many contacts do I need?</summary><p>At least 1,000 old leads, estimates, no-shows, or past customers. That's a hard qualification line: below it, the math rarely justifies the campaign and we'll tell you so. More history and higher customer value make it more interesting, not less.</p></details>
-      <details><summary>What kinds of businesses do you work with?</summary><p>Local and service businesses where a customer is worth meaningful money, an existing database exists, and there's a real next step to book: home services, contractors, professional services, clinics, and other appointment-based companies.</p></details>
-    </div>
-  </div>
-</section>
-
-<section class="final">
-  <div class="wrap">
-    <div class="push rv" role="status" style="box-shadow:0 20px 48px rgba(30,127,60,.16)">
-      <div class="push-top">
-        <span class="push-icon"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="2" width="12" height="11" rx="2" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M1 5.5h12" stroke="#fff" stroke-width="1.6"/><path d="M4.5 1v2.5M9.5 1v2.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><rect x="7.2" y="7.5" width="3.4" height="3" rx=".8" fill="#fff"/></svg></span>
-        <span class="app">LOCAL LVRG</span><span class="now">now</span>
-      </div>
-      <div class="tag">APPOINTMENT BOOKED</div>
-      <div class="when">From a lead you bought last year</div>
-      <div class="what">Sarah M. · Reactivated after 8 months · Source: your own database</div>
-    </div>
-    <h2 class="rv">Before you buy another lead, find out what happened to the ones you already bought.</h2>
-    <p class="support-line rv">Some will never buy. That's normal. But buried inside years of estimates, forms, calls, and past customers, there may be people who still want exactly what you sell. They need a better reason to come back, and a system that actually follows through.</p>
-    <div class="cta-row rv">
-      <a class="btn btn-primary" href="#calculator">See If My Database Qualifies</a>
-      <a class="btn btn-ghost" href="start/">Apply for a Test Drive &rarr;</a>
-    </div>
+    <div class="rule"></div>
+    <h3>Who is behind this</h3>
+    <p class="who">
+      Local LVRG is led by Adam Alexander in Grand Blanc, Michigan. I run a local business of my
+      own, so the problem this solves is one I have had rather than one I read about. I map the
+      qualification rules, test the booking conversations, and supervise every install myself.
+    </p>
   </div>
 </section>
 
 <footer>
   <div class="wrap cols">
-    <div class="who"><strong>Local LVRG</strong> · Turn old opportunities into new conversations.<br>Led by Adam Alexander. <a href="mailto:hello@locallvrg.co">hello@locallvrg.co</a><span style="display:block;margin-top:6px;font-size:12px">Conversations shown are illustrative examples.</span></div>
-    <div class="legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="sms-terms.html">SMS Terms</a></div>
+    <div>
+      <strong>Local LVRG</strong> &middot; Every inquiry answered, every appointment booked.<br>
+      Led by Adam Alexander &middot; Grand Blanc, Michigan &middot;
+      <a href="mailto:hello@locallvrg.co">hello@locallvrg.co</a>
+    </div>
+    <div class="legal">
+      <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="sms-terms.html">SMS Terms</a>
+    </div>
   </div>
 </footer>
-
-<script>
-(function(){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})},{threshold:.12});
-  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
-  setTimeout(function(){document.querySelectorAll('.rv:not(.vis)').forEach(function(e){e.classList.add('vis')})},2500);
-
-  function $(id){return document.getElementById(id)}
-  var fmt=function(n){return n.toLocaleString('en-US')};
-  function calc(){
-    var size=+$('i-size').value, val=+$('i-value').value, resp=+$('i-resp').value, qual=+$('i-qual').value, close=+$('i-close').value;
-    var conv=Math.round(size*resp/100), q=Math.round(conv*qual/100), cust=Math.round(q*close/100), rev=cust*val;
-    $('o-size').textContent=fmt(size); $('o-value').textContent='$'+fmt(val);
-    $('o-resp').textContent=resp+'%'; $('o-qual').textContent=qual+'%'; $('o-close').textContent=close+'%';
-    $('r-size').textContent=fmt(size); $('r-conv').textContent=fmt(conv); $('r-qual').textContent=fmt(q); $('r-cust').textContent=fmt(cust);
-    $('r-rev').textContent='$'+fmt(rev);
-    $('b-conv').style.width=Math.max(resp,2)+'%';
-    $('b-qual').style.width=Math.max(resp*qual/100,1.2)+'%';
-    $('b-cust').style.width=Math.max(resp*qual*close/10000,.8)+'%';
-  }
-  ['i-size','i-value','i-resp','i-qual','i-close'].forEach(function(id){$(id).addEventListener('input',calc)});
-  calc();
-})();
-</script>
