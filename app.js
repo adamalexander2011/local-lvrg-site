@@ -91,7 +91,7 @@ function setUpMotion(){
   motionContext.add({desktop:'(min-width:700px)',mobile:'(max-width:699px)',short:'(max-height:710px)'},context=>{
     const desktop=context.conditions.desktop;
     const short=context.conditions.short;
-    const opening=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'opening',trigger:'.opening',start:'top top',end:'bottom bottom',scrub:.45,invalidateOnRefresh:true}});
+    const opening=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'opening',trigger:'.opening',start:'top top',end:'bottom bottom',scrub:desktop?.45:.18,invalidateOnRefresh:true}});
     opening.to('.hero-copy',{y:desktop?-55:-45,autoAlpha:0,duration:.24},.06)
       .to('.scene-note span',{autoAlpha:0,duration:.12},.04)
       .to('.conversation-stage',{y:desktop?-15:short?-220:-112,x:desktop?-20:0,scale:desktop?1.06:short?.82:1.04,duration:.65,ease:'power2.inOut'},.07)
@@ -112,9 +112,9 @@ function setUpMotion(){
     gsap.fromTo('.back-one',{rotation:-12,y:70},{rotation:-4,y:0,ease:'none',scrollTrigger:{trigger:'.service-theater',start:'top 100%',end:'top 30%',scrub:.5}});
     gsap.fromTo('.back-two',{rotation:12,y:90},{rotation:4,y:0,ease:'none',scrollTrigger:{trigger:'.service-theater',start:'top 100%',end:'top 30%',scrub:.5}});
     gsap.fromTo('.service-sheet',{rotationX:12,y:60},{rotationX:0,y:0,ease:'none',scrollTrigger:{trigger:'.service-theater',start:'top 100%',end:'top 30%',scrub:.5}});
-    gsap.fromTo('.channel-demo',{rotation:-3,y:25},{rotation:0,y:0,ease:'none',scrollTrigger:{trigger:'.service-theater',start:'top 95%',end:'top 30%',scrub:.45}});
+    gsap.fromTo('.channel-demo',{rotation:-3,y:25},{rotation:0,y:0,ease:'none',scrollTrigger:{trigger:'.service-theater',start:'top 95%',end:'top 30%',scrub:desktop?.45:.18}});
 
-    const carry=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'carry',trigger:'.carry',start:'top top',end:'bottom bottom',scrub:.45,invalidateOnRefresh:true}});
+    const carry=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'carry',trigger:'.carry',start:'top top',end:'bottom bottom',scrub:desktop?.45:.18,invalidateOnRefresh:true}});
     carry.fromTo('.slip-one',{y:-25,rotation:6},{y:130,rotation:-5,duration:.45},.06)
       .fromTo('.slip-two',{y:30,rotation:-9},{y:-5,rotation:-8,duration:.26},.37)
       .to('.slip-two',{y:95,rotation:-5,duration:.24},.67)
