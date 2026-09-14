@@ -141,5 +141,12 @@ $('.motion-toggle').addEventListener('click',()=>{
 reduced.addEventListener('change',setUpMotion);
 document.body.classList.add('enhanced');
 $$('.book-page').forEach((page,index)=>{page.hidden=index!==currentStep});
-if(document.readyState==='complete')setUpMotion();else addEventListener('load',setUpMotion,{once:true});
-document.fonts.ready.then(()=>window.ScrollTrigger?.refresh());
+async function initializePage(){
+  await document.fonts.ready;
+  setUpMotion();
+  // Restore deep links after motion setup has settled the page layout.
+  let target;
+  try{target=document.getElementById(decodeURIComponent(location.hash.slice(1)))}catch{}
+  if(target)requestAnimationFrame(()=>target.scrollIntoView({behavior:'instant',block:'start'}));
+}
+if(document.readyState==='complete')initializePage();else addEventListener('load',initializePage,{once:true});
