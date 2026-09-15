@@ -87,10 +87,12 @@ function setUpMotion(){
   if(!active||!window.ScrollTrigger){restorePosition();return}
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ignoreMobileResize:true});
+  // Measure the short-viewport case once. A live (max-height) matchMedia condition flips every time a
+  // phone address bar collapses or expands mid-scroll, which reverts the whole context and resets scroll to top.
+  const short=innerHeight<=710;
   motionContext=gsap.matchMedia();
-  motionContext.add({desktop:'(min-width:700px)',mobile:'(max-width:699px)',short:'(max-height:710px)'},context=>{
+  motionContext.add({desktop:'(min-width:700px)',mobile:'(max-width:699px)'},context=>{
     const desktop=context.conditions.desktop;
-    const short=context.conditions.short;
     const opening=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'opening',trigger:'.opening',start:'top top',end:'bottom bottom',scrub:desktop?.45:.18,invalidateOnRefresh:true}});
     opening.to('.hero-copy',{y:desktop?-55:-45,autoAlpha:0,duration:.24},.06)
       .to('.scene-note span',{autoAlpha:0,duration:.12},.04)
