@@ -515,6 +515,18 @@ body.premium {
 
 .premium .choose {background:#fff;color:var(--ink)}
 .premium .choose h2 em {color:var(--accent-text)}
+.premium .owner-story {max-width:910px;margin:36px auto 42px;padding:28px 0;display:grid;grid-template-columns:.9fr 1.1fr;gap:38px;border-block:1px solid #ccc;text-align:left}
+.premium .owner-story .tiny-label {color:var(--accent-text);margin:0 0 13px;font-size:10px;letter-spacing:.09em}
+.premium .owner-story h3 {font-size:clamp(28px,3vw,38px);line-height:1.08;letter-spacing:-.04em;color:var(--ink)}
+.premium .owner-story-account>p {font-size:15px;line-height:1.75;color:#444;margin:0}
+.premium .owner-story .owner-story-byline {display:flex;flex-direction:column;gap:2px;margin-top:17px;font-size:12px;line-height:1.6}
+.premium .owner-story-byline strong {color:var(--ink);font-size:13px}
+.premium .owner-story-byline span {color:#595959}
+@media(max-width:699px){
+  .premium .owner-story {grid-template-columns:1fr;gap:20px;margin:28px auto 32px;padding:25px 0}
+  .premium .owner-story h3 {font-size:31px}
+  .premium .owner-story-account>p {font-size:14px;line-height:1.7}
+}
 .premium .choice-controls button {background:#fff;color:var(--ink);border-color:#bcbcbc}
 .premium .choice-controls button:hover {background:#f3f3f0;border-color:var(--ink)}
 .premium .choice-controls button[aria-pressed=true] {background:var(--orange);color:var(--ink);border-color:var(--orange);box-shadow:0 4px 12px #00000016}
