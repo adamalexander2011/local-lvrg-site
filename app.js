@@ -63,6 +63,7 @@ $$('details').forEach(detail=>detail.addEventListener('toggle',()=>{
 }));
 
 function setUpMotion(){
+  const premium=document.body.classList.contains('premium');
   const anchor=scrollY>0?$$('main>section').find(section=>{const r=section.getBoundingClientRect();return r.top<=100&&r.bottom>100}):null;
   const within=anchor?scrollY-anchor.offsetTop:0;
   if(motionContext)motionContext.revert();
@@ -73,6 +74,7 @@ function setUpMotion(){
   }
   settleStep(pendingStep??currentStep);turning=false;
   const active=canAnimate();
+  if(premium)$('.hero-copy').inert=false;
   document.body.classList.toggle('motion-ready',active);
   document.body.classList.toggle('no-motion',!active);
   document.documentElement.classList.toggle('no-motion',!active);
@@ -90,14 +92,23 @@ function setUpMotion(){
   // Measure the short-viewport case once. A live (max-height) matchMedia condition flips every time a
   // phone address bar collapses or expands mid-scroll, which reverts the whole context and resets scroll to top.
   const short=innerHeight<=710;
+  const landscape=premium&&innerWidth>=600&&innerHeight<=520;
   motionContext=gsap.matchMedia();
   motionContext.add({desktop:'(min-width:700px)',mobile:'(max-width:699px)'},context=>{
     const desktop=context.conditions.desktop;
-    const opening=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'opening',trigger:'.opening',start:'top top',end:'bottom bottom',scrub:desktop?.45:.18,invalidateOnRefresh:true}});
-    opening.to('.hero-copy',{y:desktop?-55:-45,autoAlpha:0,duration:.24},.06)
-      .to('.scene-note span',{autoAlpha:0,duration:.12},.04)
-      .to('.conversation-stage',{y:desktop?-15:short?-220:-112,x:desktop?-20:0,scale:desktop?1.06:short?.82:1.04,duration:.65,ease:'power2.inOut'},.07)
-      .to('.scene-note',{y:desktop?0:short?-285:-112,duration:.65,ease:'power2.inOut'},.07)
+    if(premium&&!desktop){
+      // Lay the visual below the actual copy, including font scaling and small-width wraps.
+      const copy=$('.hero-copy');
+      document.body.style.setProperty('--hero-scene-top',`${copy.offsetTop+copy.offsetHeight+55}px`);
+    }
+    const opening=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'opening',trigger:'.opening',start:'top top',end:landscape?'bottom center':'bottom bottom',scrub:desktop?.45:.18,invalidateOnRefresh:true,onUpdate:self=>{
+      // A disappearing control must leave the keyboard order while Pricing remains available.
+      if(premium)$('.hero-copy').inert=!landscape&&self.progress>.32;
+    }}});
+    if(!landscape)opening.to('.hero-copy',{y:desktop?-55:-45,autoAlpha:0,duration:premium?.2:.24},premium?.08:.06);
+    opening.to('.scene-note span',{autoAlpha:0,duration:.12},.04)
+      .to('.conversation-stage',{y:()=>desktop?-15:premium?(short?240:315)-parseFloat(getComputedStyle($('.scene-position')).top):(short?-220:-112),x:desktop?-20:0,scale:desktop?1.06:premium?(short?.8:1):(short?.82:1.04),duration:.65,ease:'power2.inOut'},.07)
+      .to('.scene-note',{y:()=>desktop?0:premium?(short?180:315)-parseFloat(getComputedStyle($('.scene-position')).top):(short?-285:-112),duration:.65,ease:'power2.inOut'},.07)
       .to('.desk-mat',{rotation:-4,scale:1.07,duration:.7},.05)
       .to('.conversation-folio',{rotation:0,rotationY:0,rotationX:0,duration:.55},.09)
       .to('.input-web',{xPercent:22,yPercent:125,rotation:2,scale:.75,autoAlpha:0,duration:.26},.12)
@@ -108,7 +119,7 @@ function setUpMotion(){
       .fromTo('.thread-next',{y:12,autoAlpha:0},{y:0,autoAlpha:1,duration:.16},.44)
       .fromTo('.next-receipt',{y:40,rotation:-8,autoAlpha:0,scale:.9},{y:0,rotation:5,autoAlpha:1,scale:1,duration:.26,ease:'power2.out'},.57)
       .to('.paper-clip',{rotation:-12,y:-8,duration:.4},.3)
-      .fromTo('.hero-exit',{y:30,autoAlpha:0},{y:0,autoAlpha:1,duration:.23},.42)
+      .fromTo('.hero-exit',{y:30,autoAlpha:0},{y:0,autoAlpha:1,duration:.23},premium?.30:.42)
       .to({}, {duration:.17});
 
     gsap.fromTo('.back-one',{rotation:-12,y:70},{rotation:-4,y:0,ease:'none',scrollTrigger:{trigger:'.service-theater',start:'top 100%',end:'top 30%',scrub:.5}});
@@ -117,7 +128,7 @@ function setUpMotion(){
     gsap.fromTo('.channel-demo',{rotation:-3,y:25},{rotation:0,y:0,ease:'none',scrollTrigger:{trigger:'.service-theater',start:'top 95%',end:'top 30%',scrub:desktop?.45:.18}});
 
     const carry=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'carry',trigger:'.carry',start:'top top',end:'bottom bottom',scrub:desktop?.45:.18,invalidateOnRefresh:true}});
-    carry.fromTo('.slip-one',{y:-25,rotation:6},{y:130,rotation:-5,duration:.45},.06)
+    carry.fromTo('.slip-one',{y:premium&&!desktop?10:-25,rotation:6},{y:130,rotation:-5,duration:.45},.06)
       .fromTo('.slip-two',{y:30,rotation:-9},{y:-5,rotation:-8,duration:.26},.37)
       .to('.slip-two',{y:95,rotation:-5,duration:.24},.67)
       .to('.folder-flap',{rotationX:0,opacity:1,duration:.28},.71)
@@ -141,6 +152,14 @@ $('.motion-toggle').addEventListener('click',()=>{
   setUpMotion();
 });
 reduced.addEventListener('change',setUpMotion);
+// Recompose after a real width/orientation change, never a phone's address-bar height change.
+let layoutWidth=innerWidth,widthRefresh;
+addEventListener('resize',()=>{
+  if(!document.body.classList.contains('premium')||innerWidth===layoutWidth)return;
+  layoutWidth=innerWidth;
+  clearTimeout(widthRefresh);
+  widthRefresh=setTimeout(setUpMotion,140);
+});
 document.body.classList.add('enhanced');
 $$('.book-page').forEach((page,index)=>{page.hidden=index!==currentStep});
 async function initializePage(){
