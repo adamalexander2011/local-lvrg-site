@@ -64,7 +64,7 @@ $$('details').forEach(detail=>detail.addEventListener('toggle',()=>{
 
 function setUpMotion(){
   const premium=document.body.classList.contains('premium');
-  const anchor=scrollY>0?$$('main>section').find(section=>{const r=section.getBoundingClientRect();return r.top<=100&&r.bottom>100}):null;
+  const anchor=scrollY>0?$$('main>section,main>.managed-scope').find(section=>{const r=section.getBoundingClientRect();return r.top<=100&&r.bottom>100}):null;
   const within=anchor?scrollY-anchor.offsetTop:0;
   if(motionContext)motionContext.revert();
   if(window.gsap){

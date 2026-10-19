@@ -431,3 +431,37 @@ body.premium {
 .premium .setup .action-note,
 .premium .contact-foot {color:#5e6762}
 .premium .contact h2 em {color:#71805f}
+
+/* Compact context belongs beside the demonstration, with responsibilities below the managed scene. */
+.premium .legacy-anchor {position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;opacity:0}
+.premium .conversation-rules {max-width:910px;margin:35px auto 0;text-align:left}
+.premium .conversation-rules details {border-top:1px solid #d2dbcc}
+.premium .conversation-rules details:last-child {border-bottom:1px solid #d2dbcc}
+.premium .conversation-rules summary {min-height:68px;gap:22px;padding-block:16px;font-size:14px;font-weight:700;line-height:1.45;letter-spacing:-.015em;color:#384b32}
+.premium .conversation-rules summary b {margin-left:auto;font-size:22px;font-weight:400;transition:transform .25s;flex-shrink:0}
+.premium .conversation-rules details[open] summary b {transform:rotate(45deg)}
+.premium .conversation-rules .detail-content {padding:0 44px 25px 0;font-size:14px;line-height:1.75;color:#626b66}
+.premium .conversation-rules .detail-content p {max-width:720px}
+.premium .conversation-rules .detail-content p+p {margin-top:12px}
+.premium .conversation-rules .walkthrough-note {font-size:11px;margin:15px 0 0}
+.premium .managed-scope {position:relative;z-index:9;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;padding:8px max(var(--gutter),calc((100vw - 1160px)/2)) 72px;background:#252e29;color:#f5f6f0}
+.premium .managed-scope article {position:relative;padding-top:23px;border-top:1px solid #c6d0c230}
+.premium .scope-number {display:block;font-size:9px;letter-spacing:.13em;color:#aebfa7;margin-bottom:14px}
+.premium .managed-scope h3 {font-size:23px;line-height:1.2;letter-spacing:-.035em;margin-bottom:13px}
+.premium .managed-scope p {font-size:14px;line-height:1.7;color:#c6d0c2;max-width:340px}
+.premium .faq-next {display:flex;align-items:center;gap:24px;border-top:1px solid #dce5ce;padding-top:28px;margin-top:0}
+.premium .faq-next .button {flex-shrink:0;min-height:52px;font-size:13px}
+.premium .faq-next .action-note {font-size:12px;line-height:1.65;margin:0;max-width:360px;color:#626b66}
+@media(max-width:699px){
+  .premium .conversation-rules {margin-top:29px}
+  .premium .conversation-rules summary {min-height:70px;font-size:14px;gap:16px}
+  .premium .conversation-rules .detail-content {font-size:13px;padding:0 12px 22px 0}
+  .premium .conversation-rules .walkthrough-note {font-size:10px}
+  .premium .managed-scope {grid-template-columns:1fr;gap:24px;padding:0 var(--gutter) 54px}
+  .premium .managed-scope article {padding:21px 0 0 33px}
+  .premium .scope-number {position:absolute;left:0;top:24px;margin:0;font-size:8px}
+  .premium .managed-scope h3 {font-size:21px;margin-bottom:10px}
+  .premium .managed-scope p {font-size:13px;line-height:1.7}
+  .premium .faq-next {align-items:flex-start;flex-direction:column;gap:14px;padding-top:25px}
+  .premium .faq-next .action-note {font-size:11px}
+}
