@@ -1,8 +1,9 @@
 /* Local LVRG homepage: precise software surfaces with the original spatial choreography. */
 body.premium {
-  --cream:#f7f7f4; --ink:#1d2023; --orange:#b94b25; --yellow:#e8bd6a;
-  --blue:#355950; --hair:rgba(29,32,35,.14); --gutter:24px; --head:72px;
-  --muted:#62686b; --surface:#fff; --line:#e1e4e2;
+  --cream:#f5f5f2; --ink:#101010; --orange:#ff5a26; --yellow:#ff5a26;
+  --blue:#101010; --hair:rgba(16,16,16,.16); --gutter:24px; --head:72px;
+  --muted:#595959; --surface:#fff; --line:#d6d6d2;
+  --accent-text:#c53912; --on-dark:#c7c7c7;
   background:var(--cream); color:var(--ink); font-family:DM,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 .premium h1,.premium h2,.premium h3,.premium em {font-family:inherit;font-style:normal;font-weight:700;letter-spacing:-.055em}
@@ -464,4 +465,149 @@ body.premium {
   .premium .managed-scope p {font-size:13px;line-height:1.7}
   .premium .faq-next {align-items:flex-start;flex-direction:column;gap:14px;padding-top:25px}
   .premium .faq-next .action-note {font-size:11px}
+}
+
+/* Ink, paper and vermilion give each existing moving plane a distinct material. */
+.premium::selection,.premium ::selection {background:var(--orange);color:var(--ink)}
+.premium .header {background:rgba(16,16,16,.96);color:#fff;border-color:#ffffff24}
+.premium .nav-demo {color:#e0e0e0}
+.premium .nav-contact {background:var(--orange);color:var(--ink)}
+.premium .motion-toggle {color:#fff;border-color:#ffffff55}
+.premium .motion-toggle[aria-pressed=true] {background:#fff;color:var(--ink)}
+.premium .button-ink {background:var(--ink);color:#fff;box-shadow:0 4px 12px #00000018}
+.premium .button-ink:hover {background:#303030;box-shadow:0 6px 18px #00000028}
+.premium :is(a,button,summary):focus-visible {outline-color:var(--accent-text)}
+.premium :is(.header,.opening,.carry,.managed-scope,.footer) :is(a,button,summary):focus-visible {outline-color:#fff}
+.premium .action-note,.premium .section-heading .eyebrow {color:var(--muted)}
+.premium .opening {background:#101010;color:#fff}
+.premium .hero-line-accent,.premium .hero-exit strong em {color:var(--orange)}
+.premium .hero-copy .eyebrow {color:#dedede}
+.premium .hero-description,.premium .hero-scope,.premium .hero-copy .action-note {color:var(--on-dark)}
+.premium .hero-copy .button {background:var(--orange);color:var(--ink);box-shadow:0 6px 24px #00000038}
+.premium .hero-copy .button:hover {background:#ff784c}
+.premium .hero-demo-link {color:#fff;text-decoration-color:#858585}
+.premium .hero-demo-link:hover {color:var(--orange);text-decoration-color:var(--orange)}
+.premium .desk-mat {background:linear-gradient(135deg,#ff7343,#ff5a26);border-color:#ff8d64;box-shadow:10px 15px 0 #282828,0 32px 60px -25px #00000099}
+.premium .desk-mat>span {color:#3d1b10}
+.premium .conversation-routes {color:#4a2012}
+.premium .incoming-card {background:#fff;color:var(--ink);border-color:#e0e0e0;box-shadow:0 12px 28px #00000038}
+.premium .incoming-card small {color:#595959}
+.premium .incoming-card p {color:var(--ink)}
+.premium .source-icon,.premium .input-social .source-icon,.premium .input-sms .source-icon {background:var(--orange);color:var(--ink)}
+.premium .conversation-folio {background:#fff;color:var(--ink);border-color:#d2d2d2;box-shadow:1px 2px 0 #d6d6d6,3px 5px 0 #fff,4px 6px 0 #aaa,0 25px 55px #00000055}
+.premium .folio-edge {background:#e7e7e7;border-color:#bfbfbf}
+.premium .folio-top,.premium .folio-bottom {border-color:#d6d6d6}
+.premium .folio-mark {background:var(--ink);color:#fff}
+.premium .folio-top small,.premium .thread-caption,.premium .folio-bottom {color:#595959}
+.premium .thread-in,.premium .thread-next {background:#eeeeec;color:var(--ink)}
+.premium .thread-out {background:var(--ink);color:#fff;border-color:var(--ink)}
+.premium .thread-out small {color:#ff946f}
+.premium .folio-accent {color:var(--accent-text)}
+.premium .next-receipt {background:#101010;color:#fff;border-color:#737373;box-shadow:0 18px 36px #00000066}
+.premium .next-receipt small,.premium .next-receipt div>span {color:#dedede}
+.premium .receipt-check {border-color:var(--orange);color:var(--orange)}
+.premium .receipt-arrow {color:var(--orange)}
+.premium .paper-clip,.premium .paper-clip:after {border-color:#818181}
+.premium .paper-clip {box-shadow:1px 1px 0 #fff,inset 1px 0 0 #fff,2px 3px 2px #00000030}
+.premium .scene-note,.premium .scene-note span {color:#c7c7c7}
+.premium .hero-exit {color:#fff}
+.premium .hero-exit>span,.premium .hero-exit>p {color:#c7c7c7}
+
+.premium .choose {background:#fff;color:var(--ink)}
+.premium .choose h2 em {color:var(--accent-text)}
+.premium .choice-controls button {background:#fff;color:var(--ink);border-color:#bcbcbc}
+.premium .choice-controls button:hover {background:#f3f3f0;border-color:var(--ink)}
+.premium .choice-controls button[aria-pressed=true] {background:var(--orange);color:var(--ink);border-color:var(--orange);box-shadow:0 4px 12px #00000016}
+.premium .back-one {background:var(--ink);box-shadow:0 10px 35px #00000028}
+.premium .back-two {background:var(--orange)}
+.premium .service-sheet {background:#fff;border-color:#bcbcbc;box-shadow:0 15px 35px #00000020}
+.premium .sheet-top,.premium .sheet-bottom {border-color:#d6d6d6;color:#595959}
+.premium .sheet-number {color:var(--ink)}
+.premium .sheet-mark {color:var(--accent-text)}
+.premium .channel-demo {background:#f1f1ee;border-color:#d6d6d2}
+.premium .channel-demo>.tiny-label,.premium .service-content .tiny-label {color:#595959}
+.premium .demo-message {background:#fff;color:var(--ink);border-color:#d6d6d6}
+.premium .demo-out {background:var(--ink);color:#fff;border-color:var(--ink)}
+.premium .demo-out>span {color:#ff946f}
+.premium .demo-result {color:#333}
+.premium .demo-result>b {background:var(--orange);color:var(--ink);border-color:var(--orange)}
+.premium .service-content>p:last-child,.premium .connection-note,.premium .walkthrough-note {color:#595959}
+.premium .conversation-rules details,.premium .conversation-rules details:last-child {border-color:#ccc}
+.premium .conversation-rules summary {color:var(--ink)}
+.premium .conversation-rules summary b {color:var(--accent-text)}
+.premium .conversation-rules .detail-content {color:#595959}
+
+.premium .carry,.premium .managed-scope {background:var(--ink);color:#fff}
+.premium .carry-heading .eyebrow,.premium .scope-number {color:#ff946f}
+.premium .carry h2 em {color:var(--orange)}
+.premium .carry-captions,.premium .managed-scope p {color:var(--on-dark)}
+.premium .managed-scope article {border-color:#ffffff40}
+.premium .folder-shadow {background:#000000a3}
+.premium .folder-back,.premium .folder-tab {background:#df4314;color:var(--ink);border-color:#9d2b08}
+.premium .folder-tab {color:#000}
+.premium .folder-front {background:linear-gradient(160deg,#ff7948,#ff5a26);color:var(--ink);box-shadow:0 14px 25px #00000055,inset 0 1px 0 #ffb398}
+.premium .folder-flap {background:linear-gradient(#e84c1a,#ff8558)}
+.premium .folder-seal {border-color:#813016;color:var(--ink)}
+.premium .task-slip {background:#fff;border-color:#d6d6d6;box-shadow:0 7px 16px #00000038}
+.premium .task-slip i {color:#595959}
+.premium .slip-two {background:#e7e7e4}
+.premium .carry-progress {background:#ffffff38}
+.premium .carry-progress span {background:var(--orange)}
+
+.premium .setup {background:#f5f5f2;color:var(--ink)}
+.premium .setup h2 em,.premium .book-page h3 em {color:var(--accent-text)}
+.premium .setup-book {background:var(--ink);box-shadow:3px 9px 0 var(--orange),8px 22px 35px #00000026}
+.premium .book-spine {background:#101010;border-color:#ffffff40}
+.premium .setup-tabs button {background:var(--ink);color:#fff;border-color:#ffffff33}
+.premium .setup-tabs button[aria-selected=true] {background:#fff;color:var(--accent-text)}
+.premium .book-pages,.premium .book-page {background:#fff;border-color:#ccc}
+.premium .page-number {color:#1010100d}
+.premium .book-page .tiny-label,.premium .book-page .page-foot,.premium .setup-note,.premium .setup .section-heading .eyebrow {color:#595959}
+.premium .book-page>p:not(.tiny-label):not(.page-foot) {color:#595959}
+.premium .book-page .page-foot {border-color:#d6d6d6}
+.premium .book-next {background:var(--ink);color:#fff}
+.premium .book-next:hover {background:#292929}
+.premium .book-next b {color:var(--orange)}
+
+.premium .contact {background:var(--orange);color:var(--ink)}
+.premium .contact h2 em {color:var(--ink)}
+.premium .contact-mark {color:#10101015}
+.premium .letter-under {background:var(--ink)}
+.premium .contact-letter {background:#fff;color:var(--ink);border-color:#dedede;box-shadow:0 24px 50px #54200633}
+.premium .letter-top {color:#595959}
+.premium .postage {border-color:#a9a9a9;color:var(--accent-text)}
+.premium .plan-price strong {color:var(--ink)}
+.premium .plan-price>span {color:#595959}
+.premium .contact .contact-letter>p.plan-description {color:var(--ink)}
+.premium .plan-includes {color:#333}
+.premium .plan-includes li:before {color:var(--accent-text)}
+.premium .setup-included,.premium .calling-waitlist {border-color:#ccc}
+.premium .setup-price {color:var(--ink)}
+.premium .setup-price del {color:#595959;text-decoration-color:#595959}
+.premium .waived-stamp {background:var(--ink);color:#fff;border-color:var(--ink)}
+.premium .setup-included>p,.premium .usage-plan>p {color:#595959}
+.premium .usage-plan h3,.premium .calling-waitlist h3 {color:var(--ink)}
+.premium .usage-plan h3 em {color:var(--accent-text)}
+.premium .usage-plan .preview-status,.premium .afterpay {background:#f3f3f0;border-color:#d6d6d2;color:#595959}
+.premium .afterpay .tiny-label,.premium .afterpay-flow,.premium .guarantee .tiny-label {color:#595959}
+.premium .guarantee {background:#fff;border-color:var(--accent-text);color:#333}
+.premium .contact-letter .checkout-action {background:var(--ink);color:#fff}
+.premium .contact-letter .checkout-action:hover {background:#303030}
+.premium .contact .contact-letter>p.billing-note {color:#333}
+.premium .contact .contact-letter>p.checkout-note {background:#f3f3f0;color:#595959}
+.premium .contact .contact-letter>p.channel-note,.premium .contact .contact-letter>p.starting-focus,.premium .contact .contact-letter>.checkout-terms {color:#595959}
+.premium .talk-link,.premium .waitlist-action {color:var(--accent-text)}
+.premium .contact-letter .email-address,.premium .calling-waitlist>p,.premium .calling-waitlist>.waitlist-note {color:#595959}
+.premium .contact-foot {color:#382017}
+
+.premium .questions {background:#fff;color:var(--ink)}
+.premium .questions>h2 em {color:var(--accent-text)}
+.premium .questions summary {color:var(--ink)}
+.premium .questions summary>b {color:var(--accent-text)}
+.premium .questions .detail-content,.premium .faq-next .action-note {color:#595959}
+.premium .questions details,.premium .faq-next {border-color:#ccc}
+.premium .footer {background:var(--ink);color:#fff;border-color:#383838}
+.premium .footer p,.premium .footer>div,.premium .footer>small {color:#c7c7c7}
+@media(forced-colors:active){
+  .premium :is(.button,.nav-contact,.choice-controls button,.setup-tabs button,.book-next) {border:1px solid ButtonText}
 }
