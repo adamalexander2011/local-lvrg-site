@@ -1,4 +1,4 @@
-import {services,validChoice,emailFor} from './service.mjs?v=channels-2';
+import {services,validChoice,emailFor} from './service.mjs?v=pricing-20261105';
 
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
