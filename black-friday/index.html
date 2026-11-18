@@ -121,6 +121,9 @@ setInterval(refresh,1000);document.addEventListener('visibilitychange',refresh);
 </script><script>
 (()=>{'use strict';
 if(location.origin!=='https://locallvrg.co'||location.pathname!=='/black-friday/')return;
+const container=document.querySelector('#cb-widget-container');
+function labelChat(){const input=container.querySelector('.cb-input'),send=container.querySelector('.cb-send'),messages=container.querySelector('.cb-messages');if(input){input.setAttribute('aria-label','Your question about the Black Friday offers');input.style.minHeight='44px';}if(send){send.setAttribute('aria-label','Send message');send.style.minHeight='44px';send.style.minWidth='44px';}if(messages){messages.setAttribute('role','log');messages.setAttribute('aria-label','Chat messages');messages.setAttribute('aria-live','polite');}if(input&&send)observer.disconnect();}
+const observer=new MutationObserver(labelChat);observer.observe(container,{childList:true,subtree:true});
 const script=document.createElement('script');script.src='https://api.closebot.com/scripts/cb.js?source=rxQlKnLARyOtKgiZ';script.async=true;script.dataset.campaignChat='golden-offers';
 script.addEventListener('error',()=>{document.querySelector('#cb-widget-container').style.height='0';});
 document.body.append(script);
