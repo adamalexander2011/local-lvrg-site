@@ -477,6 +477,11 @@ dialog .buy{margin-top:.65rem;width:100%}
   background: #39212e;
 }
 .training-scene {position: relative}
+.price-revision {margin-top:.7rem;padding:0 1rem;border:1px solid #b3976d70;background:#2a1928;color:var(--cream)}
+.price-revision summary {cursor:pointer;padding:.7rem 0;min-height:44px;font-weight:700;color:#f3d598}
+.price-revision dl {margin:.1rem 0 1rem;padding-left:.9rem;border-left:2px solid #ab874d}
+.price-revision dt {margin:.7rem 0 .15rem;color:#f4d99e;font-size:.79rem;font-weight:700}
+.price-revision dd {margin:0;font-size:.94rem;color:#f4e9e5}
 .training-exchange p {
   position: absolute;
   z-index: 1;
@@ -609,7 +614,7 @@ dialog .buy{margin-top:.65rem;width:100%}
         <div class="hero-copy">
           <div class="eyebrow hero-label">Black Friday <span aria-hidden="true">✦</span> The Golden Ticket</div>
           <h1 id="hero-title">Your 24/7 AI sales rep <em>books appointments.</em></h1>
-          <p class="hero-lead"><strong>We build it, train it on your services and prices, and manage it for you.</strong> It answers customer texts, follows up, and books directly on your calendar while you work.</p>
+          <p class="hero-lead"><strong>It answers customer texts, follows up, and books directly on your calendar.</strong> We build it, train it on your business, and manage it. New hours or prices? Message our team. We’ll update your rep.</p>
           <div class="hero-price"><strong>$97</strong><span>/ month</span></div>
           <button type="button" class="buy" data-offer="ticket" aria-haspopup="dialog">Get my Golden Ticket <span aria-hidden="true">↗</span></button>
           <p class="hero-fine">Month to month. Keep your $97 rate while active.</p>
@@ -717,7 +722,7 @@ dialog .buy{margin-top:.65rem;width:100%}
 </section>
 </div>
 
-        <section class="management" aria-labelledby="management-title">
+        <section class="management" id="revisions" aria-labelledby="management-title">
       <div class="wrap management-grid">
         <figure class="management-art training-bench" data-training-bench>
           <div class="training-frame">
@@ -738,13 +743,21 @@ dialog .buy{margin-top:.65rem;width:100%}
           </figcaption>
         </figure>
         <div class="management-copy">
-          <div class="eyebrow">The people behind your rep</div>
-          <h2 id="management-title">We train your AI rep. <em>We manage it, too.</em></h2>
+          <div class="eyebrow">Direct access to Adam and his team</div>
+          <h2 id="management-title">Your business changes. <em>We update your rep.</em></h2>
           <ul class="steps">
-            <li><strong>You give us the facts. We build the rep.</strong><span>We interview you about your services, prices and booking rules. You approve its answers before launch.</span></li>
-            <li><strong>We read the chats and make the fixes.</strong><span>We review real conversations, flag replies that need work and make the updates you approve.</span></li>
-            <li><strong>You can step in anytime.</strong><span>Read any chat, take over or pause the rep. Bring a reply to weekly office hours and go over it with Adam.</span></li>
+            <li><strong>New hours, a new price, or a reply that sounds off?</strong><span>Send our team a message. We make the change you approve, test the answer, and tell you when it’s ready.</span></li>
+            <li><strong>Want to fix it together?</strong><span>Adam, our founder, posts several live revision times each week. Bring the exact reply. For a quick fix, you can edit and test it together on the spot.</span></li>
+            <li><strong>You stay in control.</strong><span>You approve the setup before launch. Afterward, you can read any conversation, step in, or pause the rep.</span></li>
           </ul>
+          <details class="price-revision">
+            <summary>See how a price change works</summary>
+            <dl>
+              <dt>You message our team</dt><dd>“A trim is $50 starting Monday. It still includes the wash and style.”</dd>
+              <dt>We update and test the reply</dt><dd>On Monday, a customer asks, “How much for a trim?”</dd>
+              <dt>Your rep answers</dt><dd>“A trim is $50, including the wash and style.”</dd>
+            </dl>
+          </details>
         </div>
       </div>
     </section>
@@ -755,7 +768,8 @@ dialog .buy{margin-top:.65rem;width:100%}
         <h2 id="enroll-title">What your <em>$97 covers.</em></h2>
         <ul class="included-list">
           <li>Your AI sales rep, trained on your prices, services, and booking rules.</li>
-          <li>Conversation reviews, updates you approve, and weekly office hours with Adam.</li>
+          <li>Direct access to our team for revisions. We review conversations, update your rep, and test its answers.</li>
+          <li>Several chances each week to join Adam, our founder, and work through a change live.</li>
           <li>Business texting registration, one number, and $10 toward AI and messaging each live paid month.</li>
         </ul>
       </div>
@@ -771,6 +785,7 @@ dialog .buy{margin-top:.65rem;width:100%}
       <h2 id="questions-title">A few details.</h2>
       <details><summary>What’s included in my $97?</summary><p>Setup, training, human review, ordinary business text registration and one agreed number and campaign. Each live paid month includes $10 toward combined eligible AI and messaging usage. We review any extra usage and bill your authorized saved card at provider cost. Unused allowance does not roll over.</p></details>
       <details><summary>Will it work with my calendar?</summary><p>We confirm your calendar, supported channels and booking rules with you before setup. You approve the rep before it starts talking to customers.</p></details>
+      <details><summary>How do I get an answer changed?</summary><p>Email <a href="mailto:Adam@locallvrg.co?subject=Golden%20Ticket%20rep%20update">Adam@locallvrg.co</a> with the new detail and when it takes effect. If a reply sounds off, send us the wording. We’ll make the change you approve, check the rep’s answer, and let you know when it’s ready. You can also ask for Adam’s next live revision session.</p></details>
       <details><summary>What if I cancel?</summary><p>Cancel before your rep launches for a full refund of your first $97. After launch, service is month to month. <a href="/terms.html#golden-ticket">Read the Golden Ticket terms.</a></p></details>
       <details id="ticket-question"><summary>Can I ask Adam about my business?</summary><p>Tell Adam what service you sell and how you book appointments. <a href="mailto:Adam@locallvrg.co?subject=Golden%20Ticket%20question">Email Adam about the Golden Ticket.</a></p></details>
     </div></section>
