@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#281823">
+  <title>Your Golden Ticket · Getting started | Local LVRG</title>
+  <style>
+    @font-face { font-family: "DM Sans"; src: url("../assets/DMSans-normal-400.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "DM Sans"; src: url("../assets/DMSans-normal-700.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: Fraunces; src: url("../assets/Fraunces-normal-600.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: Fraunces; src: url("../assets/Fraunces-italic-600.ttf") format("truetype"); font-weight: 600; font-style: italic; font-display: swap; }
+    :root {
+      color-scheme: light;
+      --ink: #30202b; --plum: #281823; --cream: #fcf5e6; --linen: #f1e5d3;
+      --gold: #efc777; --line: #cbb895; --dim: #63554e;
+      --display: "Fraunces", Georgia, serif; --body: "DM Sans", system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font: 1rem/1.55 var(--body); }
+    h1, h2, h3, p, figure { margin: 0; }
+    h1, h2 { font-family: var(--display); font-weight: 600; letter-spacing: -.045em; line-height: 1.04; }
+    a { color: inherit; text-underline-offset: .22em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #be791e; outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    .wrap { width: min(1120px, calc(100% - 2.5rem)); margin-inline: auto; }
+    .mast { background: var(--plum); color: var(--cream); padding-block: 1rem; border-bottom: 1px solid #6d5159; }
+    .wordmark { font-weight: 750; font-size: 1.05rem; letter-spacing: .14em; }
+    .wordmark span { font-size: .93em; color: var(--gold); }
+    .skip { position: absolute; left: 1rem; top: -5rem; z-index: 3; padding: .6rem 1rem; background: white; color: black; }
+    .skip:focus { top: .3rem; }
+    .intro { padding-block: clamp(2.2rem, 6vw, 5.4rem); }
+    .intro h1 { font-size: clamp(2.65rem, 6.8vw, 5.3rem); }
+    .intro h1 em { display: block; color: #835529; }
+    .intro-copy { max-width: 45ch; }
+    .intro-copy > p { margin-top: 1.15rem; }
+    .setup { margin-top: 1.7rem; padding: 1.3rem; border: 1px solid var(--line); background: var(--linen); }
+    .setup h2 { font-size: clamp(1.65rem, 3vw, 2.3rem); }
+    .setup p { margin-top: .7rem; color: var(--dim); }
+    .button { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: .68rem 1.2rem; text-align: center; border-radius: 3px; color: var(--cream); background: var(--plum); text-decoration: none; font-weight: 700; }
+    .button:hover { background: #513349; }
+    .setup-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .25rem 1rem; margin-top: 1.1rem; }
+    .upgrade-jump { display: inline-flex; align-items: center; min-height: 44px; font-size: .9rem; }
+    .ticket-details { margin-top: .5rem; font-size: .9rem; color: var(--dim); }
+    .ticket-details summary { display: list-item; width: fit-content; padding: .65rem 0; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: .22em; color: var(--ink); }
+    .ticket-details p { margin: 0 0 .7rem; }
+    .bonus { font-size: .88rem; max-width: 40ch; }
+    .key { background: radial-gradient(ellipse at 75% 5%, #48263c 0%, var(--plum) 65%); color: var(--cream); padding-block: clamp(2rem, 5vw, 4rem); }
+    .key-grid { display: grid; gap: 1.6rem; }
+    .key-figure { max-width: 28rem; align-self: start; justify-self: center; background: #1d0c16; padding: 5px; border: 1px solid #c59b58; }
+    .key-figure img { display: block; width: 100%; height: auto; }
+    .key-copy { max-width: 56ch; }
+    .kicker { margin-bottom: .65rem; color: var(--gold); font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .key h2 { font-size: clamp(2rem, 4.3vw, 3.85rem); }
+    .key-copy > p:not(.kicker) { margin-top: .86rem; color: #e4d9da; }
+    .key details { margin-top: 1rem; border-block: 1px solid #74606c; }
+    .key summary { cursor: pointer; min-height: 45px; padding-block: .62rem; color: var(--gold); font-weight: 700; }
+    .key ul { margin: .15rem 0 1rem; padding-left: 1.2rem; }
+    .key li + li { margin-top: .35rem; }
+    .balance { padding: 1rem 0 0; }
+    .balance strong { display: block; font: 600 clamp(1.8rem, 3.6vw, 2.65rem)/1.12 var(--display); color: var(--gold); letter-spacing: -.025em; }
+    .balance span, .key .small { font-size: .91rem; color: #d6c8cb; }
+    .key .buttons { display: flex; flex-wrap: wrap; gap: .6rem 1.1rem; align-items: center; margin-top: 1.1rem; }
+    .button.gold { background: var(--gold); color: var(--ink); }
+    .button.gold:hover { background: #ffe3a8; }
+    .plain { display: inline-flex; align-items: center; min-height: 44px; }
+    .fineprint { padding-block: 1.2rem; font-size: .89rem; color: var(--dim); }
+    .footer { display: flex; gap: .3rem 1.25rem; align-items: center; flex-wrap: wrap; }
+    .footer a { display: inline-flex; align-items: center; min-height: 44px; }
+    @media (min-width: 750px) {
+      .wrap { width: min(1120px, calc(100% - 6rem)); }
+      .intro { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); }
+      .setup { margin-top: 0; padding: clamp(1.5rem, 3vw, 2.4rem); }
+      .key-grid { grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
+      .key-copy { grid-column: 2; grid-row: 1; }
+      .key-figure { grid-column: 1; grid-row: 1; }
+    }
+    @media (max-width: 749px) {
+      .key-grid { gap: .85rem; }
+      .key-copy { display: contents; }
+      .key-copy > * { order: 4; }
+      .key-copy > .kicker { order: 1; margin: 0; }
+      .key-copy > h2 { order: 2; }
+      .key-copy > p:not(.kicker), .key details, .key .buttons { margin-top: 0; }
+      .key-figure { order: 3; width: 100%; max-width: none; aspect-ratio: 2.15; overflow: hidden; }
+      .key-figure img { height: 100%; object-fit: cover; object-position: 50% 10%; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to setup</a>
+  <header class="mast"><div class="wrap wordmark">LOCAL LVRG <span aria-hidden="true">✦</span></div></header>
+  <main id="main">
+    <section class="intro wrap" aria-labelledby="thanks">
+      <div class="intro-copy">
+        <h1 id="thanks">Thank you for choosing <em>the Golden Ticket.</em></h1>
+        <p>Let’s get your AI sales rep ready to book appointments. We’ll learn your services, build the replies, and show you how it works before you approve launch.</p>
+      </div>
+      <div class="setup">
+        <h2>Start your Ticket setup.</h2>
+        <p>Tell us about your business using the same email you used at checkout. Have your website or business page handy.</p>
+        <div class="setup-actions">
+          <a class="button" id="start-setup" href="https://link.locallvrg.co/widget/survey/2sDFEayPKHRFVrVvafqV">Start my setup <span aria-hidden="true">&nbsp;↗</span></a>
+          <a id="see-upgrade" class="upgrade-jump" href="#golden-key" hidden>See the optional Golden Key upgrade <span aria-hidden="true">&nbsp;↓</span></a>
+        </div>
+        <details class="ticket-details">
+          <summary>When does billing start?</summary>
+          <p>Your $97 payment covers setup and your first live month. You approve the launch date before your rep goes live. Your next $97 is due one calendar month after that date.</p>
+        </details>
+        <p class="bonus">Tickets paid by Nov 25 at 11:59 p.m. Eastern earn the mystery bonus. We confirm eligibility from your payment time.</p>
+      </div>
+    </section>
+    <section class="key" id="golden-key" aria-labelledby="key-title" hidden>
+      <div class="key-grid wrap">
+        <div class="key-copy">
+          <p class="kicker">Optional Golden Key upgrade</p>
+          <h2 id="key-title">Hire Adam as your marketing director for 30 days.</h2>
+          <p>Where are bookings slipping away? We’ll trace the problem together, pick one goal and agree in writing on what my team and I will build. Then we do the work.</p>
+          <details>
+            <summary>What could we work on?</summary>
+            <ul>
+              <li>Rebuild the pages or offer that should turn visitors into appointments.</li>
+              <li>Find missed inquiries in your CRM and fix the follow-up.</li>
+              <li>Build an ad campaign for a service you want to book more often.</li>
+            </ul>
+          </details>
+          <p class="balance"><strong>$900 to upgrade</strong><span>Your $97 Ticket counts toward the $997 total, before applicable tax. The Ticket is included during the Key month. Ad spend is separate.</span></p>
+          <p>Send your request from your checkout email. We’ll verify your Ticket payment and send you a secure invoice for the balance. You choose whether to pay it. The upgrade purchase window closes Nov 27 at 11:59 p.m. Eastern.</p>
+          <div class="buttons">
+            <a class="button gold" id="request-upgrade" href="mailto:Adam@locallvrg.co?subject=Golden%20Ticket%20buyer%20%E2%80%94%20Golden%20Key%20upgrade%20request&amp;body=Hi%20Adam%2C%0A%0AI%27d%20like%20to%20apply%20my%20%2497%20Golden%20Ticket%20payment%20toward%20the%20Golden%20Key.%20Please%20verify%20my%20Ticket%20and%20send%20me%20a%20secure%20invoice%20for%20the%20%24900%20upgrade%20balance%2C%20plus%20any%20applicable%20tax.%0A%0ACheckout%20email%3A%20%0ABusiness%20name%3A%20">Request my $900 upgrade <span aria-hidden="true">&nbsp;↗</span></a>
+            <a class="plain" href="https://link.locallvrg.co/widget/survey/2sDFEayPKHRFVrVvafqV">Continue with my Ticket</a>
+          </div>
+          <p class="small">Prefer to write directly? Email <a href="mailto:Adam@locallvrg.co">Adam@locallvrg.co</a> with your checkout email and ask for the Golden Key upgrade.</p>
+          <p class="small">The Key month begins at the kickoff we agree in writing. At month-end, you decide whether to continue the Ticket at $97/month. <a href="https://locallvrg.co/terms.html#golden-key">Read the Key terms.</a></p>
+        </div>
+        <figure class="key-figure">
+          <img src="../assets/adam-key-560.webp" srcset="../assets/adam-key-560.webp 560w, ../assets/adam-key-1056.webp 1056w" sizes="(min-width: 750px) 38vw, 94vw" width="560" height="584" alt="Adam holds the Golden Key as the factory crew works on a business’s marketing." loading="lazy">
+        </figure>
+      </div>
+    </section>
+  </main>
+  <footer class="fineprint"><div class="wrap footer">
+    <a href="mailto:Adam@locallvrg.co">Email Adam for help</a>
+    <a href="https://locallvrg.co/terms.html#golden-ticket">Golden Ticket terms</a>
+    <a href="https://locallvrg.co/privacy.html">Privacy</a>
+  </div></footer>
+  <script>
+    (() => {
+      const upgrade = document.getElementById('golden-key');
+      const upgradeJump = document.getElementById('see-upgrade');
+      const cutoff = Date.parse('2026-11-28T05:00:00Z');
+      let timeout;
+      function showAvailableUpgrade() {
+        const remaining = cutoff - Date.now();
+        upgrade.hidden = remaining <= 0;
+        upgradeJump.hidden = upgrade.hidden;
+        clearTimeout(timeout);
+        if (remaining > 0) timeout = setTimeout(showAvailableUpgrade, Math.min(remaining, 86400000));
+      }
+      document.addEventListener('visibilitychange', showAvailableUpgrade);
+      window.addEventListener('pageshow', showAvailableUpgrade);
+      showAvailableUpgrade();
+    })();
+  </script>
+</body>
+</html>
