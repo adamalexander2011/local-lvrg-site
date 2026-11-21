@@ -51,9 +51,10 @@ h1 em,h2 em{font-weight:600;color:var(--gold)}
 .hero-copy{min-width:0}
 .hero-label{margin-bottom:17px}
 .hero-label span{display:inline-block;margin-inline:.3em}
-h1{font-size:clamp(2.75rem,5.2vw,4.85rem);max-width:12em}
+h1{font-size:clamp(2.75rem,4.25vw,3.625rem);max-width:12em}
 h1 em{display:block}
 .hero-lead{max-width:35em;margin:20px 0 16px;font-size:clamp(1rem,1.3vw,1.17rem);color:#f4e8eb}
+.hero-lead strong{color:#fff3db}
 .hero-price,.bottom-price{display:flex;align-items:baseline;gap:.38em}
 .hero-price{margin:0 0 10px;color:var(--gold)}
 .hero-price strong,.bottom-price strong{font:600 clamp(2.5rem,3.6vw,3.3rem)/1.05 var(--serif);letter-spacing:-.05em}
@@ -61,17 +62,6 @@ h1 em{display:block}
 .buy:hover:not(:disabled){filter:brightness(1.065)}
 .buy span{font-size:1.15em;line-height:1}
 .hero-fine,.refund,.rate{margin-top:9px;color:var(--muted);font-size:.83rem}
-.hero-art{position:relative;isolation:isolate;align-self:center;border:1px solid #edc17c;padding:5px 5px 0;border-radius:110px 110px 6px 6px;background:#241824;box-shadow:0 14px 45px #09030965;min-width:0;margin-bottom:17px}
-.hero-art picture{display:block;border-radius:104px 104px 0 0;overflow:hidden}
-.hero-art picture img{display:block;width:100%;height:auto;aspect-ratio:1.48;object-fit:cover;object-position:48% 50%}
-.hero-slip{position:relative;display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 -6px -1px;padding:12px 22px 14px;background:linear-gradient(120deg,#f6db99,#eac273);border:1px solid #f8dc9a;border-radius:0 0 6px 6px;color:#392431;overflow:hidden;perspective:550px}
-.slip-info{display:grid;gap:2px}
-.slip-info>span{font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;font-weight:700}
-.slip-info strong{font:600 clamp(1.25rem,2.4vw,2rem)/1.15 var(--serif)}
-.slip-check{font-size:1.2rem;border:1px solid #684c28;border-radius:50%;display:grid;place-items:center;width:32px;height:32px}
-.ticket-flap{position:absolute;inset:0;display:grid;place-items:center;transform-origin:top;background:linear-gradient(105deg,#c89540,#f7d992 49%,#cc9b49);border:3px double #986728;color:#382330;pointer-events:none;font:600 clamp(1rem,2.2vw,1.6rem)/1 var(--serif);text-transform:uppercase;letter-spacing:.11em}
-.ticket-flap span::before,.ticket-flap span::after{content:"✦";display:inline-block;font-size:.7em;margin-inline:.65em}
-.flap-open .ticket-flap{transform:rotateX(100deg);opacity:0;transition:transform 850ms cubic-bezier(.2,.7,.3,1),opacity 600ms ease 230ms}
 .dates{background:#edcc86;color:#34212c;border-block:1px solid #bc9759}
 .dates-inner{display:flex;align-items:center;gap:15px;min-height:68px;padding-block:12px}
 .bonus-seal{flex:none;width:37px;height:37px;display:grid;place-items:center;border:3px double #846127;border-radius:50%;font-size:20px;color:#604222}
@@ -90,7 +80,9 @@ h1 em{display:block}
 .steps span{color:var(--muted);font-size:.94rem}
 .enroll{background:#261924;border-block:1px solid #d4b77b47}
 .enroll-inner{display:grid;grid-template-columns:1fr minmax(0,.86fr);gap:clamp(30px,7vw,110px);align-items:center}
-.enroll-heading p{max-width:26em;color:var(--muted)}
+.included-list{list-style:none;margin:0;padding:0;max-width:33em;display:grid;gap:.65em}
+.included-list li{padding-left:1.65em;position:relative;color:var(--muted)}
+.included-list li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--gold);font-weight:700}
 .enroll-details{border-left:1px solid #95764f;padding-left:clamp(20px,3.8vw,60px)}
 .bottom-price{color:var(--gold);margin-bottom:10px}
 .enroll-details>p:not(.bottom-price,.refund,.rate){margin-bottom:18px}
@@ -127,10 +119,6 @@ dialog .buy{margin-top:.65rem;width:100%}
   .hero-price strong{font-size:2.55rem}
   .buy{min-height:48px}
   .hero-fine{margin-top:7px}
-  .hero-art{margin-bottom:0;border-radius:56px 56px 4px 4px}
-  .hero-art picture{border-radius:50px 50px 0 0}
-  .hero-art picture img{aspect-ratio:2.14;object-position:50% 46%}
-  .hero-slip{padding:8px 15px 10px}
   .dates-inner{gap:10px}
   .dates strong,.dates span:not(.bonus-seal){display:block}
   .management-grid,.enroll-inner{grid-template-columns:1fr;gap:22px}
@@ -142,42 +130,470 @@ dialog .buy{margin-top:.65rem;width:100%}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .ticket-flap{display:none}
 }
 @media print{
-  .ticket-flap,.buy,.mast-buy{display:none}
+  .buy,.mast-buy{display:none}
+}
+
+/* The ticket, the customer’s text and the calendar each have their own beat. */
+.hero-art.gt-theater {
+  --gt-arch: 31% 31% 5px 5px / 17% 17% 5px 5px;
+  container-type: inline-size;
+  margin: 0;
+  padding: 4px;
+  overflow: hidden;
+  border: 1px solid #ad8251;
+  border-radius: var(--gt-arch);
+  background: #34202c;
+  box-shadow: 0 1px 0 #ffdfa380 inset, 0 18px 50px #13091669;
+}
+.gt-stage {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1.3;
+  overflow: hidden;
+  border: 1px solid #a78054;
+  border-radius: var(--gt-arch);
+  background: #352330;
+}
+.hero-art.gt-theater .gt-factory {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  transform: translateY(var(--gt-camera, -2%)) scale(var(--gt-depth, 1.08));
+}
+.hero-art.gt-theater .gt-factory img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: 50% 47%;
+}
+.gt-stage::before,
+.gt-stage::after,
+.gt-light {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+.gt-stage::before {
+  z-index: 1;
+  background: linear-gradient(0deg,#1c0e20 0%,#321729a1 13%,#33202b0c 66%),radial-gradient(ellipse at 50% 43%,transparent 29%,#200e2163 86%);
+}
+.gt-stage::after {
+  z-index: 4;
+  inset: 6px;
+  border: 1px solid #ffe3a53f;
+  border-radius: var(--gt-arch);
+}
+.gt-light {
+  z-index: 1;
+  opacity: var(--gt-veil, .08);
+  background: radial-gradient(ellipse at 49% 38%,#903e2830 0%,#281426a6 50%,#1d1021e6 100%),linear-gradient(180deg,#2714244a,#29142a63);
+}
+.gt-stage .gt-ticket {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  width: 78%;
+  aspect-ratio: 640 / 427;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  perspective: 820px;
+  transform: translate(-50%,-50%) translateY(var(--gt-lift,0%)) rotate(var(--gt-tilt,-7deg));
+  filter: drop-shadow(0 14px 12px #12091791);
+}
+.gt-theater.is-animated .gt-ticket {display:block}
+.gt-theater.is-animated[data-state="booked"] .gt-ticket {visibility:hidden}
+.gt-ticket-wing {
+  position: absolute;
+  z-index: 1;
+  inset-block: 0;
+  width: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  opacity: var(--gt-foil-opacity,1);
+}
+.gt-ticket-left {
+  left: 0;
+  transform-origin: left center;
+  transform: translateX(calc(-1 * var(--gt-part,0%))) rotateY(calc(-1 * var(--gt-fold,0deg)));
+}
+.gt-ticket-right {
+  right: 0;
+  transform-origin: right center;
+  transform: translateX(var(--gt-part,0%)) rotateY(var(--gt-fold,0deg));
+}
+.gt-ticket-face {
+  --gt-plate: url("assets/ticket-cutout-640.webp");
+  position: absolute;
+  inset-block: 0;
+  width: 200%;
+  background: var(--gt-plate) center / 100% 100% no-repeat;
+  color: #432507;
+}
+.gt-ticket-left .gt-ticket-face {left:0}
+.gt-ticket-right .gt-ticket-face {right:0}
+.gt-ticket-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(104deg,transparent 36%,#fff1b84d 46%,#fff9d98f 49%,transparent 58%) var(--gt-glint,-105%) center / 220% 100% no-repeat;
+  -webkit-mask: var(--gt-plate) center / 100% 100% no-repeat;
+  mask: var(--gt-plate) center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.gt-engraving {
+  position: absolute;
+  inset: 12% 3% 13%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-shadow: 0 1px #ffe290;
+}
+.gt-engraving small,.gt-engraving span {
+  font-weight: 700;
+  font-size: clamp(.52rem,1.8cqw,.78rem);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.gt-engraving strong {
+  margin: .22em 0 .33em;
+  font: 600 clamp(1.5rem,6.85cqw,2.8rem)/.97 var(--serif);
+  letter-spacing: -.055em;
+}
+.gt-engraving span {letter-spacing:.09em}
+.gt-inquiry,.gt-booking {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  box-shadow: 0 10px 26px #180c1b87;
+}
+.gt-inquiry {
+  width: max-content;
+  max-width: 75%;
+  top: 56%;
+  padding: .8em 1.1em .95em;
+  border: 1px solid #e8c78a;
+  border-radius: 14px 14px 14px 2px;
+  background: #392334;
+  color: #fff1d9;
+  opacity: var(--gt-message,0);
+  transform: translate(-50%,-50%) translateY(var(--gt-message-rise,10px));
+}
+.gt-inquiry span,.gt-booking-head {
+  font: 700 clamp(.6rem,2.25cqw,.77rem)/1.1 var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+.gt-inquiry span {color:#f6cf88}
+.gt-inquiry q {display:block;font:600 clamp(1.15rem,4cqw,1.6rem)/1.22 var(--serif);margin-top:.34em}
+.gt-booking {
+  width: 79%;
+  bottom: 7.5%;
+  padding: 4% 4.5%;
+  border: 1px solid #f5ce82;
+  border-radius: 3px;
+  background: linear-gradient(120deg,#fff4df 4%,#f6e5c3 82%,#efd6a9);
+  color: #382433;
+  text-align: left;
+  opacity: var(--gt-receipt,1);
+  transform: perspective(680px) translateX(-50%) translateY(var(--gt-receipt-rise,0px)) rotateX(var(--gt-receipt-turn,0deg));
+  transform-origin: center bottom;
+}
+.gt-booking-head {display:flex;align-items:center;gap:.6em;color:#583c24}
+.gt-confirmed {display:grid;place-items:center;width:1.65em;aspect-ratio:1;border:1px solid #826039;border-radius:50%;background:#ffefd0}
+.gt-confirmed svg {width:78%;height:78%}
+.gt-confirmed path {stroke-dasharray:20;stroke-dashoffset:var(--gt-ink,0)}
+.gt-booking strong {display:block;margin:.25em 0;font:600 clamp(1.6rem,6.2cqw,2.65rem)/1.04 var(--serif);letter-spacing:-.055em}
+.gt-booking strong i {font-size:.7em;font-weight:600}
+.gt-booking strong span {white-space:nowrap}
+.gt-booking p {margin:0;padding-top:.65em;border-top:1px solid #8b663f55;font:400 clamp(.81rem,2.8cqw,.98rem)/1.4 var(--sans)}
+.gt-caption {display:flex;align-items:center;justify-content:space-between;gap:.35rem;padding:2px 2.8%;min-height:46px;color:#ffe6ac}
+.gt-caption>span:first-child {font:600 clamp(.86rem,3.1cqw,1.12rem)/1.12 var(--serif)}
+.gt-control {
+  display:inline-flex;align-items:center;justify-content:center;gap:.36rem;flex:none;min-height:44px;
+  padding:.35rem .3rem;border:0;background:transparent;color:#fff4dc;font:700 clamp(.74rem,2.55cqw,.86rem)/1 var(--sans);
+}
+.gt-control:focus-visible {outline:2px solid #f1c778;outline-offset:-3px;border-radius:5px}
+.gt-control:hover span {text-decoration:underline;text-underline-offset:3px}
+.gt-control .gt-replay-icon,.gt-theater[data-state="booked"] .gt-play-icon {display:none}
+.gt-theater[data-state="booked"] .gt-replay-icon {display:block}
+.gt-accessible {position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (min-width:1000px) and (min-resolution:1.25dppx) {.gt-ticket-face {--gt-plate:url("assets/ticket-cutout-1000.webp")}}
+@media (max-width:760px) {.gt-stage {aspect-ratio:1.43}}
+@media (max-width:360px) {.gt-booking{width:85%}.gt-caption{padding-inline:1.6%}}
+@media (prefers-reduced-motion:reduce) {
+  .gt-theater.is-animated .gt-ticket,.gt-inquiry,.gt-control {display:none}
+  .gt-booking {opacity:1;transform:translateX(-50%)}
+  .gt-confirmed path {stroke-dashoffset:0}
 }
 
 .sales-demo {
-  scroll-margin-top: 5rem;
-  padding-block: clamp(2.75rem, 6vw, 6rem);
-  background: #f5eedf;
-  color: #301d2c;
-  border-bottom: 1px solid #cbb58d;
+  padding-block: clamp(2.8rem, 6vw, 5.6rem);
+  scroll-margin-top: 4.5rem;
+  border-bottom: 1px solid #c5af8c;
+  background: radial-gradient(ellipse at 4% 64%, #efe1c7, transparent 52%), #faf3e5;
+  color: #321f30;
 }
-.sales-demo .eyebrow { color: #745321; }
-.sales-demo h2 { max-width: 18em; margin: .4rem 0; font-size: clamp(2.15rem, 4.8vw, 4.2rem); line-height: 1.06; }
-.sales-demo-lead, .sales-demo-note { line-height: 1.55; }
-.sales-demo-lead { margin: .7rem 0 1.25rem; }
-.sales-threads { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(.6rem,1.5vw,1.35rem); align-items: start; }
-.sales-threads details { border: 1px solid #9d8054; box-shadow: 0 3px 0 #d3c09f; background: #fffaf0; }
-.sales-threads summary { list-style: none; cursor: pointer; position: relative; display: grid; align-content: space-between; gap: .8rem; min-height: 8.3rem; padding: 1.1rem 2.25rem 1.1rem 1.05rem; }
-.sales-threads summary::-webkit-details-marker { display: none; }
-.sales-threads summary::after { content: '+'; position: absolute; top: .92rem; right: .87rem; font-size: 1.35rem; line-height: 1; color: #705120; }
-.sales-threads details[open] summary::after { content: '−'; }
-.sales-threads summary:focus-visible { outline: 3px solid #8f6028; outline-offset: 3px; }
-.sales-text { font-family: Georgia,serif; font-size: clamp(1.24rem,2.05vw,1.7rem); line-height: 1.18; }
-.sales-result { width: fit-content; background: #f3dfa8; color: #43301d; padding: .22rem .52rem; font-weight: 700; font-size: .78rem; line-height: 1.35; }
-.sales-replies { border-top: 1px solid #d3c09f; display: grid; justify-items: end; gap: .6rem; padding: .85rem; }
-.sales-replies p { margin: 0; max-width: 94%; border-radius: .55rem .55rem .15rem .55rem; padding: .6rem .72rem; font-size: .91rem; line-height: 1.43; background: #472b40; color: #fff9ee; }
-.sales-replies b { display: block; font-size: .71rem; margin-bottom: .12rem; color: #efcf83; }
-.sales-replies .sales-customer { justify-self: start; color: #332331; background: #ece2d4; border-radius: .55rem .55rem .55rem .15rem; }
-.sales-customer b { color: #66515d; }
-.sales-replies .sales-reminder { justify-self: start; padding: .25rem 0; background: transparent; color: #60461e; font-weight: 700; }
-.sales-demo-note { max-width: 52rem; margin: 1.15rem 0 0; color: #5b4853; }
-@media(max-width:760px) {
-  .sales-threads { grid-template-columns: 1fr; }
-  .sales-threads summary { min-height: 4.3rem; gap: .35rem; padding: .8rem 2.3rem .8rem .9rem; }
+.sales-demo .eyebrow { color: #795023; }
+.sales-demo h2 { margin: .45rem 0 .55rem; font-size: clamp(2.2rem, 4.8vw, 4.2rem); }
+.sales-demo h2 em { color: #77442d; }
+.sales-demo-lead { margin: 0 0 clamp(1.3rem, 3vw, 2rem); color: #55434c; }
+.sales-stage { position: relative; min-width: 0; margin: 0; padding: 0; border: 0; }
+.sales-sr, .sales-radio {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.sales-layout {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(1.2rem, 4.2vw, 4.3rem); align-items: center;
+}
+.sales-evening {
+  min-width: 0; padding: clamp(5px, .8vw, 9px); border: 1px solid #937042; border-radius: 3px;
+  background: #33202d; box-shadow: 0 12px 26px -20px #35212d;
+}
+.sales-window { position: relative; isolation: isolate; overflow: hidden; border: 1px solid #b68f55; }
+.sales-window::after {
+  content: ''; position: absolute; inset: .35rem; pointer-events: none; z-index: 1;
+  border: 1px solid #fcd99480; box-shadow: 0 0 0 .4rem #341d2f29;
+}
+.sales-window::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(110deg, transparent 28%, #f9e3ba32 47%, transparent 65%);
+  transform: translateX(110%);
+}
+.sales-window img { display: block; width: 100%; height: auto; aspect-ratio: 1.9; object-fit: cover; }
+.sales-evening figcaption {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .35rem;
+  padding: .72rem .55rem .35rem; color: #fff0d7; font-size: .93rem;
+}
+.sales-evening figcaption strong { color: #ffdb90; }
+.sales-dial {
+  display: inline-block; width: .6rem; height: .6rem; flex: none; margin-right: .25rem;
+  border-radius: 100%; background: #f5cf78; box-shadow: 0 0 0 3px #ad83454d, 0 0 9px #edc87768;
+}
+.sales-machine { min-width: 0; }
+.sales-switch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .35rem; margin-bottom: .6rem; }
+.sales-switch label {
+  display: flex; align-items: center; justify-content: center; min-height: 44px; padding: .52rem .16rem;
+  text-align: center; line-height: 1.15; font-weight: 700; font-size: clamp(.78rem, 1.3vw, 1rem);
+  border: 1px solid #a88d6a; border-radius: 4px; background: #fdf9f0; cursor: pointer; touch-action: manipulation;
+}
+#sales-booking:checked ~ .sales-layout label[for="sales-booking"],
+#sales-price:checked ~ .sales-layout label[for="sales-price"],
+#sales-follow:checked ~ .sales-layout label[for="sales-follow"] {
+  border-color: #4d2c42; background: #42283b; color: #ffe0a1; box-shadow: inset 0 -3px #deb56e;
+}
+#sales-booking:focus-visible ~ .sales-layout label[for="sales-booking"],
+#sales-price:focus-visible ~ .sales-layout label[for="sales-price"],
+#sales-follow:focus-visible ~ .sales-layout label[for="sales-follow"] { outline: 3px solid #845122; outline-offset: 2px; }
+.sales-glass {
+  overflow: hidden; border: 1px solid #b59a70; border-radius: 5px;
+  background: linear-gradient(132deg, #fffdf7, #f3e8d3); box-shadow: 0 3px 0 #dbc8a7, inset 0 1px #fff;
+}
+.sales-panel { display: none; }
+#sales-booking:checked ~ .sales-layout [data-scenario="booking"],
+#sales-price:checked ~ .sales-layout [data-scenario="price"],
+#sales-follow:checked ~ .sales-layout [data-scenario="follow"] { display: block; }
+.sales-thread { display: grid; gap: .45rem; padding: clamp(.72rem, 1.6vw, 1.2rem); }
+.sales-message {
+  width: fit-content; max-width: 91%; margin: 0; padding: .44rem .72rem .53rem;
+  font-size: clamp(.88rem, 1.12vw, 1rem); line-height: 1.35;
+}
+.sales-message b { display: block; margin-bottom: .08rem; font-size: .7rem; line-height: 1.3; }
+.sales-message.from-customer { background: #ebe0cf; border-radius: 11px 11px 11px 2px; }
+.sales-message.from-customer b { color: #675143; }
+.sales-message.from-rep { justify-self: end; background: #4b2c45; color: #fff9ef; border-radius: 11px 11px 2px 11px; }
+.sales-message.from-rep b { color: #f2d498; }
+.sales-receipt {
+  display: flex; align-items: center; gap: .65rem; padding: .65rem clamp(.72rem, 1.6vw, 1.2rem);
+  border-top: 1px dashed #9f783f; background: linear-gradient(115deg, #f4d593, #f8e6bb 66%, #eac686);
+  color: #3f2b22; font-size: .84rem; line-height: 1.35;
+}
+.sales-receipt b, .sales-receipt div > span { display: block; }
+.sales-receipt b { font-size: .99rem; }
+.sales-mark {
+  display: grid; place-items: center; flex: none; width: 1.65rem; height: 1.65rem;
+  border: 1px solid #85632e; border-radius: 50%; color: #65471d; font-weight: 700;
+}
+.sales-replay {
+  display: inline-flex; align-items: center; gap: .36rem; min-height: 44px; margin-top: .2rem;
+  padding: .45rem .25rem; border: 0; background: transparent; color: #694c3c; font-size: .82rem; font-weight: 700;
+}
+.sales-replay > span { font-size: 1.2rem; line-height: 1; }
+@media (min-width: 761px) {
+  .sales-machine { align-self: start; }
+  .sales-stage { align-content: start; }
+  /* Reserve the longest transcript's space when comparing conversations. */
+  .sales-glass { display: grid; }
+  .sales-panel { display: flex; flex-direction: column; justify-content: space-between; grid-area: 1 / 1; visibility: hidden; }
+  #sales-booking:checked ~ .sales-layout [data-scenario="booking"],
+  #sales-price:checked ~ .sales-layout [data-scenario="price"],
+  #sales-follow:checked ~ .sales-layout [data-scenario="follow"] { display: flex; visibility: visible; }
+}
+@media (max-width: 760px) {
+  .sales-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .sales-window img { aspect-ratio: 2.49; }
+  .sales-evening figcaption { padding-block: .48rem .22rem; font-size: .83rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sales-playing .sales-window img { animation: sales-camera 1.45s cubic-bezier(.18,.64,.28,1) both; }
+  .sales-playing .sales-window::before { animation: sales-glint 1.2s ease-out both; }
+  .sales-running .sales-message { animation: sales-deliver .29s cubic-bezier(.21,.77,.28,1) both; }
+  .sales-running .sales-message:nth-child(2) { animation-delay: .32s; }
+  .sales-running .sales-message:nth-child(3) { animation-delay: .71s; }
+  .sales-running .sales-message:nth-child(4) { animation-delay: 1.04s; }
+  .sales-running .sales-receipt { animation: sales-print .36s cubic-bezier(.18,.72,.26,1) 1.45s both; }
+  .sales-running[data-scenario="price"] .sales-receipt { animation-delay: .74s; }
+  .sales-running[data-scenario="follow"] .sales-receipt { animation-delay: 1.08s; }
+}
+@keyframes sales-camera { from { transform: scale(1.055) translateX(-.8%); } to { transform: scale(1); } }
+@keyframes sales-glint { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
+@keyframes sales-deliver { from { opacity: 0; transform: perspective(650px) translateY(8px) rotateX(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes sales-print { from { opacity: 0; transform: translateY(-.75rem); clip-path: inset(0 0 100%); } to { opacity: 1; transform: none; clip-path: inset(0); } }
+@media (forced-colors: active) {
+  #sales-booking:checked ~ .sales-layout label[for="sales-booking"],
+  #sales-price:checked ~ .sales-layout label[for="sales-price"],
+  #sales-follow:checked ~ .sales-layout label[for="sales-follow"] { outline: 2px solid Highlight; }
+}
+
+/* The wooden bubbles are part of the photograph. Keep their lettering on the
+   same plane as the image so it stays registered as the workbench moves. */
+.training-bench {
+  --bench-rise: 0px;
+  --ink-rise: 0px;
+  box-shadow: 0 12px 32px #160d1638;
+}
+.training-frame {
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+  background: #39212e;
+}
+.training-scene {position: relative}
+.training-exchange p {
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  color: #462b20;
+  font: 700 clamp(.77rem, 3.15cqw, 1.2rem)/1.08 var(--sans);
+  text-shadow: 0 1px #ffe6b97a;
+}
+.training-question {
+  width: 43%;
+  top: 63%;
+  left: 14%;
+  transform: translateY(-50%) rotate(-8deg);
+}
+.training-answer {
+  width: 28%;
+  top: 52%;
+  left: 67%;
+  transform: translateY(-50%) rotate(-5deg);
+}
+.training-reader-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.training-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 9px;
+  padding: 8px clamp(8px, 1.2vw, 17px);
+  font: 600 clamp(.98rem, 1.45vw, 1.23rem)/1.24 var(--serif);
+  color: #f5db9c;
+}
+.training-controls {display: inline-flex; flex-wrap: wrap; gap: 4px}
+.training-controls button {
+  min-height: 44px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 0;
+  color: #efe3d3;
+  background: transparent;
+  font: 700 .79rem/1.2 var(--sans);
+  text-decoration: underline transparent 2px;
+  text-underline-offset: 6px;
+}
+.training-controls button[aria-pressed="true"] {color: #ffe6a9; text-decoration-color: #e2b961}
+.training-controls button:hover {color: #ffe6a9; text-decoration-color: currentColor}
+
+.enroll-inner {
+  --offer-edge: 50%;
+  position: relative;
+  isolation: isolate;
+  padding: clamp(23px, 3.7vw, 55px);
+  border: 1px solid #a48251;
+  background: radial-gradient(ellipse at 5% 0%,#573341a8,transparent 69%), #32212e;
+  box-shadow: 0 15px 44px #140a132e;
+}
+/* Foil lives in the narrow frame, clear of the price, terms and CTA. */
+.enroll-inner::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  inset: 5px;
+  border: 1px solid #ae895952;
+  border-image: linear-gradient(108deg, #836543, #ac8754 calc(var(--offer-edge) - 12%), #ffe5a6 var(--offer-edge), #967341 calc(var(--offer-edge) + 12%), #7d6142) 1;
+}
+.enroll-inner::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  inset: 0 -1px;
+  background: radial-gradient(circle at left center, #261924 0 7px, #a48251 7.5px 8.5px, transparent 9px),
+              radial-gradient(circle at right center, #261924 0 7px, #a48251 7.5px 8.5px, transparent 9px);
+}
+.enroll-inner .enroll-details {border-left-style: dashed}
+@media (max-width: 760px) {
+  .enroll-inner .enroll-details {border-left: 0; border-top-style: dashed}
+}
+@media (prefers-reduced-motion: no-preference) {
+  .training-bench[data-motion-ready] .training-scene {
+    transform: translateY(var(--bench-rise)) scale(1.07);
+  }
+  .training-bench[data-motion-ready] .training-frame::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 39%, #ffd78113 49%, transparent 60%) var(--bench-light) center / 190% 100%;
+  }
+  .management[data-motion-ready] .steps li::before {
+    opacity: var(--review-light, .75);
+    transform: scale(var(--review-scale, 1));
+  }
+  .training-bench[data-motion-ready] .training-exchange p > [data-training-question],
+  .training-bench[data-motion-ready] .training-exchange p > [data-training-answer] {
+    display: inline-block;
+    transform: translateY(var(--ink-rise));
+  }
+  .training-bench[data-stamping] .training-exchange p > [data-training-question],
+  .training-bench[data-stamping] .training-exchange p > [data-training-answer] {
+    animation: bench-letterpress .38s cubic-bezier(.25,.8,.3,1) both;
+  }
+  .training-bench[data-stamping] .training-exchange p > [data-training-answer] {animation-delay: .08s}
+  @keyframes bench-letterpress {
+    from {transform: translateY(-4px); opacity: .45}
+    to {transform: translateY(var(--ink-rise)); opacity: 1}
+  }
+}
+@media print {
+  .training-controls {display: none}
 }
 </style>
 </head>
@@ -193,22 +609,45 @@ dialog .buy{margin-top:.65rem;width:100%}
         <div class="hero-copy">
           <div class="eyebrow hero-label">Black Friday <span aria-hidden="true">✦</span> The Golden Ticket</div>
           <h1 id="hero-title">Your 24/7 AI sales rep <em>books appointments.</em></h1>
-          <p class="hero-lead">Your customers get replies while you work. Adam’s team builds and manages your rep to answer texts, follow up and book directly on your calendar.</p>
+          <p class="hero-lead"><strong>We build it, train it on your services and prices, and manage it for you.</strong> It answers customer texts, follows up, and books directly on your calendar while you work.</p>
           <div class="hero-price"><strong>$97</strong><span>/ month</span></div>
           <button type="button" class="buy" data-offer="ticket" aria-haspopup="dialog">Get my Golden Ticket <span aria-hidden="true">↗</span></button>
           <p class="hero-fine">Month to month. Keep your $97 rate while active.</p>
         </div>
-        <figure class="hero-art" aria-label="The Golden Ticket opens to reveal a booked appointment">
-          <picture>
-            <source media="(max-width: 700px)" srcset="assets/booking-crew-560.webp">
-            <img src="assets/booking-crew-1056.webp" width="1056" height="595" alt="Oompa Loompas carry a customer message through a brass machine to a booking calendar." fetchpriority="high" decoding="async">
-          </picture>
-          <figcaption class="hero-slip">
-            <span class="slip-info"><span>Appointment booked</span><strong>Tuesday at 4:30 p.m.</strong></span>
-            <span class="slip-check" aria-hidden="true">✓</span>
-            <span class="ticket-flap" aria-hidden="true"><span>The Golden Ticket</span></span>
+                <figure class="hero-art gt-theater" data-state="booked" aria-labelledby="gt-scene-caption">
+          <div class="gt-stage" aria-hidden="true">
+            <picture class="gt-factory">
+              <source media="(max-width: 700px)" srcset="assets/booking-crew-560.webp">
+              <img src="assets/booking-crew-1056.webp" width="1056" height="595" alt="" fetchpriority="high" decoding="async">
+            </picture>
+            <div class="gt-light"></div>
+            <div class="gt-inquiry">
+              <span>Customer text</span>
+              <q>Tuesday at 4:30 works. Can you book me in?</q>
+            </div>
+            <div class="gt-booking">
+              <div class="gt-booking-head">
+                <span class="gt-confirmed"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="m4 10 4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span>Appointment booked</span>
+              </div>
+              <strong>Tuesday <i>at</i> <span>4:30 p.m.</span></strong>
+              <p>Perfect. We have you all set for Tuesday at 4:30 p.m.</p>
+            </div>
+            <div class="gt-ticket">
+              <div class="gt-ticket-wing gt-ticket-left"><div class="gt-ticket-face"><div class="gt-engraving"><small>Local LVRG</small><strong>The Golden Ticket</strong><span>Your 24/7 AI sales rep</span></div></div></div>
+              <div class="gt-ticket-wing gt-ticket-right"><div class="gt-ticket-face"><div class="gt-engraving"><small>Local LVRG</small><strong>The Golden Ticket</strong><span>Your 24/7 AI sales rep</span></div></div></div>
+            </div>
+          </div>
+          <figcaption class="gt-caption" id="gt-scene-caption">
+            <span>From a text to your calendar</span>
+            <span class="gt-accessible">A customer asks to book Tuesday at 4:30. The AI sales rep confirms the appointment on the business’s calendar.</span>
+            <button class="gt-control" type="button" hidden>
+              <svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path class="gt-play-icon" d="m6 3.5 10 6.5-10 6.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path class="gt-replay-icon" d="M3 7a7 7 0 1 1 .6 7M3 3v4.5h4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Open ticket</span>
+            </button>
           </figcaption>
         </figure>
+
       </div>
     </section>
     <aside class="dates" aria-label="Black Friday deadlines"><div class="wrap dates-inner">
@@ -221,54 +660,104 @@ dialog .buy{margin-top:.65rem;width:100%}
     <div id="how"><section class="sales-demo" id="sales-demo" aria-labelledby="sales-demo-title">
   <div class="wrap">
     <div class="eyebrow">Your AI sales rep at work</div>
-    <h2 id="sales-demo-title">Three customers text while you’re working.</h2>
-    <p class="sales-demo-lead">Open a text to see how your rep handles it.</p>
-    <div class="sales-threads">
-      <details>
-        <summary><span class="sales-text">“How much for a trim?”</span><span class="sales-result">Price answered</span></summary>
-        <div class="sales-replies">
-          <p><b>Your rep</b>A trim is $45, including the wash and style. Are you looking to keep the same cut?</p>
+    <h2 id="sales-demo-title">A customer texts. <em>You finish dinner.</em></h2>
+    <p class="sales-demo-lead">Pick a customer text to see how your rep handles it.</p>
+
+    <fieldset class="sales-stage">
+      <legend class="sales-sr">Choose a customer text</legend>
+      <input class="sales-radio" type="radio" name="sales-scenario" id="sales-booking" value="booking" checked aria-controls="sales-booking-panel">
+      <input class="sales-radio" type="radio" name="sales-scenario" id="sales-price" value="price" aria-controls="sales-price-panel">
+      <input class="sales-radio" type="radio" name="sales-scenario" id="sales-follow" value="follow" aria-controls="sales-follow-panel">
+
+      <div class="sales-layout">
+        <figure class="sales-evening">
+          <div class="sales-window">
+            <img src="assets/evening-booking-560.webp" srcset="assets/evening-booking-560.webp 560w, assets/evening-booking-960.webp 960w" sizes="(max-width: 760px) 90vw, (max-width: 1300px) 42vw, 555px" width="560" height="225" loading="lazy" decoding="async" alt="Adam at dinner while his factory crew books an appointment in the background.">
+          </div>
+          <figcaption><span class="sales-dial" aria-hidden="true"></span>After hours. <strong>Your rep is on.</strong></figcaption>
+        </figure>
+
+        <div class="sales-machine">
+          <div class="sales-switch">
+            <label for="sales-booking"><span aria-hidden="true">“</span>Got time?<span aria-hidden="true">”</span></label>
+            <label for="sales-price"><span aria-hidden="true">“</span>How much?<span aria-hidden="true">”</span></label>
+            <label for="sales-follow"><span aria-hidden="true">“</span>Check back?<span aria-hidden="true">”</span></label>
+          </div>
+          <div class="sales-glass">
+            <article class="sales-panel" data-scenario="booking" id="sales-booking-panel" aria-label="Book an appointment">
+              <div class="sales-thread">
+                <p class="sales-message from-customer"><b>Customer</b>Got anything Tuesday after four?</p>
+                <p class="sales-message from-rep"><b>Your AI rep</b>Tuesday at 4:30 p.m. is open. Does that work?</p>
+                <p class="sales-message from-customer"><b>Customer</b>Yes, please.</p>
+                <p class="sales-message from-rep"><b>Your AI rep</b>Perfect. We have you all set for Tuesday at 4:30 p.m.</p>
+              </div>
+              <div class="sales-receipt"><span class="sales-mark" aria-hidden="true">✓</span><div><b>Appointment booked</b><span>Tuesday at 4:30 p.m. on your calendar.</span></div></div>
+            </article>
+            <article class="sales-panel" data-scenario="price" id="sales-price-panel" aria-label="Answer a price question">
+              <div class="sales-thread">
+                <p class="sales-message from-customer"><b>Customer</b>How much for a trim?</p>
+                <p class="sales-message from-rep"><b>Your AI rep</b>A trim is $45, including the wash and style. Are you looking to keep the same cut?</p>
+              </div>
+              <div class="sales-receipt"><span class="sales-mark" aria-hidden="true">✓</span><div><b>Price answered</b><span>Your customer gets the rate you approved.</span></div></div>
+            </article>
+            <article class="sales-panel" data-scenario="follow" id="sales-follow-panel" aria-label="Arrange the requested follow-up">
+              <div class="sales-thread">
+                <p class="sales-message from-customer"><b>Customer</b>Check back after Thanksgiving.</p>
+                <p class="sales-message from-rep"><b>Your AI rep</b>Sure. Would Monday morning work for a text?</p>
+                <p class="sales-message from-customer"><b>Customer</b>Monday’s good, thanks.</p>
+              </div>
+              <div class="sales-receipt"><span class="sales-mark" aria-hidden="true">✓</span><div><b>Follow-up set</b><span>Monday morning, just as they asked.</span></div></div>
+            </article>
+          </div>
+          <button class="sales-replay" type="button" hidden><span aria-hidden="true">↻</span> Replay conversation</button>
         </div>
-      </details>
-      <details>
-        <summary><span class="sales-text">“Got anything Tuesday after four?”</span><span class="sales-result">Appointment booked</span></summary>
-        <div class="sales-replies">
-          <p><b>Your rep</b>Tuesday at 4:30 p.m. is open. Does that work?</p>
-          <p class="sales-customer"><b>Customer</b>Yes, please.</p>
-          <p><b>Your rep</b>Perfect. We have you all set for Tuesday at 4:30 p.m.</p>
-        </div>
-      </details>
-      <details>
-        <summary><span class="sales-text">“Check back after Thanksgiving.”</span><span class="sales-result">Follow-up set</span></summary>
-        <div class="sales-replies">
-          <p><b>Your rep</b>Sure. Would Monday morning work for a text?</p>
-          <p class="sales-customer"><b>Customer</b>Monday’s good, thanks.</p>
-          <p class="sales-reminder">Next follow-up · Monday morning</p>
-        </div>
-      </details>
-    </div>
-    <p class="sales-demo-note">You set the prices, booking rules and follow-up preferences. Adam’s team trains your rep and reviews the conversations.</p>
+      </div>
+    </fieldset>
   </div>
 </section>
 </div>
 
-    <section class="management" aria-labelledby="management-title"><div class="wrap management-grid">
-      <div class="management-art"><img src="assets/training-crew-560.webp" srcset="assets/training-crew-560.webp 560w, assets/training-crew-1056.webp 1056w" sizes="(max-width: 700px) 92vw, 43vw" width="1056" height="793" loading="lazy" alt="Oompa Loompas shape the replies at the training bench."></div>
-      <div class="management-copy">
-        <div class="eyebrow">The people behind your rep</div>
-        <h2 id="management-title">You tell us how you sell. <em>We do the work.</em></h2>
-        <ul class="steps">
-          <li><strong>We build it around your business.</strong><span>We interview you about your services, prices and booking rules. You approve the setup before launch.</span></li>
-          <li><strong>We keep its answers current.</strong><span>Our team reviews conversations and makes the updates you approve. Bring a question to weekly office hours.</span></li>
-          <li><strong>You stay in control.</strong><span>Read any conversation, jump in yourself or pause the rep whenever you need to.</span></li>
-        </ul>
+        <section class="management" aria-labelledby="management-title">
+      <div class="wrap management-grid">
+        <figure class="management-art training-bench" data-training-bench>
+          <div class="training-frame">
+            <div class="training-scene">
+              <img src="assets/training-crew-560.webp" srcset="assets/training-crew-560.webp 560w, assets/training-crew-1056.webp 1056w" sizes="(max-width: 510px) 92vw, (max-width: 760px) 470px, 43vw" width="1056" height="793" loading="lazy" alt="Two Oompa Loompas at the workbench measure and cut a pair of wooden speech bubbles.">
+              <div class="training-exchange" aria-live="polite" aria-atomic="true">
+                <p class="training-question"><span class="training-reader-label">Customer asks, </span><span data-training-question>Open Saturdays?</span></p>
+                <p class="training-answer"><span class="training-reader-label">Your rep replies, </span><span data-training-answer>9 a.m. to 1 p.m.</span></p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="training-caption">Your answers at work
+            <span class="training-controls" role="group" aria-label="Choose what the rep is trained on" hidden>
+              <button type="button" data-training-topic="hours" aria-pressed="true">Hours</button>
+              <button type="button" data-training-topic="pricing" aria-pressed="false">Pricing</button>
+              <button type="button" data-training-topic="booking" aria-pressed="false">Booking</button>
+            </span>
+          </figcaption>
+        </figure>
+        <div class="management-copy">
+          <div class="eyebrow">The people behind your rep</div>
+          <h2 id="management-title">We train your AI rep. <em>We manage it, too.</em></h2>
+          <ul class="steps">
+            <li><strong>You give us the facts. We build the rep.</strong><span>We interview you about your services, prices and booking rules. You approve its answers before launch.</span></li>
+            <li><strong>We read the chats and make the fixes.</strong><span>We review real conversations, flag replies that need work and make the updates you approve.</span></li>
+            <li><strong>You can step in anytime.</strong><span>Read any chat, take over or pause the rep. Bring a reply to weekly office hours and go over it with Adam.</span></li>
+          </ul>
+        </div>
       </div>
-    </div></section>
+    </section>
+
 
     <section class="enroll" id="offers" aria-labelledby="enroll-title"><div class="wrap enroll-inner">
-      <div class="enroll-heading"><div class="eyebrow">Your Black Friday offer</div>
-        <h2 id="enroll-title">Get your <em>Golden Ticket.</em></h2>
-        <p>Your 24/7 AI sales rep answers customer texts, follows up and books appointments. Setup, training and ongoing human review are included.</p>
+      <div class="enroll-heading"><div class="eyebrow">The Golden Ticket</div>
+        <h2 id="enroll-title">What your <em>$97 covers.</em></h2>
+        <ul class="included-list">
+          <li>Your AI sales rep, trained on your prices, services, and booking rules.</li>
+          <li>Conversation reviews, updates you approve, and weekly office hours with Adam.</li>
+          <li>Business texting registration, one number, and $10 toward AI and messaging each live paid month.</li>
+        </ul>
       </div>
       <div class="enroll-details">
         <p class="bottom-price"><strong>$97</strong> / month</p>
@@ -355,17 +844,276 @@ dialog .buy{margin-top:.65rem;width:100%}
   window.addEventListener('pageshow',refresh);
   window.addEventListener('focus',refresh);
   refresh();
+})();
 
-  const art = document.querySelector('.hero-art');
-  const openTicket = () => window.setTimeout(() => art.classList.add('flap-open'),480);
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) { openTicket(); observer.disconnect(); }
-    }, {threshold:.35});
-    observer.observe(art);
-  } else {
-    openTicket();
+(() => {
+  const scene = document.querySelector('.gt-theater');
+  if (!scene || !window.matchMedia || !window.IntersectionObserver) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const button = scene.querySelector('.gt-control');
+  const label = button.querySelector('span');
+  const duration = 5000;
+  let progress = 0;
+  let visible = false;
+  let previousTime = 0;
+  let scrollOrigin = 0;
+  let scrollDistance = 1;
+  let frame = 0;
+  let delay = 0;
+  let playing = false;
+
+  function between(value, start, end) {
+    const t = Math.max(0, Math.min(1, (value - start) / (end - start)));
+    return t * t * (3 - 2 * t);
   }
+
+  function render(value) {
+    progress = value;
+    const doors = between(value, .1, .43);
+    const questionIn = between(value, .38, .46);
+    const questionOut = between(value, .64, .71);
+    const receipt = between(value, .70, .90);
+    const camera = between(value, .06, .92);
+    const style = scene.style;
+    style.setProperty('--gt-fold', `${85 * doors}deg`);
+    style.setProperty('--gt-part', `${46 * doors}%`);
+    style.setProperty('--gt-tilt', `${-7 + 9 * between(value, 0, .42)}deg`);
+    style.setProperty('--gt-lift', `${-7 * between(value, 0, .36)}%`);
+    style.setProperty('--gt-foil-opacity', 1 - between(value, .30, .42));
+    style.setProperty('--gt-glint', `${146 - 221 * between(value, 0, .32)}%`);
+    style.setProperty('--gt-camera', `${3 - 5 * camera}%`);
+    style.setProperty('--gt-depth', 1.19 - .11 * camera);
+    style.setProperty('--gt-veil', .83 - .75 * camera);
+    style.setProperty('--gt-message', questionIn * (1 - questionOut));
+    style.setProperty('--gt-message-rise', `${12 * (1 - questionIn) - 9 * questionOut}px`);
+    style.setProperty('--gt-receipt', receipt);
+    style.setProperty('--gt-receipt-rise', `${38 * (1 - receipt)}px`);
+    style.setProperty('--gt-receipt-turn', `${-18 * (1 - receipt)}deg`);
+    style.setProperty('--gt-ink', 20 * (1 - between(value, .9, 1)));
+
+    const state = value >= 1 ? 'booked' : value >= .38 ? 'inquiry' : playing ? 'opening' : 'sealed';
+    if (scene.dataset.state !== state) scene.dataset.state = state;
+    const action = state === 'booked' ? 'Replay' : state === 'sealed' ? 'Open ticket' : 'Show booking';
+    if (label.textContent !== action) label.textContent = action;
+  }
+
+  function pause() {
+    window.clearTimeout(delay);
+    window.cancelAnimationFrame(frame);
+    frame = 0;
+    previousTime = 0;
+  }
+
+  function step(now) {
+    frame = 0;
+    if (!visible || document.hidden || reduceMotion.matches || progress >= 1) return;
+    const elapsed = previousTime ? Math.min(now - previousTime, 80) : 0;
+    previousTime = now;
+    const scrolled = Math.max(0, (window.scrollY - scrollOrigin) / scrollDistance);
+    // Scrub forward when the reader scrolls. Replay and a stationary reader use the same sequence.
+    render(Math.min(1, Math.max(progress + elapsed / duration, Math.min(scrolled, progress + .065))));
+    if (progress < 1) frame = window.requestAnimationFrame(step);
+    else playing = false;
+  }
+
+  function play() {
+    pause();
+    if (reduceMotion.matches || document.hidden || !visible) return;
+    playing = true;
+    scrollOrigin = window.scrollY;
+    scrollDistance = Math.max(240, scene.clientHeight * .9);
+    render(progress);
+    frame = window.requestAnimationFrame(step);
+  }
+
+  function onVisibility() {
+    pause();
+    if (!visible || reduceMotion.matches || document.hidden || progress >= 1) return;
+    if (playing) play();
+    else delay = window.setTimeout(play, 850);
+  }
+
+  function configure() {
+    pause();
+    playing = false;
+    button.hidden = reduceMotion.matches;
+    scene.classList.toggle('is-animated', !reduceMotion.matches);
+    render(reduceMotion.matches ? 1 : 0);
+    onVisibility();
+  }
+
+  button.addEventListener('click', () => {
+    if (playing) {
+      pause();
+      playing = false;
+      render(1);
+    } else {
+      render(0);
+      play();
+    }
+  });
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting && entry.intersectionRatio >= .23;
+    onVisibility();
+  }, {threshold: [0, .23]});
+  configure();
+  observer.observe(scene);
+  document.addEventListener('visibilitychange', onVisibility);
+  if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', configure);
+  else reduceMotion.addListener(configure);
+})();
+
+(() => {
+  const section = document.getElementById('sales-demo');
+  if (!section) return;
+
+  const stage = section.querySelector('.sales-stage');
+  const replay = stage.querySelector('.sales-replay');
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let firstView;
+  let activePanel;
+  let cleanup;
+
+  function stop() {
+    window.clearTimeout(cleanup);
+    stage.classList.remove('sales-playing');
+    activePanel?.classList.remove('sales-running');
+  }
+
+  function play() {
+    firstView?.disconnect();
+    const restarting = stage.classList.contains('sales-playing');
+    stop();
+    if (motion.matches) return;
+
+    // Restart in the same paint: the finished conversation never flashes first.
+    if (restarting) void stage.offsetWidth;
+    const scenario = stage.querySelector('.sales-radio:checked').value;
+    activePanel = stage.querySelector('[data-scenario="' + scenario + '"]');
+    activePanel.classList.add('sales-running');
+    stage.classList.add('sales-playing');
+    cleanup = window.setTimeout(stop, 1900);
+  }
+
+  function syncMotion() {
+    stop();
+    replay.hidden = motion.matches;
+  }
+
+  stage.addEventListener('change', event => {
+    if (event.target.name === 'sales-scenario') play();
+  });
+  replay.addEventListener('click', play);
+  motion.addEventListener('change', syncMotion);
+  syncMotion();
+
+  if (!motion.matches && 'IntersectionObserver' in window) {
+    firstView = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) play();
+    }, { threshold: .2 });
+    firstView.observe(stage.querySelector('.sales-glass'));
+  }
+})();
+
+(() => {
+  const bench = document.querySelector('[data-training-bench]');
+  const offer = document.querySelector('.enroll-inner');
+  if (!bench || !offer || bench.hasAttribute('data-training-ready')) return;
+  bench.setAttribute('data-training-ready', '');
+
+  const topics = {
+    hours: ['Open Saturdays?', '9 a.m. to 1 p.m.'],
+    pricing: ['Price for a trim?', '$45 with a wash.'],
+    booking: ['After 4 Tuesday?', '4:30 is open.']
+  };
+  const controls = bench.querySelector('.training-controls');
+  const question = bench.querySelector('[data-training-question]');
+  const answer = bench.querySelector('[data-training-answer]');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (controls && question && answer) {
+    const buttons = controls.querySelectorAll('[data-training-topic]');
+    controls.hidden = false;
+    controls.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-training-topic]');
+      if (!button || button.getAttribute('aria-pressed') === 'true') return;
+      const exchange = topics[button.dataset.trainingTopic];
+      if (!exchange) return;
+
+      for (const item of buttons) item.setAttribute('aria-pressed', String(item === button));
+      question.textContent = exchange[0];
+      answer.textContent = exchange[1];
+      if (!reduced.matches) {
+        bench.removeAttribute('data-stamping');
+        // Restart the brief ink impression even when two topics are tried in succession.
+        void question.offsetWidth;
+        bench.setAttribute('data-stamping', '');
+      }
+    });
+  }
+
+  const management = bench.closest('.management');
+  const steps = management ? [...management.querySelectorAll('.steps li')] : [];
+  const visible = new Set();
+  let pending = 0;
+  let observer;
+
+  function paint() {
+    pending = 0;
+    const height = document.documentElement.clientHeight;
+    for (const element of visible) {
+      const box = element.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (height - box.top) / (height + box.height)));
+      if (element === bench) {
+        const rise = Math.min(9, box.height * .02);
+        bench.style.setProperty('--bench-rise', ((progress * 2 - 1) * rise).toFixed(2) + 'px');
+        bench.style.setProperty('--ink-rise', ((.5 - progress) * 3).toFixed(2) + 'px');
+        bench.style.setProperty('--bench-light', (progress * 100).toFixed(1) + '%');
+      } else if (element === offer) {
+        offer.style.setProperty('--offer-edge', (progress * 138 - 19).toFixed(1) + '%');
+      } else {
+        const center = box.top + box.height / 2;
+        const emphasis = Math.max(0, 1 - Math.abs(center - height * .52) / (height * .22));
+        element.style.setProperty('--review-light', (.68 + emphasis * .32).toFixed(2));
+        element.style.setProperty('--review-scale', (.9 + emphasis * .3).toFixed(2));
+      }
+    }
+  }
+
+  function nextFrame() {
+    if (!pending && visible.size) pending = requestAnimationFrame(paint);
+  }
+
+  function syncMotion() {
+    observer?.disconnect();
+    observer = null;
+    window.removeEventListener('scroll', nextFrame);
+    window.removeEventListener('resize', nextFrame);
+    cancelAnimationFrame(pending);
+    pending = 0;
+    visible.clear();
+    const enabled = !reduced.matches && 'IntersectionObserver' in window;
+    bench.toggleAttribute('data-motion-ready', enabled);
+    management?.toggleAttribute('data-motion-ready', enabled);
+    if (!enabled) {
+      offer.style.removeProperty('--offer-edge');
+      return;
+    }
+    observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      }
+      nextFrame();
+    }, {rootMargin: '30px 0px'});
+    for (const element of [bench, offer, ...steps]) observer.observe(element);
+    window.addEventListener('scroll', nextFrame, {passive: true});
+    window.addEventListener('resize', nextFrame);
+  }
+
+  syncMotion();
+  reduced.addEventListener('change', syncMotion);
 })();
 </script>
 </body>
